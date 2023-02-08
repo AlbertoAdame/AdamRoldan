@@ -1,0 +1,81 @@
+<div class="container loginPage">
+<br>
+<h2>LOGIN</h2>
+
+
+
+    <div class="row">
+        <div class="col">
+
+            <form (ngSubmit)="save()" #myForm="ngForm">
+                
+                <!-- Campo de email -->
+                <div class="mb-3 row">
+
+                    <div class="col-sm-9">
+                        
+                        <input type="email"
+                                class="form-control"
+                                placeholder="E-mail"
+                                ngModel
+                                name="email"
+                                minlength="3"
+                                required>
+                                
+                        <span class="form-text text-danger" 
+                            *ngIf="notValidEmail('email')">
+                            CANT BEA EMPTY
+                        </span>
+                    </div>
+                </div>
+
+
+                <!-- Campo de email -->
+                <div class="mb-3 row">
+                    <div class="col-sm-9">
+                        <input type="password"
+                            class="form-control"
+                            placeholder="**********"
+                            ngModel 
+                            name="password"
+                            required
+                            >
+
+                            <span class="form-text text-danger" 
+                            *ngIf="notValid('password')">
+                                CANT BEA EMPTY
+                            </span>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col">
+                        <button type="submit"
+                                class="btn btn-primary float-end"
+                                [disabled]="myForm.invalid">
+                            Guardar
+                        </button>
+                    </div>
+                </div>
+
+
+
+            </form>
+
+            <span>Valid</span>
+            <pre>{{myForm.valid}}</pre>
+
+            <span>Pristine</span>
+            <pre>{{myForm.pristine}}</pre>
+
+            <span>Touched</span>
+            <pre>{{myForm.touched}}</pre>
+
+            <span>Value</span>
+            <pre>{{myForm.value | json}}</pre>
+
+        </div>
+    </div>
+</div>
+

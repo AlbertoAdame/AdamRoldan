@@ -1,7 +1,124 @@
-.navbar{
-    height: 100px !important;
+/* ===== Google Font Import - Poppins ===== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.4s ease;;
 }
 
-.white{
-    color: white !important;
+body{
+    height: 100vh;
+    background-color: var(--body-color);
 }
+
+nav{
+    /* position: fixed; */
+    height: 90px;
+    width: 100%;
+    background-color: grey;
+    padding-left:30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo{
+    font-size: 25px;
+    font-weight: 500;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+
+ul{
+    display: flex;
+    margin: 0;
+}
+
+li{
+
+    list-style: none;
+}
+
+.buttonNav{
+    border: 0;
+    height: 90px;
+    width: max-content;
+    background-color: grey;
+    margin: 0 15px;
+}
+
+.cart{
+    border: 0;
+    height: 90px;
+    width: max-content;
+    background-color: grey;
+    margin: 0 15px;
+}
+
+.login{
+    border: 0;
+    height: 90px;
+    width: max-content;
+    background-color: grey;
+    margin: 0 15px;
+}
+
+.liBorder{
+    border-left:  solid 1px black;
+}
+
+
+/* @media (max-width: 790px) {
+    nav .nav-bar .sidebarOpen{
+        display: block;
+    }
+
+    .menu{
+        position: fixed;
+        height: 100%;
+        width: 320px;
+        left: -100%;
+        top: 0;
+        padding: 20px;
+        background-color: var(--side-nav);
+        z-index: 100;
+        transition: all 0.4s ease;
+    }
+
+    nav.active .menu{
+        left: -0%;
+    }
+
+    nav.active .nav-bar .navLogo a{
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+
+    .menu .logo-toggle{
+        display: block;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .logo-toggle .siderbarClose{
+        color: var(--text-color);
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    .nav-bar .nav-links{
+        flex-direction: column;
+        padding-top: 30px;
+    }
+
+    .nav-links li a{
+        display: block;
+        margin-top: 20px;
+    }
+} */
