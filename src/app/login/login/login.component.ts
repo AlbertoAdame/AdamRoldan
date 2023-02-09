@@ -20,15 +20,18 @@ export class LoginComponent implements OnInit {
 
   notValidEmail(campo:string): boolean{ 
     let result:boolean= false;
+    var validRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
     
-    if(this.myForm?.controls[campo]?.invalid && this.myForm?.controls[campo]?.touched){
+    if(this.myForm?.controls[campo]?.touched){
 
-      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/.test(campo)){
-          result=true;
-      } else {
+      if (/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(this.myForm?.controls[campo].value)){
+          result=false;
+      } 
+      else {
           result=true;
       }
     }
+    console.log(result)
       return result;
   }
 

@@ -7,6 +7,8 @@ import { HomeModule } from './home/home.module';
 import { BeatsModule } from './beats/beats.module';
 import { SharedModule } from './shared/shared.module';
 import { LoginModule } from './login/login.module';
+import { FaqModule } from './faq/faq.module';
+import { RegisterModule } from './register/register.module';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { LoginModule } from './login/login.module';
     HomeModule,
     BeatsModule,
     SharedModule,
-    LoginModule
+    LoginModule,
+    FaqModule,
+    RegisterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,9 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
+  search:boolean = false;
   constructor() { }
 
   ngOnInit(): void {
+    // const search = document.querySelector('.search')
+    // const btn = document.querySelector('.btn')
+    // const input: = document.querySelector('.input')
+
+    // btn?.addEventListener('click', () => {
+    // search?.classList.toggle('active')
+    // input?.focus()
+// })
+  }
+
+  showSearchBar():void{
+    this.search = !this.search
   }
 
 }

@@ -59,11 +59,20 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col">
+                        <button type="submit"
+                                class="btn btn-primary float-end" [routerLink]="['/register']" routerLinkActive="router-link-active">
+                            Sig In
+                        </button>
+                    </div>
+                </div>
+
 
 
             </form>
 
-            <span>Valid</span>
+            <!-- <span>Valid</span>
             <pre>{{myForm.valid}}</pre>
 
             <span>Pristine</span>
@@ -73,7 +82,7 @@
             <pre>{{myForm.touched}}</pre>
 
             <span>Value</span>
-            <pre>{{myForm.value | json}}</pre>
+            <pre>{{myForm.value | json}}</pre> -->
 
         </div>
     </div>

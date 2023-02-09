@@ -1,29 +1,42 @@
 <nav>
     <div class="logo">
-        LOGO
+        <a [routerLink]="['/home']" routerLinkActive="router-link-active">
+            LOGO
+        </a>
     </div>
 
     <div class="menu">
         <ul>
             <li> 
-                <button class="buttonNav">
+                <button class="buttonNav" [routerLink]="['/beats']" routerLinkActive="router-link-active">
                     BEATS
                 </button>
             </li>
             <li>
 
-                <button class="buttonNav">
+                <button class="buttonNav" [routerLink]="['/faq']" routerLinkActive="router-link-active">
                     FAQ
                 </button>
             </li>
             <li>
-                <button class="buttonNav">
+                <button class="buttonNav" [routerLink]="['/contact']" routerLinkActive="router-link-active">
                     CONTACT
                 </button>
             </li>
             <li>
                 <button class="buttonNav">
-                    LUPA
+                    
+
+                    <div class="search" [ngClass]="{active: search}">
+                        <input type="text" class="input" placeholder="Search..."  >
+                            <button class="btn" (click)="showSearchBar()">
+                            <svg width="25" height="25" fill="currentColor" class="fas fa-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                            </svg>
+                        </button>
+                    </div>
+
+
                 </button>
             </li>
             
@@ -34,7 +47,7 @@
             </li >
 
             <li class="liBorder">
-                <button class="login">
+                <button class="login" [routerLink]="['/login']" routerLinkActive="router-link-active">
                     FOTO LOG IN
                 </button>
             </li>
