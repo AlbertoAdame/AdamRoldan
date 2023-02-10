@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class NavbarComponent implements OnInit {
 
   search:boolean = false;
+  cart:boolean = false;
   constructor() { }
 
   ngOnInit(): void {
@@ -23,6 +24,10 @@ export class NavbarComponent implements OnInit {
 
   showSearchBar():void{
     this.search = !this.search
+  }
+
+  showCart():void{
+    this.cart = !this.cart
   }
 
 }
