@@ -1,12 +1,16 @@
 /* ===== Google Font Import - Poppins ===== */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
-    transition: all 0.4s ease;;
+    transition: all 0.4s ease;
+    letter-spacing: 2px;
+    background-color: #9e1815;
+    color: white;
 }
 
 body{
@@ -18,11 +22,15 @@ nav{
     /* position: fixed; */
     height: 90px;
     width: 100%;
-    background-color: grey;
+    background-color: white;
+    background-color: #9e1815;
     padding-left:30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    font-size: 23px;
+
+    
 }
 
 .logo{
@@ -47,29 +55,45 @@ li{
     border: 0;
     height: 90px;
     width: max-content;
-    background-color: grey;
+    background-color: white;
+    background-color: #9e1815;
     margin: 0 15px;
+}
+
+.buttonNav-search{
+    border: 0;
+    height: 90px;
+    width: max-content;
+    background-color: white;
+    background-color: #9e1815;
+    margin-left: 5px;
+    margin-right: 20px;
 }
 
 .cart{
     border: 0;
     height: 90px;
     width: max-content;
-    background-color: grey;
-    margin: 0 15px;
+    background-color: white;
+    background-color: #9e1815;
+    margin: 0 20px;
 }
 
 .login{
     border: 0;
     height: 90px;
     width: max-content;
-    background-color: grey;
-    margin: 0 15px;
+    background-color: white;
+    background-color: #9e1815;
+    margin: 0 17px;
 }
 
 .liBorder{
-    border-left:  solid 1px black;
+    border-left:  solid 1px white;
+    margin-right: 3px;
 }
+
+
 /*  HIDDEN SEARCH */
 
 .search {
@@ -78,7 +102,8 @@ li{
   }
   
   .search .input {
-    background-color: gray;
+    background-color: white;
+    background-color: #9e1815;
     border: 0;
     font-size: 18px;
     padding: 15px;
@@ -88,7 +113,8 @@ li{
   }
   
   .btn {
-    background-color: gray;
+    background-color: white;
+    background-color: #9e1815;
     border: 0;
     cursor: pointer;
     font-size: 24px;
@@ -98,6 +124,7 @@ li{
     height: 50px;
     width: 50px;
     transition: transform 0.3s ease;
+    margin-top: -3px;
   }
   
   .btn:focus,
@@ -106,13 +133,28 @@ li{
   }
   
   .search.active .input {
-    width: 200px;
+    width: 260px;
+    background-color: white;
+    
+    border-radius: 2px;
+    height: 55px;
+    margin-top: -3px;
   }
   
   .search.active .btn {
     transform: translateX(198px);
+    background-color: white;
+    
+    
   }
 
+.cartPicture{
+    margin-top: -7px;
+}
+
+.profilePicture{
+    margin-top: -5px;
+}
 
 
 
