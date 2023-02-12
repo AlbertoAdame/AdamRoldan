@@ -1,4 +1,33 @@
 .main-bg{
     /* background: linear-gradient(#9e1815, #e52d27) no-repeat; 
     height: 700px; */
+
+    
 }
+
+.frontPage{
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(#9e1815, #e52d27) no-repeat; 
+
+    /* border-radius: 0 0 5% 5%; */
+
+
+}
+
+
+.gradient{
+    position: absolute;
+    background-image: linear-gradient(to bottom, rgba(31, 14, 100, 0), #ffffff);
+    height: 20px;
+    width: 100%;
+    top: 500px;
+    /* border-radius: 0 0 5% 5%; */
+}
+
+.logo{
+    margin-bottom: 50px;
+}
+
+
+

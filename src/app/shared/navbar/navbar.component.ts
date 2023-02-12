@@ -9,6 +9,7 @@ export class NavbarComponent implements OnInit {
 
   search:boolean = false;
   cart:boolean = false;
+  color:string = 'white';
   constructor() { }
 
   ngOnInit(): void {
@@ -23,7 +24,11 @@ export class NavbarComponent implements OnInit {
   }
 
   showSearchBar():void{
-    this.search = !this.search
+    this.search = !this.search;
+    if(this.color==='white')
+      this.color= 'black';
+    else
+    this.color= 'white';
   }
 
   showCart():void{
