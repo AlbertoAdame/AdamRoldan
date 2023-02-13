@@ -1,0 +1,48 @@
+.title{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+/* --------------------------------------  SEARCH ---------------------------------------------  */
+
+.search {
+    position: relative;
+    height: 50px;
+  }
+  
+  .search .input {
+    background-color: white;
+
+    border: 0;
+    font-size: 18px;
+    padding: 15px;
+    height: 50px;
+    width: 300px;
+    border-radius: 2px;
+    height: 55px;
+    margin-top: -3px;
+    padding-right: 55px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  }
+  
+
+  .btn {
+    background-color: white;
+    border: 0;
+    cursor: pointer;
+    font-size: 24px;
+    position: absolute;
+    left: 248px;
+    height: 50px;
+    width: 50px;
+    margin-top: -2px;
+    padding: 5px 0;
+    border-radius: 2px;
+
+
+  }
+
+.cartPicture{
+    margin-top: -7px;
+}

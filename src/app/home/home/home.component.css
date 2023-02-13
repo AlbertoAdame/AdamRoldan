@@ -30,4 +30,100 @@
 }
 
 
+/* --------------------------------------  TAG LIST OF SONGS ---------------------------------------------  */
+
+.songsList{
+    margin-bottom: 50px;
+}
+
+.listProductTag{
+    margin-top: 50px;
+    margin-bottom: 25px;
+    color: grey;
+    font-size: small;
+}
+
+.productTitleTag{
+    margin-left: 289px;
+}
+
+.productTimeTag{
+    position: absolute;
+    left: 670px;
+}
+
+.productBpmTag{
+    position: absolute;
+    left: 870px;
+}
+
+
+/* --------------------------------------  LIST OF SONGS ---------------------------------------------  */
+
+
+.listProduct{
+    margin: 10px 200px;
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+
+.productImage{
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.productTitle{
+    margin-left: 30px;
+    color: black;
+}
+
+.productTime{
+    position: absolute;
+    left: 670px;
+}
+
+.productBpm{
+
+    position: absolute;
+    right: 700px;
+
+}
+
+.productPrice{
+    margin-left: 160px;
+    color: black;
+}
+
+.cartButton{
+    width: 130px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: solid 2px;
+    border-radius: 5px;
+    margin-bottom: 2px;
+    justify-content: center;
+    position: absolute;
+    right: 349px;
+}
+
+.share{
+    /* margin-right: -25px; */
+    position: absolute;
+    cursor: pointer;
+    right: 515px;
+    margin-top: -13px;
+}
+
+.division{
+    margin: auto;
+    width: 700px;
+}
+
+
+
+
+
 
