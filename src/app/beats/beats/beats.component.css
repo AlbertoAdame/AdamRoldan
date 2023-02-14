@@ -1,7 +1,19 @@
+.frontPage{
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(#9e1815, #e52d27) no-repeat; 
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 0px 16px;
+  margin-bottom: 40px;
+}
+
 .title{
     display: flex;
     justify-content: center;
-    margin-top: 50px;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    font-weight: bolder;
+    font-size: xxx-large;
+    color: white;
 }
 
 /* --------------------------------------  SEARCH ---------------------------------------------  */
@@ -23,9 +35,9 @@
     height: 55px;
     margin-top: -3px;
     padding-right: 55px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
-  }
-  
+    box-shadow: rgb(50 50 93 / 20%) 0px 6px 5px -2px, rgb(0 0 0 / 30%) 0px 3px 10px -3px;
+    
+  }  
 
   .btn {
     background-color: white;
@@ -46,3 +58,5 @@
 .cartPicture{
     margin-top: -7px;
 }
+
+

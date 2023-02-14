@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FaqComponent } from './faq/faq.component';
 import { FaqRoutingModule } from './faq-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -12,7 +13,8 @@ import { FaqRoutingModule } from './faq-routing.module';
   ],
   imports: [
     CommonModule,
-    FaqRoutingModule
+    FaqRoutingModule,
+    SharedModule
   ]
 })
 export class FaqModule { }

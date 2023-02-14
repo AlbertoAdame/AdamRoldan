@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+
+
+*
+{
+  font-family: poppins;
+  text-decoration: none;
+  user-select: none;
+}
+
+.center
+{
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-left: 435px;
+  margin-top: -8px;
+}
+
+a
+{
+  color: #fff;
+}
+
+.crumb1 li
+{
+  display: inline-block;
+  padding: 15px;
+  background: #CC2520;
+  transform: skew(-20deg);
+  cursor: pointer;
+  opacity: 0.75;
+  border-radius: 10px 10px 0px 0;
+}
+
+.crumb1 li.active
+{
+  display: inline-block;
+  cursor: default;
+  background: #CC2520;
+  opacity: 1;
+
+}
+
+.crumb1 li.active a
+{
+  cursor: default;
+}
+
+.crumb1 li:hover
+{
+  opacity: 1;
+}
+
+.crumb1 li a
+{
+  display: block;
+  transform: skew(20deg);
+}

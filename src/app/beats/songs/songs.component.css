@@ -1,38 +1,9 @@
-.main-bg{
-    /* background: linear-gradient(#9e1815, #e52d27) no-repeat; 
-    height: 700px; */
-
-    
-}
-
-.frontPage{
-    display: flex;
-    justify-content: center;
-    background: linear-gradient(#9e1815, #e52d27) no-repeat; 
-    box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;    
-    /* box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px; */
-
-}
-
-.gradient{
-    position: absolute;
-    background-image: linear-gradient(to bottom, rgba(31, 14, 100, 0), #ffffff);
-    height: 20px;
-    width: 100%;
-    top: 500px;
-    /* border-radius: 0 0 5% 5%; */
-}
-
-.logo{
-    margin-bottom: 50px;
-}
-
 
 /* --------------------------------------  TAG LIST OF SONGS ---------------------------------------------  */
 
 .songsList{
     margin-bottom: 50px;
-    margin-top: 45px;
+    margin-top: 40px;
 
 }
 
@@ -120,9 +91,3 @@
     margin-top: 5px;
     margin-bottom: 5px;
 }
-
-
-
-
-
-

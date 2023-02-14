@@ -4,6 +4,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { CartComponent } from './cart/cart.component';
 import { RouterModule } from '@angular/router';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
 
 
@@ -11,7 +12,8 @@ import { RouterModule } from '@angular/router';
   declarations: [
     NavbarComponent,
     NotFoundComponent,
-    CartComponent
+    CartComponent,
+    BreadcrumbComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { RouterModule } from '@angular/router';
   exports: [
     NavbarComponent,
     NotFoundComponent,
-    CartComponent
+    CartComponent,
+    BreadcrumbComponent
   ]
 })
 export class SharedModule { }

@@ -1,0 +1,89 @@
+html, 
+body {
+  font: 100%/1.5 Verdana, sans-serif
+}
+#wrapper {
+  margin: 0 auto;
+  display: block;
+  width: 960px;
+  margin-top: -15px;
+
+}
+.page-header {
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: normal;
+  border-bottom: 1px solid #ddd;
+  margin: 30px 0
+}
+#pagination {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  margin-bottom: 25px;
+
+}
+#pagination li {
+  display: inline
+}
+#pagination li a {
+  display: inline-block;
+  text-decoration: none;
+  padding: 5px 10px;
+  color: #000;
+  /* box-shadow: rgba(50, 50, 93, 0.15) 0px 6px 12px -2px, rgba(0, 0, 0, 0.1) 0px 3px 7px -3px; */
+}
+
+/* Active and Hoverable Pagination */
+#pagination li a {
+  border-radius: 100%;
+  width: 35px;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s
+    
+}
+#pagination li a.active {
+  background-color: #e52d27;
+  color: #fff
+}
+#pagination li a:hover:not(.active) {
+  background-color: #ddd;
+} 
+
+/* border-pagination */
+.b-pagination-outer {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  overflow: hidden;
+  display: flex
+}
+#border-pagination {
+  margin: 0 auto;
+  padding: 0;
+  text-align: center
+}
+#border-pagination li {
+  display: inline;
+
+}
+#border-pagination li a {
+  display: block;
+  text-decoration: none;
+  color: #000;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  float: left;
+
+}
+#border-pagination li a {
+  -webkit-transition: background-color 0.4s;
+  transition: background-color 0.4s
+}
+#border-pagination li a.active {
+  background-color: #4caf50;
+  color: #fff;
+}
+#border-pagination li a:hover:not(.active) {
+  background: #ddd;
+}
