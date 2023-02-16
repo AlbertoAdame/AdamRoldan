@@ -6,7 +6,9 @@
 }
 
 .background{
-    background-image: url("/assets/images/product.png") !important;
+    background-image: url("/assets/images/product5.png") !important;
+	background-repeat: no-repeat;
+  	background-size: cover;
     height: 100vh;
 }
 
@@ -51,8 +53,8 @@ a {
 
 button {
 	border-radius: 20px;
-	border: 1px solid #FF4B2B;
-	background-color: #FF4B2B;
+	border: 1px solid #1f9d23;
+	background-color: #178c1d;
 	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
@@ -71,8 +73,10 @@ button:focus {
 }
 
 button.ghost {
-	background-color: transparent;
-	border-color: #FFFFFF;
+	/* background-color: transparent;
+	border-color: #FFFFFF; */
+	background-color: #cd1010;
+	border: 1px solid #c51b1b;
 }
 
 form {
@@ -95,7 +99,8 @@ input {
 }
 
 .container {
-	background-color: #fff;
+	background-color: rgba(255,255,255,0.3) !important;
+	backdrop-filter: blur(20px);
 	border-radius: 10px;
   	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
 			0 10px 10px rgba(0,0,0,0.22);
@@ -166,13 +171,9 @@ input {
 }
 
 .overlay {
-	background: #FF416C;
-	background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-	background: linear-gradient(to right, #FF4B2B, #FF416C);
-	background-repeat: no-repeat;
-	background-size: cover;
+	
 	background-position: 0 0;
-	color: #FFFFFF;
+	/* color: #FFFFFF; */
 	position: relative;
 	left: -100%;
 	height: 100%;

@@ -36,10 +36,53 @@
 
 }
 
-.box{
-    border: solid 1px black;
-    border-radius: 8px;
+.box:hover, .titleBox:hover{
+    color: white;
+    background-color: rgb(170, 31, 31);
+    transition: 0.06s;
 
+}
+
+.red{
+    color: white !important;
+    background-color: rgb(170, 31, 31) !important;
+}
+
+.box{
+    border: none;
+    border-radius: 8px;
+    width: 100%;
     padding-left: 40px;
     padding-right: 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+p{
+    margin: 25px;
+}
+
+.info{
+    margin: 25px 0;
+
+}
+
+
+.activeLi{
+    display: none;
+}
+
+.activeYo{
+    display: none;
+}
+
+.activeLe{
+    display: none;
+}
+
+.activePa{
+    display: none;
+}
+
+.activeOr{
+    display: none;
 }

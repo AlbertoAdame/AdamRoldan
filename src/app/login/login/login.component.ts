@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-login',
@@ -10,6 +11,8 @@ export class LoginComponent implements OnInit {
 
   @ViewChild('myForm') myForm!: NgForm;
 
+  validEmail:boolean = false;
+  validUsername:boolean = false;
 
   constructor() { }
 
@@ -20,8 +23,7 @@ export class LoginComponent implements OnInit {
 
   notValidEmail(campo:string): boolean{ 
     let result:boolean= false;
-    var validRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    
+
     if(this.myForm?.controls[campo]?.touched){
 
       if (/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(this.myForm?.controls[campo].value)){
@@ -31,16 +33,38 @@ export class LoginComponent implements OnInit {
           result=true;
       }
     }
-    console.log(result)
+    this.validEmail = result;
       return result;
   }
 
   notValid(campo:string): boolean{
-    return this.myForm?.controls[campo]?.invalid &&
-      this.myForm?.controls[campo]?.touched
+    let result:boolean= false;
+    if(this.myForm?.controls[campo]?.invalid && this.myForm?.controls[campo]?.touched)
+      result = true
+    else
+      result = false
+    this.validUsername = result;
+    return result
   }
   save() {
-    this.myForm.resetForm();
+    if(!this.validEmail && !this.validUsername){
+      Swal.fire(
+        'Good job!',
+        'You clicked the button!',
+        'success'
+      )
+
+    }
+
+    else{
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+      })
+    }
+
+    // this.myForm.resetForm();
 
     // this.myForm.resetForm({
     //   password:0,

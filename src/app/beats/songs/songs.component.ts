@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BeatInterface } from '../../interfaces/beat-response.interface';
+import { BeatService } from '../../services/beat.service';
 
 @Component({
   selector: 'app-songs',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SongsComponent implements OnInit {
 
-  constructor() { }
+  results : BeatInterface[] = []
+
+  constructor(private beatService:BeatService) { }
 
   ngOnInit(): void {
+    this.beatService.buscarBeats()
+    .subscribe({
+      next: (resp) => this.results = resp
+      //falta error
+    })
   }
-
 }

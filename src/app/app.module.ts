@@ -9,6 +9,8 @@ import { SharedModule } from './shared/shared.module';
 import { LoginModule } from './login/login.module';
 import { FaqModule } from './faq/faq.module';
 import { RegisterModule } from './register/register.module';
+import { UserService } from './services/user.service';
+import { BeatService } from './services/beat.service';
 
 
 @NgModule({
@@ -25,7 +27,10 @@ import { RegisterModule } from './register/register.module';
     FaqModule,
     RegisterModule
   ],
-  providers: [],
+  providers: [
+    UserService,
+    BeatService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
