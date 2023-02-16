@@ -9,10 +9,21 @@ import Swal from 'sweetalert2'
 })
 export class LoginComponent implements OnInit {
 
-  @ViewChild('myForm') myForm!: NgForm;
+  @ViewChild('logInForm') logInForm!: NgForm;
+  @ViewChild('registerForm') registerForm!: NgForm;
+
+  view:boolean = false;
 
   validEmail:boolean = false;
+  validPassword:boolean = false;
+
+  validNewEmail:boolean = false;
+  validNewPassword:boolean = false;
   validUsername:boolean = false;
+  validName:boolean = false;
+  validRepeatNewPassword:boolean = false;
+
+  
 
   constructor() { }
 
@@ -20,13 +31,18 @@ export class LoginComponent implements OnInit {
     
   }
 
+  changeView():void{
+    this.view = !this.view
+  }
+
+    // ************************** LOG IN *********************+
 
   notValidEmail(campo:string): boolean{ 
     let result:boolean= false;
 
-    if(this.myForm?.controls[campo]?.touched){
+    if(this.logInForm?.controls[campo]?.touched){
 
-      if (/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(this.myForm?.controls[campo].value)){
+      if (/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(this.logInForm?.controls[campo].value)){
           result=false;
       } 
       else {
@@ -37,17 +53,17 @@ export class LoginComponent implements OnInit {
       return result;
   }
 
-  notValid(campo:string): boolean{
+  notValidPassword(campo:string): boolean{
     let result:boolean= false;
-    if(this.myForm?.controls[campo]?.invalid && this.myForm?.controls[campo]?.touched)
+    if(this.logInForm?.controls[campo]?.invalid && this.logInForm?.controls[campo]?.touched)
       result = true
     else
       result = false
-    this.validUsername = result;
+    this.validPassword = result;
     return result
   }
-  save() {
-    if(!this.validEmail && !this.validUsername){
+  saveLogIn() {
+    if(!this.validEmail && !this.validPassword){
       Swal.fire(
         'Good job!',
         'You clicked the button!',
@@ -66,11 +82,89 @@ export class LoginComponent implements OnInit {
 
     // this.myForm.resetForm();
 
-    // this.myForm.resetForm({
-    //   password:0,
-    //   existencias:10
-    // })
+
 
   }
 
+
+
+  // ************************** REGISTER *********************+
+
+
+  notValidNewEmail(campo:string): boolean{ 
+    let result:boolean= false;
+
+    if(this.registerForm?.controls[campo]?.touched){
+
+      if (/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(this.registerForm?.controls[campo].value)){
+          result=false;
+      } 
+      else {
+          result=true;
+      }
+    }
+    this.validNewEmail = result;
+      return result;
+  }
+
+  notValidUsername(campo:string): boolean{
+    let result:boolean= false;
+    if(this.registerForm?.controls[campo]?.invalid && this.registerForm?.controls[campo]?.touched)
+      result = true
+    else
+      result = false
+    this.validUsername = result;
+    return result
+  }
+
+  notValidName(campo:string): boolean{
+    let result:boolean= false;
+    if(this.registerForm?.controls[campo]?.invalid && this.registerForm?.controls[campo]?.touched)
+      result = true
+    else
+      result = false
+    this.validName = result;
+    return result
+  }
+
+  notValidNewPassword(campo:string): boolean{
+    let result:boolean= false;
+    if(this.registerForm?.controls[campo]?.invalid && this.registerForm?.controls[campo]?.touched)
+      result = true
+    else
+      result = false
+    this.validNewPassword = result;
+    return result
+  }
+
+  notValidRepeatNewPassword(campo:string): boolean{
+    let result:boolean= false;
+    if(this.registerForm?.controls[campo]?.invalid && this.registerForm?.controls[campo]?.touched)
+      result = true
+    else
+      result = false
+    this.validRepeatNewPassword = result;
+    return result
+  }
+
+
+  saveRegister() {
+    if(!this.validNewEmail && !this.validUsername){
+      Swal.fire(
+        'Good job!',
+        'You clicked the button!',
+        'success'
+      )
+
+    }
+
+    else{
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+      })
+    }
+
+  }
 }

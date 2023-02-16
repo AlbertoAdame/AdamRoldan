@@ -6,14 +6,22 @@
 }
 
 .background{
-    background-image: url("/assets/images/product5.png") !important;
+	transition: 1.5s;
+    background-image: url("/assets/images/product2.png");
+	background-repeat: no-repeat;
+  	background-size: cover;
+    height: 100vh;
+}
+
+.backgroundAlternative{
+	transition: 1.5s;
+    background-image: url("/assets/images/product3.png") !important;
 	background-repeat: no-repeat;
   	background-size: cover;
     height: 100vh;
 }
 
 body {
-
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -106,9 +114,9 @@ input {
 			0 10px 10px rgba(0,0,0,0.22);
 	position: relative;
 	overflow: hidden;
-	width: 768px;
+	width: 900px;
 	max-width: 100%;
-	min-height: 600px;
+	min-height: 700px;
     margin-top: 60px;
 }
 
@@ -256,4 +264,8 @@ footer i {
 footer a {
     color: #3c97bf;
     text-decoration: none;
+}
+
+.signUp{
+	margin-top: 25px;
 }
