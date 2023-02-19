@@ -15,8 +15,12 @@ export class UserService {
   }
 
 
-  buscarBeats():Observable<UserResponseInterface[]>{
+  searchUsers():Observable<UserResponseInterface[]>{
     return this.http.get<UserResponseInterface[]>(this.url)
       
+  }
+
+  newUser(email:string, password:string, name:string, username:string):Observable<UserResponseInterface[]>{
+    return this.http.post<UserResponseInterface[]>(this.url, {username,password, email, name})//esto como se haría
   }
 }

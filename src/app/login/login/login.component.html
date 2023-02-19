@@ -15,7 +15,7 @@
                 <input type="name"
                             class="form-control"
                             placeholder="Name"
-                            ngModel
+                            [(ngModel)]="newName"
                             name="name"
                             minlength="3"
                             required>
@@ -27,7 +27,7 @@
                     <input type="username"
                             class="form-control"
                             placeholder="Username"
-                            ngModel
+                            [(ngModel)]="newUsername"
                             name="username"
                             minlength="3"
                             required>
@@ -39,7 +39,7 @@
                     <input type="email"
                             class="form-control"
                             placeholder="E-mail"
-                            ngModel
+                            [(ngModel)]="newEmail"
                             name="NewEmail"
                             minlength="3"
                             required>
@@ -51,7 +51,7 @@
                     <input type="password"
                                     class="form-control"
                                     placeholder="Password"
-                                    ngModel 
+                                    [(ngModel)]="newPassword"
                                     name="NewPassword"
                                     required
                                     >
@@ -64,14 +64,14 @@
                     <input type="password"
                                     class="form-control"
                                     placeholder="Repeat Password"
-                                    ngModel 
+                                    [(ngModel)]="repeatNewPassword"
                                     name="RepeatNewPassword"
                                     required
                                     >
         
                                     <span class="form-text text-danger" 
                                     *ngIf="notValidRepeatNewPassword('RepeatNewPassword')">
-                                        Password is required
+                                        Password does not match
                                     </span>                    
                     
                     <button type="submit" class="signUp">Sign Up</button>
@@ -81,7 +81,7 @@
     <!-- ***************************************   LOG IN   *******************************************-->
 
         <div class="form-container sign-in-container">
-            <form action="#" (ngSubmit)="saveLogIn()" #logInForm="ngForm">
+            <form action="#" (ngSubmit)="login()" #logInForm="ngForm">
                 <h1>Sign in</h1>
                 <div class="social-container">
                     <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
@@ -92,9 +92,9 @@
                 <input type="email"
                         class="form-control"
                         placeholder="E-mail"
-                        ngModel
                         name="email"
                         minlength="3"
+                        [(ngModel)]="email"
                         required>
     
                 <span class="form-text text-danger" 
@@ -106,8 +106,8 @@
                 <input type="password"
                                 class="form-control"
                                 placeholder="Password"
-                                ngModel 
                                 name="password"
+                                [(ngModel)]="password"
                                 required
                                 >
     

@@ -2,8 +2,6 @@ export interface UserResponseInterface {
     username : number,
     password : string,
     email : string,
-    name : string,
-    enabled : boolean,
-    verifiaction_code : string,
+    name : string
     role : String
 }

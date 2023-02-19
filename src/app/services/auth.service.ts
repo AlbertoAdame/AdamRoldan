@@ -34,12 +34,13 @@ export class AuthService {
     //Recuperamos el usuario y comprobamos que la contraseña sea correcta
     return this.http.post<TokenInterface>(this.url, {email,password}, this.httpOptions)
     .pipe( switchMap(token=> {
-        this.cookies.set('token',  token.access_token);
-        this.cookies.set('rol', token.rol)
+        this.cookies.set('token', token.token);
+        console.log(token)
+        // this.cookies.set('rol', token.rol)
+        // console.log(token.rol)
         return of(true)
     }), catchError (error=>{
       this.cookies.delete('token');
-      this.cookies.delete('rol');
       return of(false)
     }))
 

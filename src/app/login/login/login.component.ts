@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2'
+import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -12,66 +15,79 @@ export class LoginComponent implements OnInit {
   @ViewChild('logInForm') logInForm!: NgForm;
   @ViewChild('registerForm') registerForm!: NgForm;
 
+  // ************************** CHANGE VIEW ***************************
+
   view:boolean = false;
+
+  // ************************** VALIDATIONS ***************************
 
   validEmail:boolean = false;
   validPassword:boolean = false;
 
+  touchedEmail:boolean = false;
+  touchedPassword:boolean = false;
+
   validNewEmail:boolean = false;
   validNewPassword:boolean = false;
+  validRepeatNewPassword:boolean = false;
   validUsername:boolean = false;
   validName:boolean = false;
-  validRepeatNewPassword:boolean = false;
 
-  
+  touchedNewEmail:boolean = false;
+  touchedNewPassword:boolean = false;
+  touchedRepeatNewPassword:boolean = false;
+  touchedUsername:boolean = false;
+  touchedName:boolean = false;
 
-  constructor() { }
+  // ************************** TOKEN ***************************
+
+  email:string=""
+  password:string="";
+  isLoggedIn!:boolean;
+
+    // ************************** REGISTER ***************************
+
+
+  newEmail:string=""
+  newPassword:string="";
+  repeatNewPassword:string="";
+  newName:string="";
+  newUsername:string="";
+
+  constructor(private authService:AuthService, private router:Router, private userService:UserService) { }
+
+  // ************************** TOKEN(actualizar) ***************************
 
   ngOnInit(): void {
-    
+    // this.isLoggedIn = this.authService.isAuthenticated();
   }
 
-  changeView():void{
-    this.view = !this.view
+  logout() {
+    this.authService.logout();
+    this.isLoggedIn=false;
   }
 
-    // ************************** LOG IN *********************+
-
-  notValidEmail(campo:string): boolean{ 
-    let result:boolean= false;
-
-    if(this.logInForm?.controls[campo]?.touched){
-
-      if (/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(this.logInForm?.controls[campo].value)){
-          result=false;
-      } 
-      else {
-          result=true;
-      }
+  login():void{
+    if(!this.validEmail && !this.validPassword && this.touchedEmail && this.touchedPassword){
+      this.authService.login(this.email,this.password)
+      .subscribe({
+        next: (resp) => {
+          if (resp) {
+            this.isLoggedIn=true;
+            // this.router.navigate(['/servers']);
+          }
+          else {
+            this.email=''; 
+            this.password='';
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Email o contraseña incorrecta',
+            })
+          }
+        }
+      })
     }
-    this.validEmail = result;
-      return result;
-  }
-
-  notValidPassword(campo:string): boolean{
-    let result:boolean= false;
-    if(this.logInForm?.controls[campo]?.invalid && this.logInForm?.controls[campo]?.touched)
-      result = true
-    else
-      result = false
-    this.validPassword = result;
-    return result
-  }
-  saveLogIn() {
-    if(!this.validEmail && !this.validPassword){
-      Swal.fire(
-        'Good job!',
-        'You clicked the button!',
-        'success'
-      )
-
-    }
-
     else{
       Swal.fire({
         icon: 'error',
@@ -79,23 +95,59 @@ export class LoginComponent implements OnInit {
         text: 'Something went wrong!',
       })
     }
+  }
 
-    // this.myForm.resetForm();
-
-
-
+  newAccount():void{
+    this.userService.newUser(this.newEmail, this.newPassword, this.newName, this.newUsername);
   }
 
 
+  // ************************** CHANGE VIEW ***************************
 
-  // ************************** REGISTER *********************+
+  changeView():void{
+    this.view = !this.view
+  }
+
+  // ************************** LOG IN VALIDATIONS ***************************
+
+  notValidEmail(campo:string): boolean{ 
+    let result:boolean= false;
+
+    if(this.logInForm?.controls[campo]?.touched){
+      this.touchedEmail = true;
+      if (/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(this.logInForm?.controls[campo].value)){
+          result=false;
+      } 
+      else {
+          result=false;
+      }
+    }
+      this.validEmail = result;
+      return result;
+  }
+
+  notValidPassword(campo:string): boolean{
+    let result:boolean= false;
+    if(this.logInForm?.controls[campo]?.touched){
+      this.touchedPassword = true;
+      if(this.logInForm?.controls[campo]?.invalid)
+        result = true
+      else
+        result = false
+    }
+    this.validPassword = result;
+    return result
+  }
+
+
+  // ************************** REGISTER VALIDATIONS *********************+
 
 
   notValidNewEmail(campo:string): boolean{ 
     let result:boolean= false;
 
     if(this.registerForm?.controls[campo]?.touched){
-
+      this.touchedNewEmail = true;
       if (/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(this.registerForm?.controls[campo].value)){
           result=false;
       } 
@@ -109,51 +161,67 @@ export class LoginComponent implements OnInit {
 
   notValidUsername(campo:string): boolean{
     let result:boolean= false;
-    if(this.registerForm?.controls[campo]?.invalid && this.registerForm?.controls[campo]?.touched)
-      result = true
-    else
-      result = false
+    
+    if(this.registerForm?.controls[campo]?.touched){
+      this.touchedUsername = true;
+      if(this.registerForm?.controls[campo]?.invalid)
+        result = true
+      else
+        result = false
+    }
     this.validUsername = result;
     return result
   }
 
   notValidName(campo:string): boolean{
     let result:boolean= false;
-    if(this.registerForm?.controls[campo]?.invalid && this.registerForm?.controls[campo]?.touched)
-      result = true
-    else
-      result = false
+    
+    if(this.registerForm?.controls[campo]?.touched){
+      this.touchedName = true;
+      if(this.registerForm?.controls[campo]?.invalid )
+        result = true
+      else
+        result = false
+    }
     this.validName = result;
     return result
   }
 
   notValidNewPassword(campo:string): boolean{
     let result:boolean= false;
-    if(this.registerForm?.controls[campo]?.invalid && this.registerForm?.controls[campo]?.touched)
-      result = true
-    else
-      result = false
+    
+    if(this.registerForm?.controls[campo]?.touched){
+      this.touchedNewPassword = true;
+      if(this.registerForm?.controls[campo]?.invalid)
+        result = true
+      else
+        result = false
+    }
     this.validNewPassword = result;
     return result
   }
 
   notValidRepeatNewPassword(campo:string): boolean{
     let result:boolean= false;
-    if(this.registerForm?.controls[campo]?.invalid && this.registerForm?.controls[campo]?.touched)
-      result = true
-    else
-      result = false
+    if(this.registerForm?.controls[campo]?.touched){
+      this.touchedRepeatNewPassword = true;
+      if(this.newPassword != this.repeatNewPassword )
+        result = true
+      else
+        result = false
+    }
     this.validRepeatNewPassword = result;
     return result
   }
 
 
   saveRegister() {
-    if(!this.validNewEmail && !this.validUsername){
+    if(!this.validNewEmail && !this.validNewPassword && !this.validRepeatNewPassword && !this.validUsername && !this.validName && this.touchedNewEmail && this.touchedNewPassword && this.touchedRepeatNewPassword && this.touchedUsername && this.touchedName){
       Swal.fire(
         'Good job!',
         'You clicked the button!',
-        'success'
+        'success',
+        
       )
 
     }

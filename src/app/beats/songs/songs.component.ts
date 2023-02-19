@@ -14,7 +14,7 @@ export class SongsComponent implements OnInit {
   constructor(private beatService:BeatService) { }
 
   ngOnInit(): void {
-    this.beatService.buscarBeats()
+    this.beatService.searchBeats()
     .subscribe({
       next: (resp) => this.results = resp
       //falta error

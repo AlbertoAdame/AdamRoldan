@@ -13,8 +13,7 @@ export class BeatService {
 
   }
 
-
-  buscarBeats():Observable<BeatInterface[]>{
+  searchBeats():Observable<BeatInterface[]>{
     return this.http.get<BeatInterface[]>(this.url)
       
   }
