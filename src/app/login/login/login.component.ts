@@ -61,16 +61,16 @@ export class LoginComponent implements OnInit {
   // ************************** TOKEN(actualizar) ***************************
 
   ngOnInit(): void {
-    // this.authService.isAuthenticated()
-    // .subscribe({
-    //   next: (resp) =>{
-    //     if (resp){
-    //       this.isLoggedIn=true;
-    //   }
-    //   else{
-    //     this.isLoggedIn=false;
-    //   }
-    // }})
+    this.authService.isAuthenticated()
+    .subscribe({
+      next: (resp) =>{
+        if (resp){
+          this.isLoggedIn=true;
+      }
+      else{
+        this.isLoggedIn=false;
+      }
+    }});
   }
 
   logout() {
@@ -80,7 +80,13 @@ export class LoginComponent implements OnInit {
 
    // ************************** LOGIN **************************
 
-  login():void{
+  login(){
+    // if(this.logInForm.invalid){
+    //   this.logInForm.markAllAsTouched();
+    //   return;
+    // }
+
+
     if(!this.validLoginUsername && !this.validPassword && this.touchedEmail && this.touchedPassword){
       this.authService.login(this.username,this.password)
       .subscribe({
@@ -125,7 +131,7 @@ export class LoginComponent implements OnInit {
               title: 'USUARIO CREADO',
               text: 'comprueba'
             })
-            //esto lo haremos para que se recargue el login
+            //esto lo haremos para que se recargue y te muestre el login login
             this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
                 this.router.navigate([this.currentUrl]);
             });

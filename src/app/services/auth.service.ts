@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Observable, switchMap, of, catchError } from 'rxjs';
+import { Observable, switchMap, of, catchError, BehaviorSubject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TokenInterface } from '../interfaces/token.interface';
@@ -14,6 +14,7 @@ import { DecodeTokenInterface } from '../interfaces/decode-token.interface';
 export class AuthService {
 
   url:string='http://localhost:8086/signin';
+  urlJwt:string='http://localhost:8086/user'
   loggedIn:boolean = false;
   role: string = "";
   token!:DecodeTokenInterface;
@@ -25,7 +26,7 @@ export class AuthService {
   constructor(private userService:UserService, private cookies:CookieService, private http:HttpClient) { }
 
   isAuthenticated() {    
-    return this.http.get(this.url) // aqui tengo que hacer lo de jwt para que me diga si sigue autenticado
+    return this.http.get(this.urlJwt) // aqui tengo que hacer lo de jwt para que me diga si sigue autenticado
     .pipe( switchMap(token=> {
         return of(true)
     }), catchError (error=>{
@@ -45,12 +46,18 @@ export class AuthService {
         return of(true)
     }), catchError (error=>{
       this.cookies.delete('token');
+      this.cookies.delete('sub');
+      this.cookies.delete('role');
       return of(false)
     }))
 
   }
 
-  logout() {
+  logout(){
     this.cookies.delete('token');
+    this.cookies.delete('sub');
+    this.cookies.delete('role');
+
   }
+
 }

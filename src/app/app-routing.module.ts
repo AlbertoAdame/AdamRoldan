@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
+import { RolGuardGuard } from './rol-guard.guard';
 
 const routes: Routes = [
   {
@@ -9,6 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'login',
+    canActivate: [RolGuardGuard],
     loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
   },
   {
