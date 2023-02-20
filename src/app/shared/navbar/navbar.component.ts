@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-navbar',
@@ -10,17 +12,14 @@ export class NavbarComponent implements OnInit {
   search:boolean = false;
   cart:boolean = false;
   color:string = 'white';
-  constructor() { }
+  username:string = "";
+  constructor(private cookies:CookieService) { }
 
   ngOnInit(): void {
-    // const search = document.querySelector('.search')
-    // const btn = document.querySelector('.btn')
-    // const input: = document.querySelector('.input')
+    if(this.cookies.get('sub')){
+      this.username = this.cookies.get('sub')
+    }
 
-    // btn?.addEventListener('click', () => {
-    // search?.classList.toggle('active')
-    // input?.focus()
-// })
   }
 
   showSearchBar():void{

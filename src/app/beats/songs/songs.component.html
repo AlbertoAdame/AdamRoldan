@@ -22,7 +22,7 @@
     <div class="listProduct row" *ngFor="let beat of results">
         <div class="picture col">
 
-            <img src="/assets/images/product.png" alt="image" width="50" height="50" class="productImage">
+            <img src={{beat.img}} alt="image" width="50" height="50" class="productImage">
         </div>
 
         <span class="productTitle col">{{beat.title}}</span> 

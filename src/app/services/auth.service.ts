@@ -5,6 +5,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TokenInterface } from '../interfaces/token.interface';
 import { UserService } from './user.service';
+import jwt_decode from "jwt-decode";
+import { DecodeTokenInterface } from '../interfaces/decode-token.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +15,8 @@ export class AuthService {
 
   url:string='http://localhost:8086/signin';
   loggedIn:boolean = false;
+  role: string = "";
+  token!:DecodeTokenInterface;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json'})
@@ -21,7 +25,7 @@ export class AuthService {
   constructor(private userService:UserService, private cookies:CookieService, private http:HttpClient) { }
 
   isAuthenticated() {    
-    return this.http.get(this.url)
+    return this.http.get(this.url) // aqui tengo que hacer lo de jwt para que me diga si sigue autenticado
     .pipe( switchMap(token=> {
         return of(true)
     }), catchError (error=>{
@@ -35,9 +39,9 @@ export class AuthService {
     return this.http.post<TokenInterface>(this.url, {email,password}, this.httpOptions)
     .pipe( switchMap(token=> {
         this.cookies.set('token', token.token);
-        console.log(token)
-        // this.cookies.set('rol', token.rol)
-        // console.log(token.rol)
+        this.token = jwt_decode(token.token)
+        this.cookies.set('role', this.token.role)
+        this.cookies.set('sub', this.token.sub)
         return of(true)
     }), catchError (error=>{
       this.cookies.delete('token');

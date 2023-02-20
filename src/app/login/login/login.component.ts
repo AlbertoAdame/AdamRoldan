@@ -15,13 +15,15 @@ export class LoginComponent implements OnInit {
   @ViewChild('logInForm') logInForm!: NgForm;
   @ViewChild('registerForm') registerForm!: NgForm;
 
+  currentUrl = this.router.url;
+
   // ************************** CHANGE VIEW ***************************
 
   view:boolean = false;
 
   // ************************** VALIDATIONS ***************************
 
-  validEmail:boolean = false;
+  validLoginUsername:boolean = false;
   validPassword:boolean = false;
 
   touchedEmail:boolean = false;
@@ -41,7 +43,7 @@ export class LoginComponent implements OnInit {
 
   // ************************** TOKEN ***************************
 
-  email:string=""
+  username:string=""
   password:string="";
   isLoggedIn!:boolean;
 
@@ -59,7 +61,16 @@ export class LoginComponent implements OnInit {
   // ************************** TOKEN(actualizar) ***************************
 
   ngOnInit(): void {
-    // this.isLoggedIn = this.authService.isAuthenticated();
+    // this.authService.isAuthenticated()
+    // .subscribe({
+    //   next: (resp) =>{
+    //     if (resp){
+    //       this.isLoggedIn=true;
+    //   }
+    //   else{
+    //     this.isLoggedIn=false;
+    //   }
+    // }})
   }
 
   logout() {
@@ -67,22 +78,25 @@ export class LoginComponent implements OnInit {
     this.isLoggedIn=false;
   }
 
+   // ************************** LOGIN **************************
+
   login():void{
-    if(!this.validEmail && !this.validPassword && this.touchedEmail && this.touchedPassword){
-      this.authService.login(this.email,this.password)
+    if(!this.validLoginUsername && !this.validPassword && this.touchedEmail && this.touchedPassword){
+      this.authService.login(this.username,this.password)
       .subscribe({
         next: (resp) => {
           if (resp) {
             this.isLoggedIn=true;
-            // this.router.navigate(['/servers']);
+            this.router.navigate(['/']);
           }
           else {
-            this.email=''; 
+            this.username=''; 
             this.password='';
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
               text: 'Email o contraseña incorrecta',
+              
             })
           }
         }
@@ -93,12 +107,45 @@ export class LoginComponent implements OnInit {
         icon: 'error',
         title: 'Oops...',
         text: 'Something went wrong!',
+        confirmButtonColor: '#9e1815',
       })
     }
   }
 
+   // ************************** REGISTER ***************************
+
   newAccount():void{
-    this.userService.newUser(this.newEmail, this.newPassword, this.newName, this.newUsername);
+    if(!this.validNewEmail && !this.validNewPassword && !this.validRepeatNewPassword && !this.validUsername && !this.validName && this.touchedNewEmail && this.touchedNewPassword && this.touchedRepeatNewPassword && this.touchedUsername && this.touchedName){
+      this.userService.newUser(this.newUsername, this.newPassword, this.newName, this.newEmail)
+      .subscribe({
+        next: (resp) => {
+          if(resp) {
+            Swal.fire({
+              icon: 'error',
+              title: 'USUARIO CREADO',
+              text: 'comprueba'
+            })
+            //esto lo haremos para que se recargue el login
+            this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+                this.router.navigate([this.currentUrl]);
+            });
+
+          }},
+          error: (error) => 
+          console.log(error)
+      });
+    
+    }
+    else{
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+
+      })
+    }
+
+    
   }
 
 
@@ -110,19 +157,22 @@ export class LoginComponent implements OnInit {
 
   // ************************** LOG IN VALIDATIONS ***************************
 
-  notValidEmail(campo:string): boolean{ 
+  notValidUsernameLogin(campo:string): boolean{ 
     let result:boolean= false;
 
     if(this.logInForm?.controls[campo]?.touched){
       this.touchedEmail = true;
-      if (/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(this.logInForm?.controls[campo].value)){
-          result=false;
-      } 
+      // if (/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(this.logInForm?.controls[campo].value)){
+      //     result=false;
+      // } 
+      if(this.logInForm?.controls[campo]?.invalid){
+        result=true;
+      }
       else {
           result=false;
       }
     }
-      this.validEmail = result;
+      this.validLoginUsername = result;
       return result;
   }
 

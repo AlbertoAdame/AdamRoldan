@@ -1,7 +1,6 @@
 export interface UserResponseInterface {
-    username : number,
+    username : string,
     password : string,
-    email : string,
-    name : string
-    role : String
+    name : string,
+    email : string
 }
