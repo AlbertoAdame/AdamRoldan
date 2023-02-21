@@ -24,7 +24,8 @@ body {
 
 }
 #pagination li {
-  display: inline
+  display: inline;
+  cursor:pointer;
 }
 #pagination li a {
   display: inline-block;
@@ -87,3 +88,139 @@ body {
 #border-pagination li a:hover:not(.active) {
   background: #ddd;
 }
+
+.my-pagination ::ng-deep .ngx-pagination .current {
+  background: #e52d27;
+  border-radius: 8px;
+}
+
+.my-pagination ::ng-deep .ngx-pagination a {
+  border-radius: 8px;
+}
+
+.my-pagination ::ng-deep ul {
+    margin: 0;
+    padding: 0;
+} 
+
+.my-pagination{
+  display: flex;
+  justify-content: space-around;
+  margin: auto;
+} 
+
+
+.text{
+  display: flex;
+    flex-direction: row-reverse;
+    margin-top: 6px;
+    color: rgb(159, 159, 159);
+}
+
+.form-select{
+  width: 17.5%;
+}
+
+.row{
+  margin-top: 25px;
+}
+
+
+
+
+
+
+/* --------------------------------------  TAG LIST OF SONGS ---------------------------------------------  */
+
+.songsList{
+  margin-bottom: 50px;
+  margin-top: 45px;
+
+}
+
+.listProductTag{
+  margin-top: 50px;
+  margin-bottom: 25px;
+  color: grey;
+  font-size: small;
+  margin: 25px 100px;
+}
+
+.productTitleTag{
+  text-align: center;
+}
+
+.productTimeTag{
+  text-align: center;
+}
+
+.productBpmTag{
+  text-align: center;
+}
+
+
+/* --------------------------------------  LIST OF SONGS ---------------------------------------------  */
+
+
+.listProduct{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 100px;
+}
+
+.productImage{
+  border-radius: 8px;
+  object-fit: cover;
+  width: 180px;
+}
+
+.productTitle{
+  text-align: center;
+}
+
+.productTime{
+  text-align: center;
+}
+
+.productBpm{
+  text-align: center;
+
+}
+
+.share-button{
+  width: 190px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.share{
+  /* margin-right: -25px; */
+
+  cursor: pointer;
+
+  margin-top: 10px;
+}
+
+.cartButton{
+  width: 130px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border: solid 2px;
+  border-radius: 5px;
+  margin-bottom: 2px;
+  justify-content: center;
+
+}
+
+
+.division{
+  margin: auto;
+  width: 600px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+

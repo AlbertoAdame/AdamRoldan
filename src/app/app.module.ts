@@ -11,6 +11,8 @@ import { FaqModule } from './faq/faq.module';
 import { RegisterModule } from './register/register.module';
 import { UserService } from './services/user.service';
 import { BeatService } from './services/beat.service';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { BeatService } from './services/beat.service';
     SharedModule,
     LoginModule,
     FaqModule,
-    RegisterModule
+    RegisterModule,
+    HttpClientModule
+
   ],
   providers: [
     UserService,
