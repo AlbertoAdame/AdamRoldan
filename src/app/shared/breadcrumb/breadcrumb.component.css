@@ -14,7 +14,7 @@
   position: absolute;
   left: 50%;
   transform: translate(-50%, -50%);
-  margin-left: 435px;
+  margin-left: -435px;
   margin-top: -8px;
 }
 
@@ -28,10 +28,12 @@ a
   display: inline-block;
   padding: 15px;
   background: #CC2520;
-  transform: skew(-20deg);
+
   cursor: pointer;
   opacity: 0.75;
   border-radius: 10px 10px 0px 0;
+
+
 }
 
 .crumb1 li.active
@@ -40,6 +42,8 @@ a
   cursor: default;
   background: #CC2520;
   opacity: 1;
+  box-shadow: rgb(0 0 0 / 35%) 0px -15px 15px -5px inset;
+
 
 }
 
@@ -56,5 +60,6 @@ a
 .crumb1 li a
 {
   display: block;
-  transform: skew(20deg);
+
 }
+

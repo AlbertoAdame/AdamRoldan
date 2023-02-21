@@ -24,7 +24,7 @@
                     CONTACT
                 </button>
             </li>
-            <li *ngIf="username">
+            <li *ngIf="isLoggedIn">
                 <button class="buttonNav" [routerLink]="['/contact']" routerLinkActive="active">
                     PROFILE
                 </button>

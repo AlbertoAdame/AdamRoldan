@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { BeatInterface } from '../../interfaces/beat-response.interface';
+import { Component, Input, OnInit } from '@angular/core';
+
 import { BeatService } from '../../services/beat.service';
+import { Content } from '../../interfaces/pageable.interface';
 
 @Component({
   selector: 'app-songs',
@@ -9,14 +10,18 @@ import { BeatService } from '../../services/beat.service';
 })
 export class SongsComponent implements OnInit {
 
-  results : BeatInterface[] = []
+  results : Content[]=[];
+  @Input() query:string="";
 
-  constructor(private beatService:BeatService) { }
+  constructor(private beatService:BeatService) { 
+  }
 
   ngOnInit(): void {
-    this.beatService.searchBeats()
+    this.beatService.searchBeatsPageable(0, 200, "date", this.query)
     .subscribe({
-      next: (resp) => this.results = resp
+      next: (resp) => {
+        this.results = resp.content
+      }
       //falta error
     })
   }

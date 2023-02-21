@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BreadcrumbComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router) { }
+
+  route:string="";
 
   ngOnInit(): void {
+    this.route=this.router.url.slice(1).toUpperCase()
+
   }
 
 }

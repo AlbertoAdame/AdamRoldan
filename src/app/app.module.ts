@@ -11,7 +11,10 @@ import { FaqModule } from './faq/faq.module';
 import { RegisterModule } from './register/register.module';
 import { UserService } from './services/user.service';
 import { BeatService } from './services/beat.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptorService } from './auth-interceptor.service';
+import { AuthService } from './services/auth.service';
+import { RolGuardGuard } from './rol-guard.guard';
 
 
 
@@ -32,8 +35,15 @@ import { HttpClientModule } from '@angular/common/http';
 
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    },
     UserService,
-    BeatService
+    BeatService,
+    AuthService,
+    RolGuardGuard
   ],
   bootstrap: [AppComponent]
 })

@@ -13,9 +13,10 @@ import { DecodeTokenInterface } from '../interfaces/decode-token.interface';
 })
 export class AuthService {
 
+  private loggedIn = new BehaviorSubject<boolean> (false);
+
   url:string='http://localhost:8086/signin';
-  urlJwt:string='http://localhost:8086/user'
-  loggedIn:boolean = false;
+  urlJwt:string='http://localhost:8086/jwt'
   role: string = "";
   token!:DecodeTokenInterface;
 
@@ -31,20 +32,28 @@ export class AuthService {
         return of(true)
     }), catchError (error=>{
       this.cookies.delete('token');
+      this.cookies.delete('sub');
+      this.cookies.delete('role');
       return of(false)
     }))
+  }
+
+  get isLoggedIn() {
+    return this.loggedIn.asObservable();
   }
 
   login(email:string, password:string):Observable<boolean> {
     //Recuperamos el usuario y comprobamos que la contraseña sea correcta
     return this.http.post<TokenInterface>(this.url, {email,password}, this.httpOptions)
     .pipe( switchMap(token=> {
+        this.loggedIn.next(true);
         this.cookies.set('token', token.token);
         this.token = jwt_decode(token.token)
         this.cookies.set('role', this.token.role)
         this.cookies.set('sub', this.token.sub)
         return of(true)
     }), catchError (error=>{
+      this.loggedIn.next(false);
       this.cookies.delete('token');
       this.cookies.delete('sub');
       this.cookies.delete('role');
@@ -57,6 +66,7 @@ export class AuthService {
     this.cookies.delete('token');
     this.cookies.delete('sub');
     this.cookies.delete('role');
+    this.loggedIn.next(false);
 
   }
 

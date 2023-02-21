@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BeatInterface } from '../interfaces/beat-response.interface';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Pageable } from '../interfaces/pageable.interface';
 
 @Injectable({
@@ -14,14 +14,14 @@ export class BeatService {
 
   }
 
-  searchBeats():Observable<BeatInterface[]>{
-    return this.http.get<BeatInterface[]>(this.url)
-      
+  searchBeats():Observable<Pageable>{
+    return this.http.get<Pageable>(this.url + "?pageNumber=0&sizeNumber=200")
   }
 
-  searchBeatsPageable(pageNumber:number, sizeNumber:number):Observable<Pageable>{
-    return this.http.get<Pageable>(this.url + "?pageNumber=" + pageNumber+ "&sizeNumber=" + sizeNumber)
-
+  searchBeatsPageable(pageNumber:number, sizeNumber:number, sortField:string, stringFind:string):Observable<Pageable>{
+    return this.http.get<Pageable>(this.url + "?pageNumber=" + pageNumber+ "&sizeNumber=" + sizeNumber+ "&sortField=" + sortField+ "&stringFind=" + stringFind)
   }
+
+
 
 }

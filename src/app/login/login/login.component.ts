@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
 
   username:string=""
   password:string="";
-  isLoggedIn!:boolean;
+
 
     // ************************** REGISTER ***************************
 
@@ -61,21 +61,10 @@ export class LoginComponent implements OnInit {
   // ************************** TOKEN(actualizar) ***************************
 
   ngOnInit(): void {
-    this.authService.isAuthenticated()
-    .subscribe({
-      next: (resp) =>{
-        if (resp){
-          this.isLoggedIn=true;
-      }
-      else{
-        this.isLoggedIn=false;
-      }
-    }});
   }
 
   logout() {
     this.authService.logout();
-    this.isLoggedIn=false;
   }
 
    // ************************** LOGIN **************************
@@ -92,7 +81,6 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: (resp) => {
           if (resp) {
-            this.isLoggedIn=true;
             this.router.navigate(['/']);
           }
           else {

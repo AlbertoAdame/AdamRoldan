@@ -14,11 +14,13 @@ export class PaginationComponent implements OnInit {
   results : Content[] = []
 
   totalElements:    number = 0;//cantidad total de items
-  size:             number = 0; 
-  // sort:             Sort;
-  
+  size:             number = 0;   
   numberOfElements: number = 5;//numero de beats por pagina
   actualPage : number = 0;
+
+  sortField:string ="date";
+  stringFind:string="";
+
 
 
   constructor(private beatService:BeatService) { }
@@ -28,13 +30,11 @@ export class PaginationComponent implements OnInit {
   }
 
   getBeats(){
-    this.beatService.searchBeatsPageable(this.actualPage, this.numberOfElements)
+    this.beatService.searchBeatsPageable(this.actualPage, this.numberOfElements, this.sortField, this.stringFind)
     .subscribe({
       next: (resp) => {
         this.results = resp.content
         this.totalElements=resp.totalElements
-        console.log(this.totalElements)
-        console.log(this.numberOfElements)
       }
       //falta error
     })
@@ -47,7 +47,6 @@ export class PaginationComponent implements OnInit {
 
   changePageSize(){
     this.getBeats();
-    window.location.reload()
     console.log(this.numberOfElements)
   }
 

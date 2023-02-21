@@ -5,7 +5,6 @@ import { HomeRoutingModule } from './home-routing.module';
 import { FormsModule } from '@angular/forms';
 import { PaginationComponent } from './pagination/pagination.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { TableModule } from 'primeng/table';
 
 
 
@@ -18,8 +17,7 @@ import { TableModule } from 'primeng/table';
     CommonModule,
     HomeRoutingModule,
     FormsModule,
-    NgxPaginationModule,
-    TableModule,
+    NgxPaginationModule
   ],
   exports: [
     HomeComponent
