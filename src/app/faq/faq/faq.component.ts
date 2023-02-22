@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-faq',
@@ -24,9 +25,16 @@ export class FaqComponent implements OnInit {
 
   color:string = 'white';
 
-  constructor() { }
+  isLoggedIn!:boolean;
+
+  constructor(private authService:AuthService) { }
 
   ngOnInit(): void {
+    this.authService.isLoggedIn.subscribe({
+      next: (resp) =>{
+        this.isLoggedIn=resp;
+      }
+    })
   }
 
   showLicense():void{
@@ -35,8 +43,8 @@ export class FaqComponent implements OnInit {
     if(this.color=='white')
       this.color='red'
     else
-      this.color='white'
-
+    this.color='white'
+    
   }
 
   showYoutube():void{

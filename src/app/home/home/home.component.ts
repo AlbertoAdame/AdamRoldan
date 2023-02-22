@@ -13,17 +13,6 @@ export class HomeComponent implements OnInit {
   constructor(private authService:AuthService) {}
 
   ngOnInit(): void {
-    this.authService.isAuthenticated()
-    .subscribe({
-      next: (resp) =>{
-        if (resp){
-          this.isLoggedIn=true;
-
-      }
-      else{
-        this.isLoggedIn=false;
-      }
-    }})
+    this.authService.isAuthenticated();
   }
-
 }

@@ -1,4 +1,6 @@
+
 <div class="container songsList">
+    
 
     <!-- **************************** TAG ********************************** -->
     <div class="listProductTag row">
@@ -18,8 +20,9 @@
      <!-- **************************** END TAG ********************************** -->
     
 
+<div *ngIf="beats">
 
-    <div class="listProduct row" *ngFor="let beat of results">
+    <div class="listProduct row" *ngFor="let beat of beats.content" >
         <div class="picture col">
 
             <img src={{beat.img}} alt="image" width="50" height="50" class="productImage">
@@ -54,5 +57,6 @@
         <hr class="division">
     
     </div>
+</div>
     
 </div>

@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { BeatService } from '../../services/beat.service';
-import { Content } from '../../interfaces/pageable.interface';
+import { Content, Pageable } from '../../interfaces/pageable.interface';
+import { Page } from 'ngx-pagination';
 
 @Component({
   selector: 'app-songs',
@@ -11,18 +12,29 @@ import { Content } from '../../interfaces/pageable.interface';
 export class SongsComponent implements OnInit {
 
   results : Content[]=[];
-  @Input() query:string="";
+  // @Input() query:string="";
+  
 
   constructor(private beatService:BeatService) { 
   }
 
   ngOnInit(): void {
-    this.beatService.searchBeatsPageable(0, 200, "date", this.query)
-    .subscribe({
-      next: (resp) => {
-        this.results = resp.content
-      }
-      //falta error
-    })
+    // this.beatService.searchBeatsPageable(0, 200, "date", this.query)
+    // .subscribe({
+    //   next: (resp) => {
+    //     this.results = resp.content
+    //   }
+    //   //falta error
+    // })
+    this.beatService.searchBeatsPageable(0, 200, "date", '')
+    //   .subscribe({
+    //     next: resp => this.beats = resp
+    //   }
+    //   )
+
+  }
+
+  get beats(): Pageable{
+    return this.beatService.beats
   }
 }

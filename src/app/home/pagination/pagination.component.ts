@@ -26,27 +26,27 @@ export class PaginationComponent implements OnInit {
   constructor(private beatService:BeatService) { }
 
   ngOnInit(): void {
-    this.getBeats();
+    // this.getBeats();
   }
 
-  getBeats(){
-    this.beatService.searchBeatsPageable(this.actualPage, this.numberOfElements, this.sortField, this.stringFind)
-    .subscribe({
-      next: (resp) => {
-        this.results = resp.content
-        this.totalElements=resp.totalElements
-      }
-      //falta error
-    })
-  }
+  // getBeats(){
+  //   this.beatService.searchBeatsPageable(this.actualPage, this.numberOfElements, this.sortField, this.stringFind)
+  //   .subscribe({
+  //     next: (resp) => {
+  //       this.results = resp.content
+  //       this.totalElements=resp.totalElements
+  //     }
+  //     //falta error
+  //   })
+  // }
 
   pageChangeEvent(event: number){
     this.actualPage = event;
-    this.getBeats();
+    // this.getBeats();
 }
 
   changePageSize(){
-    this.getBeats();
+    // this.getBeats();
     console.log(this.numberOfElements)
   }
 

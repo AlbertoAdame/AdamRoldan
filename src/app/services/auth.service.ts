@@ -24,16 +24,25 @@ export class AuthService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json'})
   }
 
-  constructor(private userService:UserService, private cookies:CookieService, private http:HttpClient) { }
+  constructor(private userService:UserService, private cookies:CookieService, private http:HttpClient) {
+    this.http.get(this.urlJwt) 
+    .subscribe({ 
+      next:() => this.loggedIn.next(true),
+      error: () =>  this.loggedIn.next(false)
+      
+    })
+  }
 
   isAuthenticated() {    
     return this.http.get(this.urlJwt) // aqui tengo que hacer lo de jwt para que me diga si sigue autenticado
     .pipe( switchMap(token=> {
+        console.log(true)
         return of(true)
     }), catchError (error=>{
       this.cookies.delete('token');
       this.cookies.delete('sub');
       this.cookies.delete('role');
+      console.log(false)
       return of(false)
     }))
   }
@@ -67,6 +76,7 @@ export class AuthService {
     this.cookies.delete('sub');
     this.cookies.delete('role');
     this.loggedIn.next(false);
+    window.location.reload()
 
   }
 

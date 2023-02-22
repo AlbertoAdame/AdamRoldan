@@ -13,9 +13,8 @@
 {
   position: absolute;
   left: 50%;
-  transform: translate(-50%, -50%);
-  margin-left: -435px;
-  margin-top: -8px;
+  margin-left: -570px;
+  margin-top: 4px;
 }
 
 a
@@ -26,7 +25,7 @@ a
 .crumb1 li
 {
   display: inline-block;
-  padding: 15px;
+  padding: 12.5px 15px;
   background: #CC2520;
 
   cursor: pointer;

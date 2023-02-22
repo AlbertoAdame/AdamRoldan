@@ -10,16 +10,24 @@ import { Pageable } from '../interfaces/pageable.interface';
 export class BeatService {
   private url = 'http://localhost:8086/beat';
 
+  _beats!: Pageable; 
   constructor(private http : HttpClient) {
 
   }
 
+  get beats(): Pageable{
+    return this._beats;
+  } 
   searchBeats():Observable<Pageable>{
     return this.http.get<Pageable>(this.url + "?pageNumber=0&sizeNumber=200")
   }
 
-  searchBeatsPageable(pageNumber:number, sizeNumber:number, sortField:string, stringFind:string):Observable<Pageable>{
-    return this.http.get<Pageable>(this.url + "?pageNumber=" + pageNumber+ "&sizeNumber=" + sizeNumber+ "&sortField=" + sortField+ "&stringFind=" + stringFind)
+  searchBeatsPageable(pageNumber:number, sizeNumber:number, sortField:string, stringFind:string){
+    this.http.get<Pageable>(this.url + "?pageNumber=" + pageNumber+ "&sizeNumber=" + sizeNumber+ "&sortField=" + sortField+ "&stringFind=" + stringFind)
+      .subscribe({
+        next: resp => this._beats = resp
+      }
+      )
   }
 
 

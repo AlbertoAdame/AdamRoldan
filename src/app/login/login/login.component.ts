@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2'
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -56,16 +57,16 @@ export class LoginComponent implements OnInit {
   newName:string="";
   newUsername:string="";
 
-  constructor(private authService:AuthService, private router:Router, private userService:UserService) { }
+  constructor(private authService:AuthService, private router:Router, private userService:UserService, private cookies:CookieService) { }
 
   // ************************** TOKEN(actualizar) ***************************
 
   ngOnInit(): void {
+
+
   }
 
-  logout() {
-    this.authService.logout();
-  }
+
 
    // ************************** LOGIN **************************
 
@@ -115,7 +116,7 @@ export class LoginComponent implements OnInit {
         next: (resp) => {
           if(resp) {
             Swal.fire({
-              icon: 'error',
+              icon: 'success',
               title: 'USUARIO CREADO',
               text: 'comprueba'
             })
@@ -137,9 +138,7 @@ export class LoginComponent implements OnInit {
         text: 'Something went wrong!',
 
       })
-    }
-
-    
+    }    
   }
 
 

@@ -20,6 +20,9 @@
 
 .search {
     height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 100px; 
   }
   
   .search .input {
@@ -36,7 +39,10 @@
     padding-right: 55px;
     box-shadow: rgb(50 50 93 / 20%) 0px 6px 5px -2px, rgb(0 0 0 / 30%) 0px 3px 10px -3px;
     
+
+
   }  
+
 
   .btn {
     background-color: white;

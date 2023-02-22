@@ -8,7 +8,7 @@
 .background{
 	transition: 1.5s;
     background-image: url("/assets/images/product2.png");
-	background-repeat: no-repeat;
+	background-repeat: repeat;
   	background-size: cover;
     height: 100vh;
 }
@@ -16,12 +16,12 @@
 .backgroundAlternative{
 	transition: 1.5s;
     background-image: url("/assets/images/product3.png") !important;
-	background-repeat: no-repeat;
+	background-repeat: repeat-y;
   	background-size: cover;
     height: 100vh;
 }
 
-body {
+/* body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -29,7 +29,7 @@ body {
 	font-family: 'Montserrat', sans-serif;
 	height: 100vh;
 	margin: -20px 0 50px;
-}
+} */
 
 h1 {
 	font-weight: bold;
@@ -117,7 +117,7 @@ input {
 	width: 900px;
 	max-width: 100%;
 	min-height: 700px;
-    margin-top: 60px;
+	margin: auto;
 }
 
 .form-container {

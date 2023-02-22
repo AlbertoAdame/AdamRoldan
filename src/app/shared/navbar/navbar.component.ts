@@ -24,24 +24,14 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
 
+    
     this.authService.isLoggedIn.subscribe({
       next: (resp) =>{
         this.isLoggedIn=resp;
       }
-
+      
     })
-
-    this.authService.isAuthenticated()
-    .subscribe({
-      next: (resp) =>{
-        if (resp){
-          this.isLoggedIn=true;
-      }
-      else{
-        this.isLoggedIn=false;
-      }
-    }})
-
+    
     if(this.cookies.get('sub')){
       this.username = this.cookies.get('sub')
     }

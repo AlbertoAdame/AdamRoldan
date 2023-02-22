@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-contact',
@@ -7,6 +8,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
+
+  isLoggedIn!:boolean;
 
   myForm: FormGroup = this.fb.group({
     name: ['', [Validators.required]],
@@ -16,9 +19,14 @@ export class ContactComponent implements OnInit {
 
   })
   
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private authService:AuthService) { }
 
   ngOnInit() {
+    this.authService.isLoggedIn.subscribe({
+      next: (resp) =>{
+        this.isLoggedIn=resp;
+      }
+    })
   }
 
   isValidField(field: string){
