@@ -18,10 +18,13 @@ export class BeatService {
   get beats(): Pageable{
     return this._beats;
   } 
-  searchBeats():Observable<Pageable>{
-    return this.http.get<Pageable>(this.url + "?pageNumber=0&sizeNumber=200")
+
+  //Manera simple
+  searchBeats(pageNumber:number, sizeNumber:number):Observable<Pageable>{
+    return this.http.get<Pageable>(`${this.url}?pageNumber=${pageNumber}&sizeNumber=${sizeNumber}&sortfield=date&stringfind=''`)
   }
 
+  //Manera con get
   searchBeatsPageable(pageNumber:number, sizeNumber:number, sortField:string, stringFind:string){
     this.http.get<Pageable>(this.url + "?pageNumber=" + pageNumber+ "&sizeNumber=" + sizeNumber+ "&sortField=" + sortField+ "&stringFind=" + stringFind)
       .subscribe({

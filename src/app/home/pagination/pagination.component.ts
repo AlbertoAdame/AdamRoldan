@@ -18,35 +18,32 @@ export class PaginationComponent implements OnInit {
   numberOfElements: number = 5;//numero de beats por pagina
   actualPage : number = 0;
 
-  sortField:string ="date";
-  stringFind:string="";
-
 
 
   constructor(private beatService:BeatService) { }
 
   ngOnInit(): void {
-    // this.getBeats();
+    this.getBeats();
   }
 
-  // getBeats(){
-  //   this.beatService.searchBeatsPageable(this.actualPage, this.numberOfElements, this.sortField, this.stringFind)
-  //   .subscribe({
-  //     next: (resp) => {
-  //       this.results = resp.content
-  //       this.totalElements=resp.totalElements
-  //     }
-  //     //falta error
-  //   })
-  // }
+  getBeats(){
+    this.beatService.searchBeats(this.actualPage, this.numberOfElements)
+    .subscribe({
+      next: (resp) => {
+        this.results = resp.content
+        this.totalElements=resp.totalElements
+      }
+      //falta error
+    })
+  }
 
   pageChangeEvent(event: number){
     this.actualPage = event;
-    // this.getBeats();
+    this.getBeats();
 }
 
   changePageSize(){
-    // this.getBeats();
+    this.getBeats();
     console.log(this.numberOfElements)
   }
 

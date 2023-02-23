@@ -42,7 +42,8 @@ import { RolGuardGuard } from './rol-guard.guard';
     },
     UserService,
     BeatService,
-    AuthService
+    AuthService,
+    RolGuardGuard
   ],
   bootstrap: [AppComponent]
 })
