@@ -21,6 +21,11 @@ export class BeatService {
 
   //Manera simple
   searchBeats(pageNumber:number, sizeNumber:number):Observable<Pageable>{
+    //Este if lo tendremos que hacer para que la paginación funcione correctamente, ya que empieza por 0,
+    //y al pulsar los botones la primera página es la 1, en vez de la 0
+    if(pageNumber!=0){
+      pageNumber-=1;
+    }
     return this.http.get<Pageable>(`${this.url}?pageNumber=${pageNumber}&sizeNumber=${sizeNumber}&sortfield=date&stringfind=''`)
   }
 
@@ -28,7 +33,13 @@ export class BeatService {
   searchBeatsPageable(pageNumber:number, sizeNumber:number, sortField:string, stringFind:string){
     this.http.get<Pageable>(this.url + "?pageNumber=" + pageNumber+ "&sizeNumber=" + sizeNumber+ "&sortField=" + sortField+ "&stringFind=" + stringFind)
       .subscribe({
-        next: resp => this._beats = resp
+        next: resp => {
+          this._beats = resp
+          console.log(resp);
+          
+        },
+        error: (error) => console.log(error)
+        
       }
       )
   }

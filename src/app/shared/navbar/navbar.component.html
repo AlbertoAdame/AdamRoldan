@@ -34,7 +34,7 @@
                     
 
                     <div class="search" [ngClass]="{active: search}">
-                        <input type="text" class="input" placeholder="Search...">
+                        <input type="text" class="input" placeholder="Search..." name="query" [(ngModel)]="query" (change)="getSearch()">
                             <button class="btn" (click)="showSearchBar()">
                             <!-- "attr.fill" lo usaremos para cambiar el valor del atributo cuando hagamos click en la lupa -->
                                 <svg width="26.5" height="26.5" [attr.fill]="color"  class="fas fa-search" viewBox="0 0 16 16">

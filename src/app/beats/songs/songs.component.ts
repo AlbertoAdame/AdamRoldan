@@ -12,6 +12,7 @@ import { Page } from 'ngx-pagination';
 export class SongsComponent implements OnInit {
 
   results : Content[]=[];
+  flag : boolean = false;
   // @Input() query:string="";
   
 
@@ -26,7 +27,9 @@ export class SongsComponent implements OnInit {
     //   }
     //   //falta error
     // })
-    this.beatService.searchBeatsPageable(0, 200, "date", '')
+    // if(this.beatService.beats == undefined){
+      // this.beatService.searchBeatsPageable(0, 200, "date", '')
+    // }
     //   .subscribe({
     //     next: resp => this.beats = resp
     //   }
@@ -35,6 +38,8 @@ export class SongsComponent implements OnInit {
   }
 
   get beats(): Pageable{
+    console.log(this.beatService.beats); 
+    
     return this.beatService.beats
   }
 }

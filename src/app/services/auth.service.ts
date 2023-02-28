@@ -33,7 +33,7 @@ export class AuthService {
     })
   }
 
-  isAuthenticated() {    
+  isAuthenticated():Observable<boolean> {    
     return this.http.get(this.urlJwt) // aqui tengo que hacer lo de jwt para que me diga si sigue autenticado
     .pipe( switchMap(token=> {
         console.log(true)

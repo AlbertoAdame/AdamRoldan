@@ -21,7 +21,6 @@
 
   <div class="listProduct row"  *ngFor="let beat of results| paginate: { itemsPerPage: numberOfElements, currentPage: actualPage, totalItems: totalElements }">
           <div class="picture col">
-
               <img src={{beat.img}} alt="image" width="50" height="50" class="productImage">
           </div>
   
@@ -30,7 +29,9 @@
 
       <span class="productTime col">{{beat.time}}</span> 
 
-      <span class="productBpm col">{{beat.bpm}}</span> 
+      <!-- <span class="productBpm col">{{beat.bpm}}</span>  -->
+
+      <span class="productBpm col">{{beat.datetime}}</span> 
 
 
       <div class="share-button col">
@@ -40,8 +41,6 @@
           </svg>
   
           <button class="cartButton">
-              
-  
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart-plus " viewBox="0 0 16 16">
                   <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z"/>
                   <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
@@ -57,7 +56,6 @@
 
   <div id="pagination container">
     <div class="row">
-
       <span class="col text">Showing 1 to {{numberOfElements}} of {{totalElements}} entries</span>
       <pagination-controls (pageChange)="pageChangeEvent($event)" class="my-pagination col"></pagination-controls>
       <div class="selection col">
@@ -75,44 +73,6 @@
 </div>
 
 
-
-
-
-<!-- <div id="wrapper">
-      <ul id="pagination" >
-        <li class="button"><a class="" (click)="avanzar(1)">«</a></li>
-        <li class="button"><a (click)="avanzar(1)"*ngIf="totalPages>0">1</a></li>
-        <li class="button"><a (click)="avanzar(2)" class="active" *ngIf="totalPages>1">2</a></li>
-        <li class="button"><a (click)="avanzar(3)"  *ngIf="totalPages>2">3</a></li>
-        <li class="button"><a (click)="avanzar(4)" *ngIf="totalPages>3">4</a></li>
-        <li class="button"><a (click)="avanzar(5)"  *ngIf="totalPages>4">5</a></li>
-        <li class="button"><a (click)="avanzar(6)"  *ngIf="totalPages>5">6</a></li>
-        <li class="button"><a (click)="avanzar(7)"  *ngIf="totalPages>6">7</a></li>
-        <li class="button"><a (click)="avanzar(totalPages)">»</a></li>
-      </ul> 
-
-</div> -->
-
-<!-- <div class="container">
-  <h1>Angular Pagination Example - ItSolutionStuff.com</h1>
-   
-  <table class="table table-bordered">
-    <tr>
-      <th>ID</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Email</th>
-    </tr>
-    <tr *ngFor="let user of results| paginate: { itemsPerPage: 6, currentPage: actualPage, totalItems: totalPages }">
-        <td>{{ user.title }}</td>
-        <td>{{ user.bpm }}</td>
-        <td>{{ user.time }}</td>
-
-    </tr>
-  </table>  
-  
-  <pagination-controls (pageChange)="pageChangeEvent($event)"></pagination-controls>
-</div> -->
 
 
 

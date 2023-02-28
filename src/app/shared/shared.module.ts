@@ -5,6 +5,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { CartComponent } from './cart/cart.component';
 import { RouterModule, Router } from '@angular/router';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -17,7 +18,8 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
   exports: [
     NavbarComponent,
