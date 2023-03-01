@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contact',
@@ -19,7 +22,7 @@ export class ContactComponent implements OnInit {
 
   })
   
-  constructor(private fb: FormBuilder, private authService:AuthService) { }
+  constructor(private fb: FormBuilder, private authService:AuthService, private userService:UserService, private router:Router) { }
 
   ngOnInit() {
     this.authService.isLoggedIn.subscribe({
@@ -41,6 +44,26 @@ export class ContactComponent implements OnInit {
       this.myForm.markAllAsTouched()
       return
     }
+    this.userService.contact(this.myForm.value.name, this.myForm.value.email, this.myForm.value.subject, this.myForm.value.message)
+    .subscribe({
+      next: (resp) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Your message was sent',
+            text: 'You will receive an answer soon'
+          }),
+          this.myForm.reset()
+        },
+        error: (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+    
+          })
+          console.log(error)
+        }
+    });
     console.log(this.myForm.value)
 
   }

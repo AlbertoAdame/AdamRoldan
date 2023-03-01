@@ -94,7 +94,8 @@ export class LoginComponent implements OnInit {
               
             })
           }
-        }
+        },
+        error: error => console.log(error)
       })
     }
     else{
@@ -104,6 +105,7 @@ export class LoginComponent implements OnInit {
         text: 'Something went wrong!',
         confirmButtonColor: '#9e1815',
       })
+
     }
   }
 
