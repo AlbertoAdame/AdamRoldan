@@ -16,6 +16,35 @@
     color: white;
 }
 
+.addButton{
+  position: absolute;
+  left: 100px;
+  top: 95px;
+
+    font-size: large;
+    width: 130px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #157347;
+    color: white;
+    letter-spacing: 5%;
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 2px;
+}
+
+.addButton:hover{
+  background-color: #155c3b;
+}
+
+.cloud{
+  margin-right: 5px;
+  margin-left: -2px;
+}
+
 /* --------------------------------------  SEARCH ---------------------------------------------  */
 
 .search {

@@ -24,7 +24,6 @@ export class NavbarComponent implements OnInit {
 
   constructor(private cookies:CookieService, private authService:AuthService, private router:Router, private beatService:BeatService) { }
 
-  // @Output() sendChild:EventEmitter<string> = new EventEmitter();
 
   ngOnInit(): void {
 
@@ -61,7 +60,7 @@ export class NavbarComponent implements OnInit {
   getSearch(){
     this.beatService.searchBeatsPageable(0, 200, "title", this.query)
     this.query=""
-    this.router.navigate(['beats']);
+    // this.router.navigate(['beats']);
   }
 
 }

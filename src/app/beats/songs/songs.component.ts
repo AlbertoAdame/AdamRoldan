@@ -28,7 +28,7 @@ export class SongsComponent implements OnInit {
     //   //falta error
     // })
     // if(this.beatService.beats == undefined){
-      // this.beatService.searchBeatsPageable(0, 200, "date", '')
+      this.beatService.searchBeatsPageable(0, 200, "date", '')
     // }
     //   .subscribe({
     //     next: resp => this.beats = resp

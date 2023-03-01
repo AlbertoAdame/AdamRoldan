@@ -5,22 +5,27 @@ import { BeatsRoutingModule } from './beats-routing.module';
 import { SongsComponent } from './songs/songs.component';
 import { SharedModule } from '../shared/shared.module';
 import { BeatService } from '../services/beat.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { UploadComponent } from './upload/upload.component';
+import { RouterModule } from '@angular/router';
 
 
 
 @NgModule({
   declarations: [
     BeatsComponent,
-    SongsComponent
+    SongsComponent,
+    UploadComponent
   ],
   imports: [
     CommonModule,
     BeatsRoutingModule,
     SharedModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule,
+    ReactiveFormsModule
   ],
   providers:[
     BeatService
