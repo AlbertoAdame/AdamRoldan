@@ -22,13 +22,42 @@ export interface Pageable {
 }
 
 export interface Content {
-    idBeat:   number;
-    title:    string;
-    price:    number;
-    time:     number;
-    bpm:      number;
-    img:      string;
-    datetime: number[];
+    idBeat:    number;
+    title:     string;
+    price:     number;
+    time:      number;
+    bpm:       number;
+    img:       string;
+    genreList: GenreList[];
+    moodList:  MoodList[];
+    datetime:  number[];
+}
+
+export interface GenreList {
+    idBeat: number;
+    genre:  GenreClass;
+}
+
+export interface GenreClass {
+    genre: GenreEnum;
+}
+
+export enum GenreEnum {
+    Drill = "DRILL",
+    Electronic = "ELECTRONIC",
+    House = "HOUSE",
+    Jazz = "JAZZ",
+    RB = "R&B",
+    Trap = "TRAP",
+}
+
+export interface MoodList {
+    idBeat: number;
+    mood:   MoodClass;
+}
+
+export interface MoodClass {
+    mood: string;
 }
 
 export interface PageableClass {
@@ -231,7 +260,23 @@ const typeMap: any = {
         { json: "time", js: "time", typ: 0 },
         { json: "bpm", js: "bpm", typ: 0 },
         { json: "img", js: "img", typ: "" },
+        { json: "genreList", js: "genreList", typ: a(r("GenreList")) },
+        { json: "moodList", js: "moodList", typ: a(r("MoodList")) },
         { json: "datetime", js: "datetime", typ: a(0) },
+    ], false),
+    "GenreList": o([
+        { json: "idBeat", js: "idBeat", typ: 0 },
+        { json: "genre", js: "genre", typ: u(r("GenreClass"), r("GenreEnum")) },
+    ], false),
+    "GenreClass": o([
+        { json: "genre", js: "genre", typ: r("GenreEnum") },
+    ], false),
+    "MoodList": o([
+        { json: "idBeat", js: "idBeat", typ: 0 },
+        { json: "mood", js: "mood", typ: u(r("MoodClass"), "") },
+    ], false),
+    "MoodClass": o([
+        { json: "mood", js: "mood", typ: "" },
     ], false),
     "PageableClass": o([
         { json: "sort", js: "sort", typ: r("Sort") },
@@ -246,5 +291,12 @@ const typeMap: any = {
         { json: "sorted", js: "sorted", typ: true },
         { json: "unsorted", js: "unsorted", typ: true },
     ], false),
+    "GenreEnum": [
+        "DRILL",
+        "ELECTRONIC",
+        "HOUSE",
+        "JAZZ",
+        "R&B",
+        "TRAP",
+    ],
 };
-

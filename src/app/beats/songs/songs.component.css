@@ -12,7 +12,7 @@
     margin-bottom: 25px;
     color: grey;
     font-size: small;
-    margin: 25px 100px;
+
 }
 
 .productTitleTag{
@@ -25,7 +25,11 @@
 
 .productBpmTag{
     text-align: center;
+    /* padding-left: 30px !important;
+    padding-right: 30px !important; */
 }
+
+
 
 
 /* --------------------------------------  LIST OF SONGS ---------------------------------------------  */
@@ -35,7 +39,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 0 100px;
+
 }
 
 .productImage{
@@ -81,13 +85,14 @@
     border-radius: 5px;
     margin-bottom: 2px;
     justify-content: center;
+    margin-left: 16px;
 
 }
 
 
 .division{
     margin: auto;
-    width: 600px;
+    width: 900px;
     margin-top: 5px;
     margin-bottom: 5px;
 }

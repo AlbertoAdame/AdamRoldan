@@ -13,6 +13,10 @@
 
         <span class="productBpmTag col">BPM</span> 
 
+        <span class="productTimeTag col">GENRE</span> 
+
+        <span class="productBpmTag col">MOOD</span> 
+
         <span class="col"></span>
 
     </div>
@@ -34,6 +38,10 @@
         <span class="productTime col">{{beat.time}}</span> 
 
         <span class="productBpm col">{{beat.bpm}}</span> 
+
+        <span class="productTime col"><span *ngFor="let itemGenre of beat.genreList">{{itemGenre.genre.genre || itemGenre.genre}}</span></span> 
+
+        <span class="productBpm col" ><span *ngFor="let listMood of beat.moodList">{{listMood.mood.mood || listMood.mood}} </span></span>
 
 
         <div class="share-button col">
@@ -57,6 +65,7 @@
         <hr class="division">
     
     </div>
+    
 </div>
     
 </div>
