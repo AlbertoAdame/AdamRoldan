@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 
-
 *
 {
   font-family: poppins;
@@ -12,10 +11,7 @@
 
 .center
 {
-  position: absolute;
-  left: 50%;
-  margin-left: -570px;
-  margin-top: -20px;
+  margin-top: 41px;
 }
 
 a
@@ -43,7 +39,6 @@ a
   background: #CC2520;
   opacity: 1;
   box-shadow: rgb(0 0 0 / 35%) 0px -15px 15px -5px inset;
-
 
 }
 

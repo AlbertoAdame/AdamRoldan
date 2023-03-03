@@ -50,14 +50,12 @@
 .search {
     height: 50px;
     display: flex;
-    justify-content: flex-end;
-    margin-right: 100px; 
+    justify-content: space-between;
     align-items: center;
   }
   
   .search .input {
     background-color: white;
-    margin-left: 110px;
     border: 0;
     font-size: 18px;
     padding: 15px;
