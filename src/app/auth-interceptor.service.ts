@@ -21,17 +21,18 @@ export class AuthInterceptorService {
     if (token) {
       request = req.clone({
         setHeaders: {
-          authorization: `Bearer ${ token }`
-        }
+          Authorization: `Bearer ${ token }`
+        }       
       });
+      console.log(`Bearer ${ token }`);
     }
 
     return next.handle(request).pipe(
       catchError((err: HttpErrorResponse) => {
 
-        if (err.status === 401) {
-          this.router.navigateByUrl('/');
-        }
+        // if (err.status === 401) {
+        //   this.router.navigateByUrl('/');
+        // }
 
         return throwError( err );
 

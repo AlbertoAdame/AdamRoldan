@@ -3,7 +3,6 @@
     justify-content: center;
     background: linear-gradient(#9e1815, #ca2c26) no-repeat; 
     box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 0px 16px;
-    margin-bottom: 65px;
   }
   
   .title{
@@ -20,10 +19,6 @@ input{
     height: 45px;
 }
 
-form{
-    margin-top: 125px;
-}
-
 .box{
     margin-bottom: 20px;
 }
@@ -32,7 +27,11 @@ label{
     margin-bottom: 10px;
 }
 
-.container{
-    width: 70%;
-    margin-left: 15.5%;
+/* .container{
+
+} */
+
+.picture{
+    padding-top: 10px;
+    padding-left: 15px;
 }

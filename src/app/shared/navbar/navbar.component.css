@@ -79,9 +79,6 @@ li{
     
 }
 
-
-
-
 .buttonNav-search{
     border: 0;
     height: 70px;
@@ -108,8 +105,8 @@ li{
 
 .login{
     border: 0;
-    height: 70px;
-    width: max-content;
+    height: 70px !important;
+    width: max-content !important;
     background-color: white;
     background-color: #9e1815;
     margin: 10px 18px;

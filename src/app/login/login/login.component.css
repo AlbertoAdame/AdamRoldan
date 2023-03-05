@@ -6,6 +6,7 @@
 }
 
 .background{
+	padding-top: 90px;
 	transition: 1.5s;
     background-image: url("/assets/images/product2.png");
 	background-repeat: repeat;

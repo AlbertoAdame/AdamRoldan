@@ -27,8 +27,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #157347;
-    color: white;
+    background-color: #fffa67;
+    color: black;
     letter-spacing: 5%;
     font-weight: 500;
     border: none;
@@ -37,7 +37,7 @@
 }
 
 .addButton:hover{
-  background-color: #155c3b;
+  background-color: #eee962;
 }
 
 .cloud{

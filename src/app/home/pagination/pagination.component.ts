@@ -47,4 +47,12 @@ export class PaginationComponent implements OnInit {
     console.log(this.numberOfElements)
   }
 
+  secondsToString(seconds:number) {
+    var minute:string|number = Math.floor((seconds / 60) % 60);
+    minute = (minute < 10)? '0' + minute : minute;
+    var second:string|number = seconds % 60;
+    second = (second < 10)? '0' + second : second;
+    return minute + ':' + second;
+  }
+
 }

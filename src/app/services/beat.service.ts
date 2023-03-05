@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BeatInterface } from '../interfaces/beat-response.interface';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, switchMap, of, catchError } from 'rxjs';
 import { Pageable } from '../interfaces/pageable.interface';
 
 @Injectable({
@@ -44,6 +44,30 @@ export class BeatService {
       )
   }
 
+  uploadBeat(title:string, price:number, bpm:number, time:number, picture:File):Observable<boolean>{
+    
+    const newBeat= { 
+      title: title,
+      price: price,
+      time: time, 
+      bpm: bpm
+    }
+
+    const formData:FormData = new FormData();
+    // formData.append("file", new Blob([JSON.stringify({ picture })], {type: 'application/octet-stream'}))
+    
+    formData.append('beat', new Blob([JSON.stringify({ newBeat })], {type: "application/json" }));
+    formData.append('file', picture)
+
+    return this.http.post<BeatInterface>(this.url, formData)
+    .pipe(switchMap(resp => {
+      return of(true);
+    }), catchError(error => {
+      console.log(error);
+      
+      return of(false)
+    }));
+  }
 
 
 }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import Swal from 'sweetalert2';
+import { BeatService } from '../../services/beat.service';
 
 @Component({
   selector: 'app-upload',
@@ -15,14 +16,14 @@ export class UploadComponent implements OnInit {
   isLoggedIn!:boolean;
 
   myForm: FormGroup = this.fb.group({
-    name: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
-    subject: ['', [Validators.required]],
-    message: ['', [Validators.required]],
-
+    title: ['', [Validators.required]],
+    price: ['', [Validators.required]],
+    bpm: ['', [Validators.required]],
+    picture: [''],
+    time: ['', [Validators.required]],
   })
   
-  constructor(private fb: FormBuilder, private authService:AuthService, private userService:UserService, private router:Router) { }
+  constructor(private fb: FormBuilder, private authService:AuthService, private beatService:BeatService, private router:Router) { }
 
   ngOnInit() {
     this.authService.isLoggedIn.subscribe({
@@ -38,21 +39,33 @@ export class UploadComponent implements OnInit {
   }
 
   save(){
+    console.log(this.myForm.value.title, this.myForm.value.price, this.myForm.value.bpm, this.myForm.value.picture, this.myForm.value.time)
+    console.log(this.myForm)
     
     if (this.myForm.invalid){
 
       this.myForm.markAllAsTouched()
       return
-    }
-    this.userService.contact(this.myForm.value.name, this.myForm.value.email, this.myForm.value.subject, this.myForm.value.message)
+  }
+    this.beatService.uploadBeat(this.myForm.value.title, this.myForm.value.price, this.myForm.value.bpm, this.myForm.value.picture, this.myForm.value.time)
     .subscribe({
       next: (resp) => {
+        if(resp){
           Swal.fire({
             icon: 'success',
             title: 'Your message was sent',
             text: 'You will receive an answer soon'
           }),
           this.myForm.reset()
+        }
+        else{
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Hubo un error al subir su archivo',
+    
+          })
+        }
         },
         error: (error) => {
           Swal.fire({

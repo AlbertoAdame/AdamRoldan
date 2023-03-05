@@ -8,7 +8,10 @@
           <span>HOME</span>
           
       </li></a>
-      <li class="active">{{route}}</li>
+      <a  *ngFor="let item of route; let i = index" href="{{item.toLowerCase()}}">
+        <li >{{item}}</li>
+      </a>
+      <li class="active">{{firstRoute}}</li>
     </ul><br>
       
 </div>

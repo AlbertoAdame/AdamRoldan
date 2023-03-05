@@ -4,7 +4,7 @@ export interface BeatInterface {
     price : number,
     time : number,
     bpm : number,
-    img : String,
+    img : FormData,
     date : Date
 }
 

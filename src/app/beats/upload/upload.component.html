@@ -3,71 +3,84 @@
 
 </div>
 
-<app-breadcrumb></app-breadcrumb>
 
 
 
 <div class="container">
+    <app-breadcrumb></app-breadcrumb>
 
 
-    <form method="POST" id="contactForm" name="contactForm" class="contactForm" (ngSubmit)="save()" [formGroup]="myForm" autocomplete="off">
+    <form method="POST" id="contactForm" name="contactForm" class="contactForm" (ngSubmit)="save()" [formGroup]="myForm" autocomplete="off" enctype="multipart/form-data">
         <div class="row">
-            <div class="col-md-6 box">
+            <div class="col-md-12 box">
                 <div class="form-group">
-                    <label class="label" for="name">Name</label>
+                    <label class="label" for="title">Title</label>
                     <input type="text" 
                         class="form-control"
-                        formControlName="name" 
-                        placeholder="Name">
+                        formControlName="title" 
+                        placeholder="Title">
                                 
                     <span class="form-text text-danger"
-                    *ngIf="isValidField('name')">
-                        Name is required
+                    *ngIf="isValidField('title')">
+                        Title is required
                     </span>
                 </div>
             </div>
-            <div class="col-md-6 box"> 
+            <div class="col-md-12 box"> 
                 <div class="form-group">
-                    <label class="label" for="email">Email Address</label>
-                    <input type="email" 
+                    <label class="label" for="price">Price</label>
+                    <input type="number" 
                         class="form-control" 
-                        formControlName="email" 
-                        placeholder="Email">
+                        formControlName="price" 
+                        placeholder="Price">
 
                     <span class="form-text text-danger"
-                    *ngIf="isValidField('email')">
-                        Please provide a valid e-mail
+                    *ngIf="isValidField('price')">
+                        Price is required
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-12 box"> 
+                <div class="form-group">
+                    <label class="label" for="time">Time</label>
+                    <input type="number" 
+                        class="form-control" 
+                        formControlName="time" 
+                        placeholder="Time">
+
+                    <span class="form-text text-danger"
+                    *ngIf="isValidField('time')">
+                        Time is required
                     </span>
                 </div>
             </div>
             <div class="col-md-12 box">
                 <div class="form-group">
-                    <label class="label" for="subject">Subject</label>
-                    <input  type="text" 
+                    <label class="label" for="bpm">Bpm</label>
+                    <input  type="number" 
                             class="form-control" 
-                            formControlName="subject" 
-                            placeholder="Subject">
+                            formControlName="bpm" 
+                            placeholder="Bpm">
                     
                     <span class="form-text text-danger"
-                    *ngIf="isValidField('subject')">
-                        Subject is required
+                    *ngIf="isValidField('bpm')">
+                        Bpm is required
                     </span>
                 </div>
             </div>
             <div class="col-md-12 box">
                 <div class="form-group">
-                    <label class="label" for="#">Message</label>
-                    <textarea   name="message" 
-                                class="form-control" 
-                                formControlName="message" 
-                                cols="30" 
-                                rows="4" 
-                                placeholder="Message"></textarea>
+                    <label class="label" for="picture">Picture</label>
+                    <input  type="file" 
+                            name="picture" 
+                            class="form-control picture" 
+                            formControlName="picture" 
+                            placeholder="Picture">
                     
-                    <span class="form-text text-danger"
+                    <!-- <span class="form-text text-danger"
                     *ngIf="isValidField('message')">
-                        Message is required
-                    </span>
+                        Picture is required
+                    </span> -->
                 </div>
             </div>
             <div class="col-md-12">

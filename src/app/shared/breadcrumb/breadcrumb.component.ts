@@ -10,11 +10,14 @@ export class BreadcrumbComponent implements OnInit {
 
   constructor(private router:Router) { }
 
-  route:string="";
+  route:string[]=[]
+  firstRoute:string|undefined=""
+  separator:string = "/";
 
   ngOnInit(): void {
-    this.route=this.router.url.slice(1).toUpperCase()
-
+    this.route=this.router.url.slice(1).toUpperCase().split(this.separator)
+    this.firstRoute = this.route.pop()    
   }
+
 
 }
