@@ -13,14 +13,22 @@ import { BeatService } from '../../services/beat.service';
 })
 export class UploadComponent implements OnInit {
 
+  json :any = {
+    title: '',
+    price: null,
+    bpm: null,
+    time:null
+  }
+
   isLoggedIn!:boolean;
 
   myForm: FormGroup = this.fb.group({
     title: ['', [Validators.required]],
     price: ['', [Validators.required]],
     bpm: ['', [Validators.required]],
-    picture: [''],
     time: ['', [Validators.required]],
+    picture:['',[Validators.required]],
+    fileSource:['', [Validators.required]]
   })
   
   constructor(private fb: FormBuilder, private authService:AuthService, private beatService:BeatService, private router:Router) { }
@@ -38,22 +46,41 @@ export class UploadComponent implements OnInit {
     && this.myForm.controls[field].touched
   }
 
+  onFileChange(event:any) {
+    
+    
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.myForm.patchValue({
+        fileSource: file
+      });
+    }
+  }
+
+  
   save(){
-    console.log(this.myForm.value.title, this.myForm.value.price, this.myForm.value.bpm, this.myForm.value.picture, this.myForm.value.time)
     console.log(this.myForm)
     
     if (this.myForm.invalid){
-
+      
       this.myForm.markAllAsTouched()
       return
-  }
-    this.beatService.uploadBeat(this.myForm.value.title, this.myForm.value.price, this.myForm.value.bpm, this.myForm.value.picture, this.myForm.value.time)
+    }
+    
+    this.json.title = this.myForm.value.title
+    this.json.price = this.myForm.value.price
+    this.json.bpm = this.myForm.value.bpm
+    this.json.time = this.myForm.value.time
+    
+    console.log(this.myForm.get('fileSource')?.value)
+    
+    this.beatService.uploadBeat(this.json, this.myForm.get('fileSource')?.value)
     .subscribe({
       next: (resp) => {
         if(resp){
           Swal.fire({
             icon: 'success',
-            title: 'Your message was sent',
+            title: 'Beat was added',
             text: 'You will receive an answer soon'
           }),
           this.myForm.reset()
@@ -77,7 +104,6 @@ export class UploadComponent implements OnInit {
           console.log(error)
         }
     });
-    console.log(this.myForm.value)
 
   }
 

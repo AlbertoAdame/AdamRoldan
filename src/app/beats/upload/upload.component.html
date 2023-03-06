@@ -71,11 +71,14 @@
             <div class="col-md-12 box">
                 <div class="form-group">
                     <label class="label" for="picture">Picture</label>
-                    <input  type="file" 
+                    <!-- <input  type="file" 
                             name="picture" 
                             class="form-control picture" 
                             formControlName="picture" 
-                            placeholder="Picture">
+                            placeholder="Picture"
+                            (change)="onFileChange($event)"> -->
+
+                        <input type="file" class="form-control" placeholder="picture" formControlName="picture" name="picture" (change)="onFileChange($event)" />
                     
                     <!-- <span class="form-text text-danger"
                     *ngIf="isValidField('message')">

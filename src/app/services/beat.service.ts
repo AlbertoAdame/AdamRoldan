@@ -44,22 +44,20 @@ export class BeatService {
       )
   }
 
-  uploadBeat(title:string, price:number, bpm:number, time:number, picture:File):Observable<boolean>{
+  uploadBeat(beat:any, picture:File):Observable<boolean>{
+  
+    console.log(picture);
+    console.log(beat);
     
-    const newBeat= { 
-      title: title,
-      price: price,
-      time: time, 
-      bpm: bpm
-    }
+    
 
-    const formData:FormData = new FormData();
+    const data:FormData = new FormData();
     // formData.append("file", new Blob([JSON.stringify({ picture })], {type: 'application/octet-stream'}))
     
-    formData.append('beat', new Blob([JSON.stringify({ newBeat })], {type: "application/json" }));
-    formData.append('file', picture)
+    data.append('beat', new Blob([JSON.stringify( beat )], {type: "application/json" }));
+    data.append('file', picture)
 
-    return this.http.post<BeatInterface>(this.url, formData)
+    return this.http.post<BeatInterface>(this.url, data)
     .pipe(switchMap(resp => {
       return of(true);
     }), catchError(error => {
