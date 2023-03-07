@@ -13,65 +13,66 @@ import { DecodeTokenInterface } from '../interfaces/decode-token.interface';
 })
 export class AuthService {
 
-  private loggedIn = new BehaviorSubject<boolean> (false);
+  private loggedIn = new BehaviorSubject<boolean>(false);
 
-  url:string='http://localhost:8086/signin';
-  urlJwt:string='http://localhost:8086/jwt'
+  url: string = 'https://adamroldanapi-production.up.railway.app/signin';
+  urlJwt: string = 'https://adamroldanapi-production.up.railway.app/user/jwt'
   role: string = "";
-  token!:DecodeTokenInterface;
+  token!: DecodeTokenInterface;
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json'})
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
 
-  constructor(private userService:UserService, private cookies:CookieService, private http:HttpClient) {
-    this.http.get(this.urlJwt) 
-    .subscribe({ 
-      next:() => this.loggedIn.next(true),
-      error: () =>  this.loggedIn.next(false)
-      
-    })
+  constructor(private userService: UserService, private cookies: CookieService, private http: HttpClient) {
+    this.http.get(this.urlJwt)
+      .subscribe({
+        next: () => this.loggedIn.next(true),
+        error: () => this.loggedIn.next(false)
+
+      })
   }
 
-  isAuthenticated():Observable<boolean> {    
-    return this.http.get(this.urlJwt) // aqui tengo que hacer lo de jwt para que me diga si sigue autenticado
-    .pipe( switchMap(token=> {
+  isAuthenticated(): Observable<boolean> {
+    return this.http.get(this.urlJwt)
+      .pipe(switchMap(token => {
         console.log(true)
         return of(true)
-    }), catchError (error=>{
-      this.cookies.delete('token');
-      this.cookies.delete('sub');
-      this.cookies.delete('role');
-      console.log(false)
-      return of(false)
-    }))
+      }), catchError(error => {
+        this.cookies.delete('token');
+        this.cookies.delete('sub');
+        this.cookies.delete('role');
+
+        console.log(false)
+        return of(false)
+      }))
   }
 
   get isLoggedIn() {
     return this.loggedIn.asObservable();
   }
 
-  login(email:string, password:string):Observable<boolean> {
+  login(email: string, password: string): Observable<boolean> {
     //Recuperamos el usuario y comprobamos que la contraseña sea correcta
-    return this.http.post<TokenInterface>(this.url, {email,password}, this.httpOptions)
-    .pipe( switchMap(token=> {
+    return this.http.post<TokenInterface>(this.url, { email, password }, this.httpOptions)
+      .pipe(switchMap(token => {
         this.loggedIn.next(true);
         this.cookies.set('token', token.token);
         this.token = jwt_decode(token.token)
         this.cookies.set('role', this.token.role)
         this.cookies.set('sub', this.token.sub)
         return of(true)
-    }), catchError (error=>{
-      this.loggedIn.next(false);
-      this.cookies.delete('token');
-      this.cookies.delete('sub');
-      this.cookies.delete('role');
-      return of(false)
-    }))
+      }), catchError(error => {
+        this.loggedIn.next(false);
+        this.cookies.delete('token');
+        this.cookies.delete('sub');
+        this.cookies.delete('role');
+        return of(false)
+      }))
 
   }
 
-  logout(){
+  logout() {
     this.cookies.delete('token');
     this.cookies.delete('sub');
     this.cookies.delete('role');

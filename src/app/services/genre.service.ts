@@ -8,11 +8,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class GenreService {
 
-  private url = 'http://localhost:8086/genre';
+  private url = 'https://adamroldanapi-production.up.railway.app/genre';
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getGenres():Observable<Genre[]>{
+  getGenres(): Observable<Genre[]> {
     return this.http.get<Genre[]>(this.url)
   }
 }

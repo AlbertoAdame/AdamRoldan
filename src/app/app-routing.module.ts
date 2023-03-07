@@ -10,7 +10,6 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    canActivate: [RolGuardGuard],
     loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
   },
   {
@@ -30,6 +29,7 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  { path: 'editUser', loadChildren: () => import('./edit-user/edit-user.module').then(m => m.EditUserModule) },
   {
     path: '**',
     component: NotFoundComponent

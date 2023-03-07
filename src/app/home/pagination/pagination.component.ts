@@ -11,47 +11,49 @@ import { Content } from '../../interfaces/pageable.interface';
 })
 export class PaginationComponent implements OnInit {
 
-  results : Content[] = []
+  results: Content[] = []
 
-  totalElements:    number = 0;//cantidad total de items
-  size:             number = 0;   
+  totalElements: number = 0;//cantidad total de items
+  size: number = 0;
   numberOfElements: number = 5;//numero de beats por pagina
-  actualPage : number = 0;
+  actualPage: number = 0;
 
 
 
-  constructor(private beatService:BeatService) { }
+  constructor(private beatService: BeatService) { }
 
   ngOnInit(): void {
     this.getBeats();
   }
 
-  getBeats(){
+  getBeats() {
     this.beatService.searchBeats(this.actualPage, this.numberOfElements)
-    .subscribe({
-      next: (resp) => {
-        this.results = resp.content
-        this.totalElements=resp.totalElements
-      }
-      //falta error
-    })
+      .subscribe({
+        next: (resp) => {
+          console.log(resp.content[0].mood);
+
+          this.results = resp.content
+          this.totalElements = resp.totalElements
+        }
+        //falta error
+      })
   }
 
-  pageChangeEvent(event: number){
+  pageChangeEvent(event: number) {
     this.actualPage = event;
     this.getBeats();
-}
+  }
 
-  changePageSize(){
+  changePageSize() {
     this.getBeats();
     console.log(this.numberOfElements)
   }
 
-  secondsToString(seconds:number) {
-    var minute:string|number = Math.floor((seconds / 60) % 60);
-    minute = (minute < 10)? '0' + minute : minute;
-    var second:string|number = seconds % 60;
-    second = (second < 10)? '0' + second : second;
+  secondsToString(seconds: number) {
+    var minute: string | number = Math.floor((seconds / 60) % 60);
+    minute = (minute < 10) ? '0' + minute : minute;
+    var second: string | number = seconds % 60;
+    second = (second < 10) ? '0' + second : second;
     return minute + ':' + second;
   }
 

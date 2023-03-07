@@ -33,6 +33,7 @@
 
 
 
+
 /* --------------------------------------  LIST OF SONGS ---------------------------------------------  */
 
 
@@ -81,13 +82,19 @@
     height: 50px;
     display: flex;
     align-items: center;
-    background-color: white;
-    border: solid 2px;
+    background-color: #1b8d57;
+    color: white;
+    border: solid 2px #1b8d57;
     border-radius: 5px;
     margin-bottom: 2px;
     justify-content: center;
-    margin-left: 16px;
+    margin-left: 50px;
 
+}
+
+.cartButton:hover{
+    background-color: #1a9b5f;
+    border: solid 2px #1a9b5f;
 }
 
 
@@ -118,3 +125,64 @@
     display: flex;
     justify-content: center;
 }
+
+
+/* -------------------------------------- TABLA ---------------------------------------------  */
+
+.table>:not(caption)>*>*{
+    border-bottom:none;
+}
+
+.td{
+    margin-top: 13px;
+}
+
+.tdPicture{
+    display: flex;
+    /* justify-content: center; */
+    margin-top: 3px;
+
+}
+
+
+
+.tdButtons{
+    display: flex;
+    width: auto;
+    justify-content: flex-end;
+}
+
+input {
+    background-color: white;
+    border: 0;
+    font-size: 18px;
+    padding: 15px;
+    height: 50px;
+    width: 300px;
+    border-radius: 2px;
+    height: 55px;
+    padding-right: 55px;
+    box-shadow: rgb(50 50 93 / 20%) 0px 6px 5px -2px, rgb(0 0 0 / 30%) 0px 3px 10px -3px;
+
+}
+
+.genreButton{
+    width: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    color: white;
+    height: 40px;
+    background-color: black;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+}
+
+.price{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 8%;
+
+}
+
+

@@ -10,7 +10,7 @@ import { Genre } from '../interfaces/genre.interface';
   providedIn: 'root'
 })
 export class BeatService {
-  private url = 'http://localhost:8086/beat';
+  private url = 'https://adamroldanapi-production.up.railway.app/beat';
 
   _beats!: Pageable;
   constructor(private http: HttpClient) {

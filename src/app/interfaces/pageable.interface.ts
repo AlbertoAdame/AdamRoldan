@@ -8,34 +8,34 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface Pageable {
-    content:          Content[];
-    pageable:         PageableClass;
-    totalPages:       number;
-    totalElements:    number;
-    last:             boolean;
-    size:             number;
-    number:           number;
-    sort:             Sort;
-    first:            boolean;
+    content: Content[];
+    pageable: PageableClass;
+    totalPages: number;
+    totalElements: number;
+    last: boolean;
+    size: number;
+    number: number;
+    sort: Sort;
     numberOfElements: number;
-    empty:            boolean;
+    first: boolean;
+    empty: boolean;
 }
 
 export interface Content {
-    idBeat:    number;
-    title:     string;
-    price:     number;
-    time:      number;
-    bpm:       number;
-    img:       string;
+    idBeat: number;
+    title: string;
+    price: number;
+    time: number;
+    bpm: number;
+    img: string;
     genreList: GenreList[];
-    moodList:  MoodList[];
-    datetime:  number[];
+    mood: MoodClass;
+    datetime: number[];
 }
 
 export interface GenreList {
     idBeat: number;
-    genre:  GenreClass;
+    genre: GenreClass;
 }
 
 export interface GenreClass {
@@ -43,17 +43,12 @@ export interface GenreClass {
 }
 
 export enum GenreEnum {
-    Drill = "DRILL",
-    Electronic = "ELECTRONIC",
-    House = "HOUSE",
-    Jazz = "JAZZ",
+    Drill = "Drill",
+    Electronic = "Electronic",
+    House = "House",
+    Jazz = "Jazz",
     RB = "R&B",
-    Trap = "TRAP",
-}
-
-export interface MoodList {
-    idBeat: number;
-    mood:   MoodClass;
+    Trap = "Trap",
 }
 
 export interface MoodClass {
@@ -61,17 +56,17 @@ export interface MoodClass {
 }
 
 export interface PageableClass {
-    sort:       Sort;
-    offset:     number;
+    sort: Sort;
+    offset: number;
     pageNumber: number;
-    pageSize:   number;
-    paged:      boolean;
-    unpaged:    boolean;
+    pageSize: number;
+    paged: boolean;
+    unpaged: boolean;
 }
 
 export interface Sort {
-    empty:    boolean;
-    sorted:   boolean;
+    empty: boolean;
+    sorted: boolean;
     unsorted: boolean;
 }
 
@@ -139,7 +134,7 @@ function transform(val: any, typ: any, getProps: any, key: any = '', parent: any
             const typ = typs[i];
             try {
                 return transform(val, typ, getProps);
-            } catch (_) {}
+            } catch (_) { }
         }
         return invalidValue(typs, val, key, parent);
     }
@@ -198,9 +193,9 @@ function transform(val: any, typ: any, getProps: any, key: any = '', parent: any
     if (Array.isArray(typ)) return transformEnum(typ, val);
     if (typeof typ === "object") {
         return typ.hasOwnProperty("unionMembers") ? transformUnion(typ.unionMembers, val)
-            : typ.hasOwnProperty("arrayItems")    ? transformArray(typ.arrayItems, val)
-            : typ.hasOwnProperty("props")         ? transformObject(getProps(typ), typ.additional, val)
-            : invalidValue(typ, val, key, parent);
+            : typ.hasOwnProperty("arrayItems") ? transformArray(typ.arrayItems, val)
+                : typ.hasOwnProperty("props") ? transformObject(getProps(typ), typ.additional, val)
+                    : invalidValue(typ, val, key, parent);
     }
     // Numbers can be parsed by Date but shouldn't be.
     if (typ === Date && typeof val !== "number") return transformDate(val);
@@ -249,8 +244,8 @@ const typeMap: any = {
         { json: "size", js: "size", typ: 0 },
         { json: "number", js: "number", typ: 0 },
         { json: "sort", js: "sort", typ: r("Sort") },
-        { json: "first", js: "first", typ: true },
         { json: "numberOfElements", js: "numberOfElements", typ: 0 },
+        { json: "first", js: "first", typ: true },
         { json: "empty", js: "empty", typ: true },
     ], false),
     "Content": o([
@@ -261,7 +256,7 @@ const typeMap: any = {
         { json: "bpm", js: "bpm", typ: 0 },
         { json: "img", js: "img", typ: "" },
         { json: "genreList", js: "genreList", typ: a(r("GenreList")) },
-        { json: "moodList", js: "moodList", typ: a(r("MoodList")) },
+        { json: "mood", js: "mood", typ: u(r("MoodClass"), "") },
         { json: "datetime", js: "datetime", typ: a(0) },
     ], false),
     "GenreList": o([
@@ -270,10 +265,6 @@ const typeMap: any = {
     ], false),
     "GenreClass": o([
         { json: "genre", js: "genre", typ: r("GenreEnum") },
-    ], false),
-    "MoodList": o([
-        { json: "idBeat", js: "idBeat", typ: 0 },
-        { json: "mood", js: "mood", typ: u(r("MoodClass"), "") },
     ], false),
     "MoodClass": o([
         { json: "mood", js: "mood", typ: "" },
@@ -292,11 +283,11 @@ const typeMap: any = {
         { json: "unsorted", js: "unsorted", typ: true },
     ], false),
     "GenreEnum": [
-        "DRILL",
-        "ELECTRONIC",
-        "HOUSE",
-        "JAZZ",
+        "Drill",
+        "Electronic",
+        "House",
+        "Jazz",
         "R&B",
-        "TRAP",
+        "Trap",
     ],
 };

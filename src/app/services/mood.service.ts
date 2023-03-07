@@ -8,11 +8,11 @@ import { Observable } from 'rxjs';
 })
 export class MoodService {
 
-  private url = 'http://localhost:8086/mood';
+  private url = 'https://adamroldanapi-production.up.railway.app/mood';
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getMoods():Observable<Mood[]>{
+  getMoods(): Observable<Mood[]> {
     return this.http.get<Mood[]>(this.url)
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { BeatService } from '../../services/beat.service';
 import { Content, Pageable } from '../../interfaces/pageable.interface';
@@ -14,7 +14,7 @@ import { Subject } from 'rxjs';
   templateUrl: './songs.component.html',
   styleUrls: ['./songs.component.css']
 })
-export class SongsComponent implements OnInit {
+export class SongsComponent implements OnInit, OnDestroy {
 
   flag: boolean = false;
   role: string = ''
@@ -22,7 +22,7 @@ export class SongsComponent implements OnInit {
 
   results: Content[] = [];
 
-  // dtOptions: DataTables.Settings = {};
+  dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>()
 
 
@@ -32,15 +32,16 @@ export class SongsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this.dtOptions = {
-    //   pagingType: 'full_numbers',
-    //   pageLength: 5,
-    //   processing: true
-    // };
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 200,
+      processing: true
+    };
 
     this.beatService.searchBeats(0, 200)
       .subscribe({
         next: (resp) => {
+
           this.results = resp.content
           this.dtTrigger.next(this.results)
         },

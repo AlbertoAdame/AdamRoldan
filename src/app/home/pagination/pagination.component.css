@@ -202,17 +202,25 @@ body {
   margin-top: 10px;
 }
 
+
+
 .cartButton{
   width: 130px;
   height: 50px;
   display: flex;
   align-items: center;
-  background-color: white;
-  border: solid 2px;
+  background-color: #1b8d57;
+  color: white;
+  border: solid 2px #1b8d57;
   border-radius: 5px;
   margin-bottom: 2px;
   justify-content: center;
 
+}
+
+.cartButton:hover{
+  background-color: #1a9b5f;
+  border: solid 2px #1a9b5f;
 }
 
 

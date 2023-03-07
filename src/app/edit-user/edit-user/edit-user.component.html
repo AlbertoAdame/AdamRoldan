@@ -1,0 +1,51 @@
+<div class="frontPage">
+    <h1 class="title">ACOUNT</h1>
+
+</div>
+
+<div class="container">
+    <app-breadcrumb></app-breadcrumb>
+
+    <form method="POST" id="contactForm" name="contactForm" class="contactForm" (ngSubmit)="save()" [formGroup]="myForm"
+        autocomplete="off">
+        <div class="row">
+            <div class="col-md-12 box">
+                <div class="form-group">
+                    <label class="label" for="name">Name</label>
+                    <input type="text" class="form-control" formControlName="name" placeholder="Name">
+
+                    <span class="form-text text-danger" *ngIf="isValidField('name')">
+                        Name is required
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-12 box">
+                <div class="form-group">
+                    <label class="label" for="email">Email Address</label>
+                    <input type="email" class="form-control" formControlName="email" placeholder="Email">
+
+                    <span class="form-text text-danger" *ngIf="isValidField('email')">
+                        Please provide a valid e-mail
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-12 box">
+                <div class="form-group">
+                    <label class="label" for="subject">Password</label>
+                    <input type="text" class="form-control" formControlName="subject" placeholder="Subject">
+
+                    <span class="form-text text-danger" *ngIf="isValidField('subject')">
+                        Subject is required
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <input type="submit" value="Send Message" class="btn btn-primary">
+                    <div class="submitting"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>

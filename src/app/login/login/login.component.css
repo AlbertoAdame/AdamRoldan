@@ -62,8 +62,8 @@ a {
 
 button {
 	border-radius: 20px;
-	border: 1px solid #1f9d23;
-	background-color: #178c1d;
+	border: 1px solid #1b8d57;
+	background-color: #1b8d57;
 	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
@@ -72,6 +72,12 @@ button {
 	text-transform: uppercase;
 	transition: transform 80ms ease-in;
 }
+
+  
+.button:hover{
+	background-color: #1a9b5f;
+	border: solid 2px #1a9b5f;
+  }
 
 button:active {
 	transform: scale(0.95);

@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UploadComponent } from './upload/upload.component';
 import { RouterModule } from '@angular/router';
 import { EditBeatComponent } from './edit-beat/edit-beat.component';
+import { DataTablesModule } from 'angular-datatables';
 
 
 
@@ -28,7 +29,8 @@ import { EditBeatComponent } from './edit-beat/edit-beat.component';
     FormsModule,
     HttpClientModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DataTablesModule
   ],
   providers: [
     BeatService

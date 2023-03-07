@@ -12,32 +12,32 @@ import { Contact } from '../interfaces/contact.interface';
 export class UserService {
 
 
-  private url = 'http://localhost:8086/user';
+  private url = 'https://adamroldanapi-production.up.railway.app/user';
 
-  private urlContact = 'http://localhost:8086/contactUs';
-  
+  private urlContact = 'https://adamroldanapi-production.up.railway.app/contactUs';
+
   // private cookiesToken = this.cookies.get('token');
   // httpOptions = {
   //   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization' : this.cookiesToken})
   // }
 
 
-  constructor(private http : HttpClient) {
+  constructor(private http: HttpClient) {
 
   }
 
 
-  searchUsers():Observable<UserResponseInterface[]>{
+  searchUsers(): Observable<UserResponseInterface[]> {
     return this.http.get<UserResponseInterface[]>(this.url)
-      
+
   }
 
-  newUser(username:string, password:string, name:string , email:string):Observable<UserResponseInterface>{
-    return this.http.post<UserResponseInterface>(this.url, {username, password,name, email})
+  newUser(username: string, password: string, name: string, email: string): Observable<UserResponseInterface> {
+    return this.http.post<UserResponseInterface>(this.url, { username, password, name, email })
   }
 
 
-  contact(name:string, email:string, subject:string , message:string):Observable<Contact>{
-    return this.http.post<Contact>(this.urlContact, {name, email,subject, message})
+  contact(name: string, email: string, subject: string, message: string): Observable<Contact> {
+    return this.http.post<Contact>(this.urlContact, { name, email, subject, message })
   }
 }

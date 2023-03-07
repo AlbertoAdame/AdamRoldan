@@ -11,55 +11,55 @@ import { BeatService } from '../../services/beat.service';
 })
 export class NavbarComponent implements OnInit {
 
-  search:boolean = false;
-  cart:boolean = false;
-  color:string = 'white';
-  username:string = "";
-  query:string="";
+  search: boolean = false;
+  cart: boolean = false;
+  color: string = 'white';
+  username: string = "";
+  query: string = "";
 
   currentUrl = this.router.url;
 
-  isLoggedIn!:boolean;
-  
+  isLoggedIn!: boolean;
 
-  constructor(private cookies:CookieService, private authService:AuthService, private router:Router, private beatService:BeatService) { }
+
+  constructor(private cookies: CookieService, private authService: AuthService, private router: Router, private beatService: BeatService) { }
 
 
   ngOnInit(): void {
 
-    
+
     this.authService.isLoggedIn.subscribe({
-      next: (resp) =>{
-        this.isLoggedIn=resp;
+      next: (resp) => {
+        this.isLoggedIn = resp;
       }
-      
+
     })
-    
-    if(this.cookies.get('sub')){
+
+    if (this.cookies.get('sub')) {
       this.username = this.cookies.get('sub')
     }
   }
 
-  showSearchBar():void{
+  showSearchBar(): void {
     this.search = !this.search;
-    if(this.color==='white')
-      this.color= 'black';
+    if (this.color === 'white')
+      this.color = 'black';
     else
-    this.color= 'white';
+      this.color = 'white';
   }
 
-  showCart():void{
+  showCart(): void {
     this.cart = !this.cart
   }
 
-  logout():void{
+  logout(): void {
     this.authService.logout()
-    this.isLoggedIn=false;
+    this.isLoggedIn = false;
   }
 
-  getSearch(){
+  getSearch() {
     this.beatService.searchBeatsPageable(0, 200, "title", this.query)
-    this.query=""
+    this.query = ""
     // this.router.navigate(['beats']);
   }
 

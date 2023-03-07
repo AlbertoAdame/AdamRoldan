@@ -14,6 +14,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './auth-interceptor.service';
 import { AuthService } from './services/auth.service';
 import { RolGuardGuard } from './rol-guard.guard';
+import { EditUserModule } from './edit-user/edit-user.module';
 
 
 
@@ -29,7 +30,8 @@ import { RolGuardGuard } from './rol-guard.guard';
     SharedModule,
     LoginModule,
     FaqModule,
-    HttpClientModule
+    HttpClientModule,
+    EditUserModule
 
   ],
   providers: [
