@@ -8,9 +8,9 @@ import { AuthService } from '../../services/auth.service';
 })
 export class HomeComponent implements OnInit {
 
-  isLoggedIn!:boolean;
+  isLoggedIn!: boolean;
 
-  constructor(private authService:AuthService) {}
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
     this.authService.isAuthenticated();

@@ -7,15 +7,15 @@ import { Genre } from '../../interfaces/genre.interface';
 import { Mood } from '../../interfaces/mood.interface';
 import { MoodService } from '../../services/mood.service';
 import { GenreService } from '../../services/genre.service';
-import { ActivatedRoute } from '@angular/router';
 import { BeatInterface } from '../../interfaces/beat-response.interface';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-upload',
-  templateUrl: './upload.component.html',
-  styleUrls: ['./upload.component.css']
+  selector: 'app-edit-beat',
+  templateUrl: './edit-beat.component.html',
+  styleUrls: ['./edit-beat.component.css']
 })
-export class UploadComponent implements OnInit {
+export class EditBeatComponent implements OnInit {
 
 
   jsonBeat: any = {
@@ -35,21 +35,11 @@ export class UploadComponent implements OnInit {
 
   genres: Genre[] = []
   moods: Mood[] = []
+  beat?: BeatInterface;
 
   isLoggedIn!: boolean;
 
-  myForm: FormGroup = this.fb.group({
-    title: ['', [Validators.required]],
-    price: ['', [Validators.required]],
-    bpm: ['', [Validators.required]],
-    time: ['', [Validators.required]],
-    picture: [''],
-    fileSource: [''],
-    genre: ['Drill', [Validators.required]],
-    mood: ['Accomplished', [Validators.required]]
-  })
-
-  constructor(private fb: FormBuilder, private authService: AuthService, private beatService: BeatService, private moodService: MoodService, private genreService: GenreService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private beatService: BeatService, private moodService: MoodService, private genreService: GenreService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.authService.isLoggedIn.subscribe({
@@ -57,6 +47,24 @@ export class UploadComponent implements OnInit {
         this.isLoggedIn = resp;
       }
     })
+
+    let id = this.route.snapshot.params['id']
+    this.beatService.getBeat(id)
+      .subscribe({
+        next: (resp) => {
+          if (resp) {
+            this.beat = resp;
+            this.myForm.reset({
+              title: resp.title,
+              price: resp.price,
+              time: resp.time,
+              bpm: resp.bpm
+            })
+
+          }
+
+        }
+      })
 
     this.moodService.getMoods()
       .subscribe({
@@ -71,7 +79,21 @@ export class UploadComponent implements OnInit {
           this.genres = resp;
         }
       })
+
+
+
   }
+
+  myForm: FormGroup = this.fb.group({
+    title: ['', [Validators.required]],
+    price: ['', [Validators.required]],
+    bpm: ['', [Validators.required]],
+    time: ['', [Validators.required]],
+    genre: ['Drill', [Validators.required]],
+    mood: ['Accomplished', [Validators.required]],
+    picture: [''],
+    fileSource: ['']
+  })
 
   isValidField(field: string) {
     return this.myForm.controls[field].errors
@@ -90,6 +112,7 @@ export class UploadComponent implements OnInit {
 
 
   save() {
+    console.log(this.myForm)
 
     if (this.myForm.invalid) {
 
@@ -105,7 +128,6 @@ export class UploadComponent implements OnInit {
     this.jsonGenre.genre = this.myForm.value.genre
 
     this.jsonMood.mood = this.myForm.value.mood
-
 
     this.beatService.uploadBeat(this.jsonBeat, this.myForm.get('fileSource')?.value, this.jsonGenre, this.jsonMood)
       .subscribe({
@@ -142,4 +164,3 @@ export class UploadComponent implements OnInit {
 
 
 }
-

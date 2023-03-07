@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { BeatService } from '../../services/beat.service';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -10,12 +11,14 @@ import { BeatService } from '../../services/beat.service';
 })
 export class BeatsComponent implements OnInit {
 
+  role:string=''
   isLoggedIn!:boolean;
   query:string=""
 
   constructor(
     private authService:AuthService,
-    private beatService: BeatService) { }
+    private beatService: BeatService,
+    private cookies:CookieService) { }
 
   ngOnInit(): void {
     this.authService.isLoggedIn.subscribe({
@@ -23,6 +26,9 @@ export class BeatsComponent implements OnInit {
         this.isLoggedIn=resp;
       }
     })
+
+    this.role=this.cookies.get('role')
+
   }
 
 console(){

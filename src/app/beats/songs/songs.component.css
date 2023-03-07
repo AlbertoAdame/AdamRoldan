@@ -97,3 +97,24 @@
     margin-top: 5px;
     margin-bottom: 5px;
 }
+
+.buttonEdit{
+    margin: 2.5px;
+    height: 50px !important;
+}
+
+.buttonDelete{
+    margin: 2.5px;
+    height: 50px !important;
+    background-color: #ca2924 !important;
+}
+
+.iconAdmin{
+    margin-bottom: 3px;
+
+}
+
+.adminArea{
+    display: flex;
+    justify-content: center;
+}

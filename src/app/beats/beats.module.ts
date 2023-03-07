@@ -9,6 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UploadComponent } from './upload/upload.component';
 import { RouterModule } from '@angular/router';
+import { EditBeatComponent } from './edit-beat/edit-beat.component';
+
 
 
 
@@ -16,7 +18,8 @@ import { RouterModule } from '@angular/router';
   declarations: [
     BeatsComponent,
     SongsComponent,
-    UploadComponent
+    UploadComponent,
+    EditBeatComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +30,7 @@ import { RouterModule } from '@angular/router';
     RouterModule,
     ReactiveFormsModule
   ],
-  providers:[
+  providers: [
     BeatService
   ]
 })

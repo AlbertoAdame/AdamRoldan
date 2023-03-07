@@ -10,31 +10,31 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AuthInterceptorService {
 
-  constructor(private router: Router, private cookies: CookieService) {}
+  constructor(private router: Router, private cookies: CookieService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-  
-    const token: string|null = this.cookies.get('token');
+
+    const token: string | null = this.cookies.get('token');
 
     let request = req;
 
     if (token) {
       request = req.clone({
         setHeaders: {
-          Authorization: `Bearer ${ token }`
-        }       
+          Authorization: `Bearer ${token}`
+        }
       });
-      console.log(`Bearer ${ token }`);
+      // console.log(`Bearer ${ token }`);
     }
 
     return next.handle(request).pipe(
       catchError((err: HttpErrorResponse) => {
 
         // if (err.status === 401) {
-        //   this.router.navigateByUrl('/');
+        //   this.router.navigateByUrl('/login');
         // }
 
-        return throwError( err );
+        return throwError(err);
 
       })
     );

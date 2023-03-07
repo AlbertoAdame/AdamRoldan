@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -8,15 +8,22 @@ import { Router } from '@angular/router';
 })
 export class BreadcrumbComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
-  route:string[]=[]
-  firstRoute:string|undefined=""
-  separator:string = "/";
+  actualRoute: string[] = []
+  firstRoute: string | undefined = ""
+  separator: string = "/";
+  param: string = ''
 
   ngOnInit(): void {
-    this.route=this.router.url.slice(1).toUpperCase().split(this.separator)
-    this.firstRoute = this.route.pop()    
+    //En caso de que haya un parametro lo cogeremos
+    this.param = this.route.snapshot.params['id']
+    //Convertiremos la ruta actual en un array
+    this.actualRoute = this.router.url.slice(1).toUpperCase().split(this.separator)
+    //Si tenemos un parámetro lo quitaremos para que no se nos añada en el breadCrumb
+    this.actualRoute = this.actualRoute.filter(routeParam => routeParam != this.param);
+    //Borramos el último ya que no queremos poder acceder a este
+    this.firstRoute = this.actualRoute.pop()
   }
 
 
