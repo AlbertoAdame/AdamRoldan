@@ -10,6 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'login',
+
     loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
   },
   {
@@ -24,12 +25,17 @@ const routes: Routes = [
     path: 'contact',
     loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule)
   },
+  {     
+    canActivate : [RolGuardGuard], 
+    path: 'editUser', 
+    loadChildren: () => import('./edit-user/edit-user.module').then(m => m.EditUserModule) 
+  },
   {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
   },
-  { path: 'editUser', loadChildren: () => import('./edit-user/edit-user.module').then(m => m.EditUserModule) },
+  
   {
     path: '**',
     component: NotFoundComponent

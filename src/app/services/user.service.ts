@@ -22,13 +22,18 @@ export class UserService {
   // }
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private cookies:CookieService) {
 
   }
 
 
   searchUsers(): Observable<UserResponseInterface[]> {
     return this.http.get<UserResponseInterface[]>(this.url)
+
+  }
+
+  searchUser(id:string): Observable<UserResponseInterface> {
+    return this.http.get<UserResponseInterface>(`${this.url}/${id}`)
 
   }
 
@@ -39,5 +44,9 @@ export class UserService {
 
   contact(name: string, email: string, subject: string, message: string): Observable<Contact> {
     return this.http.post<Contact>(this.urlContact, { name, email, subject, message })
+  }
+
+  editUser(name: string, email: string, password: string): Observable<UserResponseInterface> {
+    return this.http.put<UserResponseInterface>(`${this.url}/${this.cookies.get('sub')}`, { name, email, password })
   }
 }

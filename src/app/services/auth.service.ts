@@ -16,7 +16,7 @@ export class AuthService {
   private loggedIn = new BehaviorSubject<boolean>(false);
 
   url: string = 'https://adamroldanapi-production.up.railway.app/signin';
-  urlJwt: string = 'https://adamroldanapi-production.up.railway.app/user/jwt'
+  urlJwt: string = 'https://adamroldanapi-production.up.railway.app/user' //Aqui en un princpio tenia una dirección jwt, pero al desplegarlo me ha dado fallos
   role: string = "";
   token!: DecodeTokenInterface;
 
@@ -25,6 +25,7 @@ export class AuthService {
   }
 
   constructor(private userService: UserService, private cookies: CookieService, private http: HttpClient) {
+
     this.http.get(this.urlJwt)
       .subscribe({
         next: () => this.loggedIn.next(true),

@@ -17,25 +17,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EditBeatComponent implements OnInit {
 
-
-  jsonBeat: any = {
-    title: '',
-    price: null,
-    bpm: null,
-    time: null
-  }
-
-  jsonGenre: Genre = {
-    genre: ''
-  }
-
-  jsonMood: Mood = {
-    mood: ''
-  }
-
-  genres: Genre[] = []
   moods: Mood[] = []
   beat?: BeatInterface;
+  id:string=''
+  mood?:Mood
 
   isLoggedIn!: boolean;
 
@@ -48,17 +33,19 @@ export class EditBeatComponent implements OnInit {
       }
     })
 
-    let id = this.route.snapshot.params['id']
-    this.beatService.getBeat(id)
+    this.id = this.route.snapshot.params['id']
+    this.id= this.id.toString()
+    
+    this.beatService.getBeat(this.id)
       .subscribe({
         next: (resp) => {
-          if (resp) {
-            this.beat = resp;
+          if (resp) {            
             this.myForm.reset({
               title: resp.title,
               price: resp.price,
               time: resp.time,
-              bpm: resp.bpm
+              bpm: resp.bpm,
+              mood: resp.mood.mood
             })
 
           }
@@ -73,15 +60,6 @@ export class EditBeatComponent implements OnInit {
         }
       })
 
-    this.genreService.getGenres()
-      .subscribe({
-        next: (resp) => {
-          this.genres = resp;
-        }
-      })
-
-
-
   }
 
   myForm: FormGroup = this.fb.group({
@@ -89,10 +67,7 @@ export class EditBeatComponent implements OnInit {
     price: ['', [Validators.required]],
     bpm: ['', [Validators.required]],
     time: ['', [Validators.required]],
-    genre: ['Drill', [Validators.required]],
-    mood: ['Accomplished', [Validators.required]],
-    picture: [''],
-    fileSource: ['']
+    mood: ['', [Validators.required]]
   })
 
   isValidField(field: string) {
@@ -100,19 +75,8 @@ export class EditBeatComponent implements OnInit {
       && this.myForm.controls[field].touched
   }
 
-  onFileChange(event: any) {
-
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.myForm.patchValue({
-        fileSource: file
-      });
-    }
-  }
-
 
   save() {
-    console.log(this.myForm)
 
     if (this.myForm.invalid) {
 
@@ -120,16 +84,11 @@ export class EditBeatComponent implements OnInit {
       return
     }
 
-    this.jsonBeat.title = this.myForm.value.title
-    this.jsonBeat.price = this.myForm.value.price
-    this.jsonBeat.bpm = this.myForm.value.bpm
-    this.jsonBeat.time = this.myForm.value.time
+    
+    
+    
 
-    this.jsonGenre.genre = this.myForm.value.genre
-
-    this.jsonMood.mood = this.myForm.value.mood
-
-    this.beatService.uploadBeat(this.jsonBeat, this.myForm.get('fileSource')?.value, this.jsonGenre, this.jsonMood)
+    this.beatService.editBeat(this.id, this.myForm.value.title, this.myForm.value.price, this.myForm.value.bpm, this.myForm.value.time, this.myForm.value.mood)
       .subscribe({
         next: (resp) => {
           if (resp) {

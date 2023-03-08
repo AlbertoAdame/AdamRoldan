@@ -3,6 +3,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BeatService } from '../../services/beat.service';
+import { TokenInterface } from '../../interfaces/token.interface';
 
 @Component({
   selector: 'app-navbar',
@@ -20,6 +21,7 @@ export class NavbarComponent implements OnInit {
   currentUrl = this.router.url;
 
   isLoggedIn!: boolean;
+  role:boolean=false
 
 
   constructor(private cookies: CookieService, private authService: AuthService, private router: Router, private beatService: BeatService) { }
@@ -27,10 +29,11 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
 
-
     this.authService.isLoggedIn.subscribe({
       next: (resp) => {
-        this.isLoggedIn = resp;
+        this.isLoggedIn = resp;   
+        console.log(resp);
+           
       }
 
     })
@@ -38,10 +41,15 @@ export class NavbarComponent implements OnInit {
     if (this.cookies.get('sub')) {
       this.username = this.cookies.get('sub')
     }
+    else{
+      this.username=''
+    }
   }
 
   showSearchBar(): void {
     this.search = !this.search;
+    console.log(this.search);
+    
     if (this.color === 'white')
       this.color = 'black';
     else
@@ -49,7 +57,7 @@ export class NavbarComponent implements OnInit {
   }
 
   showCart(): void {
-    this.cart = !this.cart
+    this.cart = !this.cart    
   }
 
   logout(): void {

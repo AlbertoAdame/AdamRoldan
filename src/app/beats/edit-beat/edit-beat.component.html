@@ -8,7 +8,7 @@
 
 
     <form method="POST" id="contactForm" name="contactForm" class="contactForm" (ngSubmit)="save()" [formGroup]="myForm"
-        autocomplete="off" enctype="multipart/form-data">
+        autocomplete="off">
         <div class="row">
             <div class="col-md-12 box">
                 <div class="form-group">
@@ -51,40 +51,20 @@
                 </div>
             </div>
 
-            <div class="col-md-6 box">
-                <div class="form-group">
-                    <label class="label" for="genre">Genre</label>
-                    <select class="form-select" formControlName="genre">
-                        <option [value]="genre.genre" *ngFor="let genre of genres">{{genre.genre}}</option>
-                    </select>
-
-                    <span class="form-text text-danger" *ngIf="isValidField('genre')">
-                        Genre is required
-                    </span>
-                </div>
-            </div>
-
-            <div class="col-md-6 box">
-                <div class="form-group">
-                    <label class="label" for="mood">Mood</label>
-                    <select class="form-select" formControlName="mood">
-                        <option [value]="mood.mood" *ngFor="let mood of moods">{{mood.mood}}</option>
-                    </select>
-
-                    <span class="form-text text-danger" *ngIf="isValidField('mood')">
-                        Genre is required
-                    </span>
-                </div>
-            </div>
-
 
             <div class="col-md-12 box">
                 <div class="form-group">
-                    <label class="label" for="picture">Picture</label>
-                    <input type="file" class="form-control picture" placeholder="picture" formControlName="picture"
-                        name="picture" (change)="onFileChange($event)" />
+                    <label class="label" for="mood">Mood</label>
+                    <select class="form-select" formControlName="mood">
+                        <option *ngFor="let mood of moods">{{mood.mood}}</option>
+                    </select>
+
+                    <span class="form-text text-danger" *ngIf="isValidField('mood')">
+                        Mood is required
+                    </span>
                 </div>
             </div>
+
             <div class="col-md-12">
                 <div class="form-group">
                     <input type="submit" value="Send Message" class="btn btn-primary">

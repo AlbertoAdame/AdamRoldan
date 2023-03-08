@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BeatInterface } from '../interfaces/beat-response.interface';
 import { Observable, switchMap, of, catchError } from 'rxjs';
-import { Pageable } from '../interfaces/pageable.interface';
-import { Mood } from '../interfaces/mood.interface';
+import { Pageable, MoodClass } from '../interfaces/pageable.interface';
+import { Mood, MoodNew } from '../interfaces/mood.interface';
 import { Genre } from '../interfaces/genre.interface';
 
 @Injectable({
@@ -11,6 +11,8 @@ import { Genre } from '../interfaces/genre.interface';
 })
 export class BeatService {
   private url = 'https://adamroldanapi-production.up.railway.app/beat';
+
+  moodClass!:MoodNew
 
   _beats!: Pageable;
   constructor(private http: HttpClient) {
@@ -37,7 +39,6 @@ export class BeatService {
       .subscribe({
         next: resp => {
           this._beats = resp
-          console.log(resp);
 
         },
         error: (error) => console.log(error)
@@ -46,7 +47,7 @@ export class BeatService {
       )
   }
 
-  getBeat(id: number): Observable<BeatInterface> {
+  getBeat(id: string): Observable<BeatInterface> {
     return this.http.get<BeatInterface>(`${this.url}/${id}`)
   }
 
@@ -71,21 +72,16 @@ export class BeatService {
   }
 
 
-  deleteBeat(id: number): Observable<BeatInterface[]> {
-    return this.http.delete<BeatInterface[]>(`${this.url}/${id}`)
-  }
+  editBeat(id:string, title:string, price:number, bpm:number, time:number, moodStr:string ): Observable<boolean> {
+    console.log(id);
 
-  editBeat(beat: any, picture: File, genre: Genre, mood: Mood): Observable<boolean> {
+    
+    const mood = { "mood": moodStr }
+    console.log(mood);
+    
+    
 
-    const data: FormData = new FormData();
-
-    data.append('beat', new Blob([JSON.stringify(beat)], { type: "application/json" }));
-    data.append('file', picture)
-    data.append('genre', new Blob([JSON.stringify(genre)], { type: "application/json" }));
-    data.append('mood', new Blob([JSON.stringify(mood)], { type: "application/json" }));
-
-
-    return this.http.post<BeatInterface>(this.url, data)
+    return this.http.put<any>(`${this.url}/${id}`, {title, price, bpm, time, mood})
       .pipe(switchMap(resp => {
         return of(true);
       }), catchError(error => {
@@ -94,6 +90,33 @@ export class BeatService {
         return of(false)
       }));
   }
+
+  deleteBeat(id: number): Observable<BeatInterface[]> {
+    return this.http.delete<BeatInterface[]>(`${this.url}/${id}`)
+  }
+
+
+
+
+  // editBeat(title:string,price:number,bpm:number, time:number, mood:string ): Observable<boolean> {  
+
+  //   return this.http.put<BeatInterface>(this.url,   {
+  //     title: title,
+  //     price: price,
+  //     bpm: bpm,
+  //     time: time,
+  //     mood:{
+  //       mood:mood
+  //     }
+  //   })
+  //     .pipe(switchMap(resp => {
+  //       return of(true);
+  //     }), catchError(error => {
+  //       console.log(error);
+
+  //       return of(false)
+  //     }));
+  // }
 
 
 }

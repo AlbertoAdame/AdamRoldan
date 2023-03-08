@@ -1,3 +1,5 @@
+import { Genre } from './genre.interface';
+import { Mood } from './mood.interface';
 export interface BeatInterface {
     id_beat : number,
     title : String,
@@ -5,6 +7,8 @@ export interface BeatInterface {
     time : number,
     bpm : number,
     img : FormData,
-    date : Date
+    date : Date,
+    genre: Genre[],
+    mood: Mood
 }
 

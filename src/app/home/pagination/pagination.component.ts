@@ -30,12 +30,11 @@ export class PaginationComponent implements OnInit {
     this.beatService.searchBeats(this.actualPage, this.numberOfElements)
       .subscribe({
         next: (resp) => {
-          console.log(resp.content[0].mood);
 
           this.results = resp.content
           this.totalElements = resp.totalElements
         }
-        //falta error
+
       })
   }
 
@@ -46,7 +45,6 @@ export class PaginationComponent implements OnInit {
 
   changePageSize() {
     this.getBeats();
-    console.log(this.numberOfElements)
   }
 
   secondsToString(seconds: number) {

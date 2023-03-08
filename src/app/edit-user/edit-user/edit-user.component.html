@@ -31,18 +31,19 @@
             </div>
             <div class="col-md-12 box">
                 <div class="form-group">
-                    <label class="label" for="subject">Password</label>
-                    <input type="text" class="form-control" formControlName="subject" placeholder="Subject">
+                    <label class="label" for="password">Password</label>
+                    <input type="password" class="form-control" formControlName="password" placeholder="******">
 
-                    <span class="form-text text-danger" *ngIf="isValidField('subject')">
-                        Subject is required
+                    <span class="form-text text-danger" *ngIf="isValidField('password')">
+                        Password is required
                     </span>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="form-group">
-                    <input type="submit" value="Send Message" class="btn btn-primary">
-                    <div class="submitting"></div>
+                    <input type="submit" value="Save" class="btn btn-primary">
+
+                    <button type="button" class="btn btn-danger" [routerLink]="['/home']">Cancel</button>
                 </div>
             </div>
         </div>

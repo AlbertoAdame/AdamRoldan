@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
+import { UserResponseInterface } from '../../interfaces/user-response.interface';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-edit-user',
@@ -14,15 +16,16 @@ export class EditUserComponent {
 
   isLoggedIn!: boolean;
 
+  user?:UserResponseInterface;
+
   myForm: FormGroup = this.fb.group({
     name: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
-    subject: ['', [Validators.required]],
-    message: ['', [Validators.required]],
+    password: ['']
 
   })
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private userService: UserService, private router: Router) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private userService: UserService, private cookies:CookieService) { }
 
   ngOnInit() {
     this.authService.isLoggedIn.subscribe({
@@ -30,6 +33,25 @@ export class EditUserComponent {
         this.isLoggedIn = resp;
       }
     })
+
+    let id = this.cookies.get('sub')
+    this.userService.searchUser(id)
+      .subscribe({
+        next: (resp) => {
+          
+          if (resp) {
+            this.user = resp;
+            
+            this.myForm.reset({
+              name: resp.name,
+              email: resp.email,
+              password: ''
+            })
+
+          }
+
+        }
+      })
   }
 
   isValidField(field: string) {
@@ -44,15 +66,14 @@ export class EditUserComponent {
       this.myForm.markAllAsTouched()
       return
     }
-    this.userService.contact(this.myForm.value.name, this.myForm.value.email, this.myForm.value.subject, this.myForm.value.message)
+    this.userService.editUser(this.myForm.value.name, this.myForm.value.email, this.myForm.value.password)
       .subscribe({
         next: (resp) => {
           Swal.fire({
             icon: 'success',
-            title: 'Your message was sent',
-            text: 'You will receive an answer soon'
-          }),
-            this.myForm.reset()
+            title: 'Perfect',
+            text: 'Your account was updated'
+          })
         },
         error: (error) => {
           Swal.fire({

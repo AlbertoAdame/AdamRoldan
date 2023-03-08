@@ -120,7 +120,7 @@ export class LoginComponent implements OnInit {
             if (resp) {
               Swal.fire({
                 icon: 'success',
-                title: 'Good job!',
+                title: 'Congratulations!',
                 text: 'Your account was created',
                 confirmButtonColor: '#1b8d57'
               })
