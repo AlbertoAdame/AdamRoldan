@@ -7,7 +7,7 @@
 .background {
 	padding-top: 90px;
 	transition: 1.5s;
-	background-image: url("/assets/images/product2.png");
+	background-image: url("assets/images/product2.png");
 	background-repeat: repeat;
 	background-size: cover;
 	height: 100vh;
@@ -15,21 +15,12 @@
 
 .backgroundAlternative {
 	transition: 1.5s;
-	background-image: url("/assets/images/product3.png") !important;
+	background-image: url("assets/images/product3.png") !important;
 	background-repeat: repeat-y;
 	background-size: cover;
 	height: 100vh;
 }
 
-/* body {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	font-family: 'Montserrat', sans-serif;
-	height: 100vh;
-	margin: -20px 0 50px;
-} */
 
 h1 {
 	font-weight: bold;
