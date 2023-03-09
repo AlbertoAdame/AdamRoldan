@@ -9,18 +9,19 @@ import { AuthService } from './services/auth.service';
 })
 export class AdminGuard implements CanActivate {
 
-  constructor(private router:Router, private cookies:CookieService){ }
+  constructor(private router: Router, private cookies: CookieService) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if(this.cookies.get('role')=='ADMIN'){
-        return true;
-      }
-      else{
-        this.router.navigate(['/home'])
-        return false
-      }
+    //Si no es admin no le dejaremos entrar
+    if (this.cookies.get('role') == 'ADMIN') {
+      return true;
+    }
+    else {
+      this.router.navigate(['/home'])
+      return false
+    }
   }
-  
+
 }

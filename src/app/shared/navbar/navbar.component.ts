@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
   currentUrl = this.router.url;
 
   isLoggedIn!: boolean;
-  role:boolean=false
+  role: boolean = false
 
 
   constructor(private cookies: CookieService, private authService: AuthService, private router: Router, private beatService: BeatService) { }
@@ -31,9 +31,7 @@ export class NavbarComponent implements OnInit {
 
     this.authService.isLoggedIn.subscribe({
       next: (resp) => {
-        this.isLoggedIn = resp;   
-        console.log(resp);
-           
+        this.isLoggedIn = resp;
       }
 
     })
@@ -41,34 +39,36 @@ export class NavbarComponent implements OnInit {
     if (this.cookies.get('sub')) {
       this.username = this.cookies.get('sub')
     }
-    else{
-      this.username=''
+    else {
+      this.username = ''
     }
   }
 
+  //Hemos desactivado la barra de búsqueda para esta parte del proyecto
   showSearchBar(): void {
     this.search = !this.search;
-    console.log(this.search);
-    
+
     if (this.color === 'white')
       this.color = 'black';
     else
       this.color = 'white';
   }
 
+  //Al pulsar mostraremos el carrito, aunque lo tendremos desactivado para esta partde del proyecto
   showCart(): void {
-    this.cart = !this.cart    
+    this.cart = !this.cart
   }
 
+  //Cerraremos sesión
   logout(): void {
     this.authService.logout()
     this.isLoggedIn = false;
   }
 
+  //Obtendremos la búsqueda del usuario
   getSearch() {
     this.beatService.searchBeatsPageable(0, 200, "title", this.query)
     this.query = ""
-    // this.router.navigate(['beats']);
   }
 
 }

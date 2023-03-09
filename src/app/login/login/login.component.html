@@ -4,119 +4,77 @@
     <div class="container" [ngClass]="{'right-panel-active': view}" id="container">
         <div class="form-container sign-up-container">
             <form action="#" (ngSubmit)="newAccount()" #registerForm="ngForm">
-                <h1>Create Account</h1>
+                <h1>Create account</h1>
                 <div class="social-container">
-                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                    <!-- <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a> -->
                 </div>
-                <span>or use your username for registration</span>
-                <input type="name"
-                            class="form-control"
-                            placeholder="Name"
-                            [(ngModel)]="newName"
-                            name="name"
-                            minlength="3"
-                            required>
-                    <span class="form-text text-danger" 
-                            *ngIf="notValidName('name')">
-                            Name is required
-                    </span>
+                <!-- <span>or use your username for registration</span> -->
+                <input type="name" class="form-control" placeholder="Name" [(ngModel)]="newName" name="name"
+                    minlength="3" required>
+                <span class="form-text text-danger" *ngIf="notValidName('name')">
+                    Name is required
+                </span>
 
-                    <input type="username"
-                            class="form-control"
-                            placeholder="Username"
-                            [(ngModel)]="newUsername"
-                            name="username"
-                            minlength="3"
-                            required>
-                    <span class="form-text text-danger" 
-                            *ngIf="notValidUsername('username')">
-                            Username is required
-                    </span>
-                    
-                    <input type="email"
-                            class="form-control"
-                            placeholder="E-mail"
-                            [(ngModel)]="newEmail"
-                            name="NewEmail"
-                            minlength="3"
-                            required>
-                    <span class="form-text text-danger" 
-                            *ngIf="notValidNewEmail('NewEmail')">
-                            Please provide a valid e-mail
-                    </span>
-                    
-                    <input type="password"
-                                    class="form-control"
-                                    placeholder="Password"
-                                    [(ngModel)]="newPassword"
-                                    name="NewPassword"
-                                    required
-                                    >
-        
-                                    <span class="form-text text-danger" 
-                                    *ngIf="notValidNewPassword('NewPassword')">
-                                        Password is required
-                                    </span>
+                <input type="username" class="form-control" placeholder="Username" [(ngModel)]="newUsername"
+                    name="username" minlength="3" required>
+                <span class="form-text text-danger" *ngIf="notValidUsername('username')">
+                    Username is required
+                </span>
 
-                    <input type="password"
-                                    class="form-control"
-                                    placeholder="Repeat Password"
-                                    [(ngModel)]="repeatNewPassword"
-                                    name="RepeatNewPassword"
-                                    required
-                                    >
-        
-                                    <span class="form-text text-danger" 
-                                    *ngIf="notValidRepeatNewPassword('RepeatNewPassword')">
-                                        Password does not match
-                                    </span>                    
-                    
-                    <button type="submit" class="signUp">Sign Up</button>
+                <input type="email" class="form-control" placeholder="E-mail" [(ngModel)]="newEmail" name="NewEmail"
+                    minlength="3" required>
+                <span class="form-text text-danger" *ngIf="notValidNewEmail('NewEmail')">
+                    Please provide a valid e-mail
+                </span>
+
+                <input type="password" class="form-control" placeholder="Password" [(ngModel)]="newPassword"
+                    name="NewPassword" required autocomplete="">
+
+                <span class="form-text text-danger" *ngIf="notValidNewPassword('NewPassword')">
+                    Password is required
+                </span>
+
+                <input type="password" class="form-control" placeholder="Repeat Password"
+                    [(ngModel)]="repeatNewPassword" name="RepeatNewPassword" required autocomplete="">
+
+                <span class="form-text text-danger" *ngIf="notValidRepeatNewPassword('RepeatNewPassword')">
+                    Password does not match
+                </span>
+
+                <button type="submit" class="signUp">Sign Up</button>
             </form>
         </div>
-    
-    <!-- ***************************************   LOG IN   *******************************************-->
+
+        <!-- ***************************************   LOG IN   *******************************************-->
 
         <div class="form-container sign-in-container">
             <form action="#" (ngSubmit)="login()" #logInForm="ngForm">
                 <h1>Sign in</h1>
                 <div class="social-container">
-                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                    <!-- <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a> -->
                 </div>
-                <span>or use your account</span>
-                <input type="username"
-                        class="form-control"
-                        placeholder="Username"
-                        name="username"
-                        minlength="3"
-                        [(ngModel)]="username"
-                        required>
-    
-                <span class="form-text text-danger" 
-                    *ngIf="notValidUsernameLogin('username')">
+                <!-- <span>or use your account</span> -->
+                <input type="username" class="form-control" placeholder="Username" name="username" minlength="3"
+                    [(ngModel)]="username" required>
+
+                <span class="form-text text-danger" *ngIf="notValidUsernameLogin('username')">
                     Please provide a valid username
                 </span>
-    
-    
-                <input type="password"
-                                class="form-control"
-                                placeholder="Password"
-                                name="password"
-                                [(ngModel)]="password"
-                                required
-                                >
-    
-                                <span class="form-text text-danger" 
-                                *ngIf="notValidPassword('password')">
-                                    Password is required
-                                </span>
+
+
+                <input type="password" class="form-control" placeholder="Password" name="password"
+                    [(ngModel)]="password" required autocomplete="">
+
+                <span class="form-text text-danger" *ngIf="notValidPassword('password')">
+                    Password is required
+                </span>
                 <p>Forgot your password?</p>
                 <button type="submit">Sign In</button>
-                
+
             </form>
         </div>
 
@@ -130,15 +88,15 @@
                     <button class="ghost" id="signIn" (click)="changeView()">Sign In</button>
                 </div>
 
-        <!-- ***************************************   GO REGISTER   *******************************************-->
+                <!-- ***************************************   GO REGISTER   *******************************************-->
 
                 <div class="overlay-panel overlay-right">
                     <h1>Hello, Friend!</h1>
                     <p>Enter your personal details and start journey with us</p>
 
                     <button class="ghost" id="signUp" (click)="changeView()">
-                            Sign Up
-                        </button>
+                        Sign Up
+                    </button>
                 </div>
             </div>
         </div>
@@ -146,5 +104,4 @@
 
 
 
-</div>    
-
+</div>

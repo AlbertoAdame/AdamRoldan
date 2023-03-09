@@ -43,7 +43,7 @@ export class UploadComponent implements OnInit {
     price: ['', [Validators.required]],
     bpm: ['', [Validators.required]],
     time: ['', [Validators.required]],
-    picture: [''],
+    picture: ['', [Validators.required]],
     fileSource: [''],
     genre: ['Drill', [Validators.required]],
     mood: ['Accomplished', [Validators.required]]
@@ -52,12 +52,13 @@ export class UploadComponent implements OnInit {
   constructor(private fb: FormBuilder, private authService: AuthService, private beatService: BeatService, private moodService: MoodService, private genreService: GenreService) { }
 
   ngOnInit() {
+    //Este método nos indica si el token es valido
     this.authService.isLoggedIn.subscribe({
       next: (resp) => {
         this.isLoggedIn = resp;
       }
     })
-
+    //Obtener moods
     this.moodService.getMoods()
       .subscribe({
         next: (resp) => {
@@ -65,6 +66,7 @@ export class UploadComponent implements OnInit {
         }
       })
 
+    //Obtener moods
     this.genreService.getGenres()
       .subscribe({
         next: (resp) => {
@@ -73,11 +75,12 @@ export class UploadComponent implements OnInit {
       })
   }
 
+
   isValidField(field: string) {
     return this.myForm.controls[field].errors
       && this.myForm.controls[field].touched
   }
-
+  //Convertiremos el file en un fileSource
   onFileChange(event: any) {
 
     if (event.target.files.length > 0) {
@@ -97,6 +100,7 @@ export class UploadComponent implements OnInit {
       return
     }
 
+    //Pasaremos todos los valores recibidos a los jsons
     this.jsonBeat.title = this.myForm.value.title
     this.jsonBeat.price = this.myForm.value.price
     this.jsonBeat.bpm = this.myForm.value.bpm
@@ -106,7 +110,7 @@ export class UploadComponent implements OnInit {
 
     this.jsonMood.mood = this.myForm.value.mood
 
-
+    //Llamaremos al servicio para subir el beat
     this.beatService.uploadBeat(this.jsonBeat, this.myForm.get('fileSource')?.value, this.jsonGenre, this.jsonMood)
       .subscribe({
         next: (resp) => {
@@ -122,7 +126,7 @@ export class UploadComponent implements OnInit {
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Hubo un error al subir su archivo',
+              text: 'Your file is too heavy',
 
             })
           }

@@ -10,20 +10,21 @@ import { AuthService } from './services/auth.service';
 export class RolGuardGuard implements CanActivate {
 
 
-  constructor(private authService:AuthService, private router:Router, private cookies:CookieService){ }
+  constructor(private authService: AuthService, private router: Router, private cookies: CookieService) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if(this.cookies.get('role')!=''){
-        return true;
-      }
-      else{
-        this.router.navigate(['/home'])
-        return false
-      }
+    //Si no está logueado no le dejaremos entrar
+    if (this.cookies.get('role') != '') {
+      return true;
+    }
+    else {
+      this.router.navigate(['/home'])
+      return false
+    }
 
   }
-  
-  
+
+
 }

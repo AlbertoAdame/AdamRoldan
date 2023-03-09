@@ -42,14 +42,13 @@ export class LoginComponent implements OnInit {
   touchedUsername: boolean = false;
   touchedName: boolean = false;
 
-  // ************************** TOKEN ***************************
+  // ************************** LOGIN ***************************
 
   username: string = ""
   password: string = "";
 
 
   // ************************** REGISTER ***************************
-
 
   newEmail: string = ""
   newPassword: string = "";
@@ -59,24 +58,22 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router, private userService: UserService, private cookies: CookieService) { }
 
-  // ************************** TOKEN(actualizar) ***************************
+  // ************************** Si entramos en el login borramos las cookies ***************************
 
   ngOnInit(): void {
     this.cookies.deleteAll()
-
   }
-
-
 
   // ************************** LOGIN **************************
 
+  //Aquí haremos el login
   login() {
-    // if(this.logInForm.invalid){
-    //   this.logInForm.markAllAsTouched();
-    //   return;
-    // }
+    if (this.logInForm.invalid) {
+      this.logInForm.control.markAllAsTouched();
+      return;
+    }
 
-
+    //Llamaremos al servicio para loguearnos
     if (!this.validLoginUsername && !this.validPassword && this.touchedEmail && this.touchedPassword) {
       this.authService.login(this.username, this.password)
         .subscribe({
@@ -90,7 +87,7 @@ export class LoginComponent implements OnInit {
               Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Email o contraseña incorrecta',
+                text: 'Mail or password incorrect',
                 confirmButtonColor: '#9e1815',
 
               })
@@ -112,7 +109,13 @@ export class LoginComponent implements OnInit {
 
   // ************************** REGISTER ***************************
 
+  //Aquí haremos el register
   newAccount(): void {
+    if (this.registerForm.invalid) {
+      this.registerForm.control.markAllAsTouched();
+      return;
+    }
+    //Llamaremos al servicio para registrarnos
     if (!this.validNewEmail && !this.validNewPassword && !this.validRepeatNewPassword && !this.validUsername && !this.validName && this.touchedNewEmail && this.touchedNewPassword && this.touchedRepeatNewPassword && this.touchedUsername && this.touchedName) {
       this.userService.newUser(this.newUsername, this.newPassword, this.newName, this.newEmail)
         .subscribe({
@@ -124,7 +127,7 @@ export class LoginComponent implements OnInit {
                 text: 'Your account was created',
                 confirmButtonColor: '#1b8d57'
               })
-              //esto lo haremos para que se recargue y te muestre el login login
+              //esto lo haremos para que se recargue y te muestre la ventana del login
               this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
                 this.router.navigate([this.currentUrl]);
               });
@@ -161,9 +164,6 @@ export class LoginComponent implements OnInit {
 
     if (this.logInForm?.controls[campo]?.touched) {
       this.touchedEmail = true;
-      // if (/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(this.logInForm?.controls[campo].value)){
-      //     result=false;
-      // } 
       if (this.logInForm?.controls[campo]?.invalid) {
         result = true;
       }
@@ -263,27 +263,4 @@ export class LoginComponent implements OnInit {
     return result
   }
 
-
-  saveRegister() {
-    if (!this.validNewEmail && !this.validNewPassword && !this.validRepeatNewPassword && !this.validUsername && !this.validName && this.touchedNewEmail && this.touchedNewPassword && this.touchedRepeatNewPassword && this.touchedUsername && this.touchedName) {
-      Swal.fire({
-        icon: 'success',
-        title: 'Good job!',
-        text: 'Your account was created',
-        confirmButtonColor: '#1b8d57'
-      }
-      )
-
-    }
-
-    else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong!',
-        confirmButtonColor: '#9e1815',
-      })
-    }
-
-  }
 }

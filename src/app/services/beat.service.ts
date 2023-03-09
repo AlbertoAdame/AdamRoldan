@@ -5,14 +5,15 @@ import { Observable, switchMap, of, catchError } from 'rxjs';
 import { Pageable, MoodClass } from '../interfaces/pageable.interface';
 import { Mood, MoodNew } from '../interfaces/mood.interface';
 import { Genre } from '../interfaces/genre.interface';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BeatService {
-  private url = 'https://adamroldanapi-production.up.railway.app/beat';
+  private url = environment.url + 'beat';
 
-  moodClass!:MoodNew
+  moodClass!: MoodNew
 
   _beats!: Pageable;
   constructor(private http: HttpClient) {
@@ -39,20 +40,20 @@ export class BeatService {
       .subscribe({
         next: resp => {
           this._beats = resp
-
         },
         error: (error) => console.log(error)
-
       }
       )
   }
 
+  //Recogeremos lo beats
   getBeat(id: string): Observable<BeatInterface> {
     return this.http.get<BeatInterface>(`${this.url}/${id}`)
   }
 
+  //Subiremos un beat
   uploadBeat(beat: any, picture: File, genre: Genre, mood: Mood): Observable<boolean> {
-
+    //Introduciremos todos los datos en un FormData para enviarlos
     const data: FormData = new FormData();
 
     data.append('beat', new Blob([JSON.stringify(beat)], { type: "application/json" }));
@@ -71,17 +72,13 @@ export class BeatService {
       }));
   }
 
+  //Editaremos un beat
+  editBeat(id: string, title: string, price: number, bpm: number, time: number, moodStr: string): Observable<boolean> {
 
-  editBeat(id:string, title:string, price:number, bpm:number, time:number, moodStr:string ): Observable<boolean> {
-    console.log(id);
-
-    
+    //Esto es necesario para que reconozca el mood correctamente en el backend
     const mood = { "mood": moodStr }
-    console.log(mood);
-    
-    
 
-    return this.http.put<any>(`${this.url}/${id}`, {title, price, bpm, time, mood})
+    return this.http.put<any>(`${this.url}/${id}`, { title, price, bpm, time, mood })
       .pipe(switchMap(resp => {
         return of(true);
       }), catchError(error => {
@@ -91,32 +88,9 @@ export class BeatService {
       }));
   }
 
+  //Borraremos un beat
   deleteBeat(id: number): Observable<BeatInterface[]> {
     return this.http.delete<BeatInterface[]>(`${this.url}/${id}`)
   }
-
-
-
-
-  // editBeat(title:string,price:number,bpm:number, time:number, mood:string ): Observable<boolean> {  
-
-  //   return this.http.put<BeatInterface>(this.url,   {
-  //     title: title,
-  //     price: price,
-  //     bpm: bpm,
-  //     time: time,
-  //     mood:{
-  //       mood:mood
-  //     }
-  //   })
-  //     .pipe(switchMap(resp => {
-  //       return of(true);
-  //     }), catchError(error => {
-  //       console.log(error);
-
-  //       return of(false)
-  //     }));
-  // }
-
 
 }

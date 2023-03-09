@@ -24,12 +24,12 @@ export class AuthInterceptorService {
           Authorization: `Bearer ${token}`
         }
       });
-      // console.log(`Bearer ${token}`);
     }
 
     return next.handle(request).pipe(
       catchError((err: HttpErrorResponse) => {
 
+        //Esto lo comentamos para que al fallar el login no nos lleve al home
         // if (err.status === 401) {
         //   this.router.navigateByUrl('/home');
         // }

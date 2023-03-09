@@ -1,7 +1,8 @@
-html, 
+html,
 body {
   font: 100%/1.5 Verdana, sans-serif
 }
+
 #wrapper {
   margin: 0 auto;
   display: block;
@@ -9,6 +10,7 @@ body {
   margin-top: -15px;
 
 }
+
 .page-header {
   text-align: center;
   font-size: 1.5em;
@@ -16,6 +18,7 @@ body {
   border-bottom: 1px solid #ddd;
   margin: 30px 0
 }
+
 #pagination {
   margin: 0;
   padding: 0;
@@ -23,10 +26,12 @@ body {
   margin-bottom: 25px;
 
 }
+
 #pagination li {
   display: inline;
-  cursor:pointer;
+  cursor: pointer;
 }
+
 #pagination li a {
   display: inline-block;
   text-decoration: none;
@@ -41,15 +46,16 @@ body {
   width: 35px;
   -webkit-transition: background-color 0.3s;
   transition: background-color 0.3s
-    
 }
+
 #pagination li a.active {
   background-color: #e52d27;
   color: #fff
 }
+
 #pagination li a:hover:not(.active) {
   background-color: #ddd;
-} 
+}
 
 /* border-pagination */
 .b-pagination-outer {
@@ -59,15 +65,18 @@ body {
   overflow: hidden;
   display: flex
 }
+
 #border-pagination {
   margin: 0 auto;
   padding: 0;
   text-align: center
 }
+
 #border-pagination li {
   display: inline;
 
 }
+
 #border-pagination li a {
   display: block;
   text-decoration: none;
@@ -77,14 +86,17 @@ body {
   float: left;
 
 }
+
 #border-pagination li a {
   -webkit-transition: background-color 0.4s;
   transition: background-color 0.4s
 }
+
 #border-pagination li a.active {
   background-color: #4caf50;
   color: #fff;
 }
+
 #border-pagination li a:hover:not(.active) {
   background: #ddd;
 }
@@ -99,29 +111,29 @@ body {
 }
 
 .my-pagination ::ng-deep ul {
-    margin: 0;
-    padding: 0;
-} 
+  margin: 0;
+  padding: 0;
+}
 
-.my-pagination{
+.my-pagination {
   display: flex;
   justify-content: space-around;
   margin: auto;
-} 
-
-
-.text{
-  display: flex;
-    flex-direction: row-reverse;
-    margin-top: 6px;
-    color: rgb(159, 159, 159);
 }
 
-.form-select{
+
+.text {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-top: 6px;
+  color: rgb(159, 159, 159);
+}
+
+.form-select {
   width: 17.5%;
 }
 
-.row{
+.row {
   margin-top: 25px;
 }
 
@@ -132,13 +144,13 @@ body {
 
 /* --------------------------------------  TAG LIST OF SONGS ---------------------------------------------  */
 
-.songsList{
+.songsList {
   margin-bottom: 50px;
   margin-top: 45px;
 
 }
 
-.listProductTag{
+.listProductTag {
   margin-top: 50px;
   margin-bottom: 25px;
   color: grey;
@@ -146,15 +158,15 @@ body {
   margin: 25px 100px;
 }
 
-.productTitleTag{
+.productTitleTag {
   text-align: center;
 }
 
-.productTimeTag{
+.productTimeTag {
   text-align: center;
 }
 
-.productBpmTag{
+.productBpmTag {
   text-align: center;
 }
 
@@ -162,39 +174,39 @@ body {
 /* --------------------------------------  LIST OF SONGS ---------------------------------------------  */
 
 
-.listProduct{
+.listProduct {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 0 100px;
 }
 
-.productImage{
+.productImage {
   border-radius: 8px;
   object-fit: cover;
   width: 180px;
 }
 
-.productTitle{
+.productTitle {
   text-align: center;
 }
 
-.productTime{
+.productTime {
   text-align: center;
 }
 
-.productBpm{
+.productBpm {
   text-align: center;
 
 }
 
-.share-button{
+.share-button {
   width: 190px;
   display: flex;
   justify-content: space-between;
 }
 
-.share{
+.share {
   /* margin-right: -25px; */
 
   cursor: pointer;
@@ -204,31 +216,31 @@ body {
 
 
 
-.cartButton{
-  width: 130px;
+.cartButton {
+  width: 140px;
   height: 50px;
   display: flex;
   align-items: center;
   background-color: #1b8d57;
+  padding-left: 15px;
+  padding-right: 15px;
   color: white;
   border: solid 2px #1b8d57;
   border-radius: 5px;
   margin-bottom: 2px;
-  justify-content: center;
+  justify-content: space-between;
 
 }
 
-.cartButton:hover{
+.cartButton:hover {
   background-color: #1a9b5f;
   border: solid 2px #1a9b5f;
 }
 
 
-.division{
+.division {
   margin: auto;
   width: 600px;
   margin-top: 5px;
   margin-bottom: 5px;
 }
-
-

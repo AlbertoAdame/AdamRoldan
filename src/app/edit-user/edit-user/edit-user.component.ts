@@ -16,7 +16,7 @@ export class EditUserComponent {
 
   isLoggedIn!: boolean;
 
-  user?:UserResponseInterface;
+  user?: UserResponseInterface;
 
   myForm: FormGroup = this.fb.group({
     name: ['', [Validators.required]],
@@ -25,9 +25,10 @@ export class EditUserComponent {
 
   })
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private userService: UserService, private cookies:CookieService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private userService: UserService, private cookies: CookieService) { }
 
   ngOnInit() {
+    //Este método nos indica si el token es valido
     this.authService.isLoggedIn.subscribe({
       next: (resp) => {
         this.isLoggedIn = resp;
@@ -35,13 +36,14 @@ export class EditUserComponent {
     })
 
     let id = this.cookies.get('sub')
+    //Buscaremos el usuario que queramos editar
     this.userService.searchUser(id)
       .subscribe({
         next: (resp) => {
-          
+
           if (resp) {
             this.user = resp;
-            
+
             this.myForm.reset({
               name: resp.name,
               email: resp.email,
@@ -62,10 +64,10 @@ export class EditUserComponent {
   save() {
 
     if (this.myForm.invalid) {
-
       this.myForm.markAllAsTouched()
       return
     }
+    //Llamaremos al servicio para editar el user
     this.userService.editUser(this.myForm.value.name, this.myForm.value.email, this.myForm.value.password)
       .subscribe({
         next: (resp) => {
@@ -85,10 +87,6 @@ export class EditUserComponent {
           console.log(error)
         }
       });
-    console.log(this.myForm.value)
-
   }
-
-
 }
 

@@ -1,27 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 
-*
-{
+* {
   font-family: poppins;
   text-decoration: none;
   user-select: none;
   color: white;
 }
 
-.center
-{
+.center {
   margin-top: 41px;
   margin-left: -15px;
 }
 
-a
-{
+a {
   color: #fff;
 }
 
-.crumb1 li
-{
+.crumb1 li {
   display: inline-block;
   padding: 12.5px 15px;
   background: #CC2520;
@@ -33,29 +29,28 @@ a
 
 }
 
-.crumb1 li.active
-{
+.crumb1 li.active {
   display: inline-block;
   cursor: default;
   background: #CC2520;
   opacity: 1;
-  box-shadow: rgb(0 0 0 / 35%) 0px -15px 15px -5px inset;
+  box-shadow: rgb(0 0 0 / 10%) 0px -15px 15px -5px inset;
 
 }
 
-.crumb1 li.active a
-{
+.crumb1 li.active a {
   cursor: default;
 }
 
-.crumb1 li:hover
-{
+.crumb1 li:hover {
   opacity: 1;
 }
 
-.crumb1 li a
-{
+.crumb1 li a {
   display: block;
 
 }
 
+.icon {
+  margin-bottom: 3px;
+}

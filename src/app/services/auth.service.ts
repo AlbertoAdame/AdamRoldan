@@ -7,6 +7,7 @@ import { TokenInterface } from '../interfaces/token.interface';
 import { UserService } from './user.service';
 import jwt_decode from "jwt-decode";
 import { DecodeTokenInterface } from '../interfaces/decode-token.interface';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,10 @@ export class AuthService {
 
   private loggedIn = new BehaviorSubject<boolean>(false);
 
-  url: string = 'https://adamroldanapi-production.up.railway.app/signin';
-  urlJwt: string = 'https://adamroldanapi-production.up.railway.app/user' //Aqui en un princpio tenia una dirección jwt, pero al desplegarlo me ha dado fallos
+  url: string = environment.url + 'signin';
+  urlJwt: string = environment.url + 'user' //Aqui en un princpio tenia una dirección jwt, pero al desplegarlo me ha dado fallos y lo he tenido que cambiar
   role: string = "";
+  //Aquin guardaremos la info del token descodificado
   token!: DecodeTokenInterface;
 
   httpOptions = {
@@ -26,6 +28,7 @@ export class AuthService {
 
   constructor(private userService: UserService, private cookies: CookieService, private http: HttpClient) {
 
+    //Pondremos en funcionamiento del BehavioSubject
     this.http.get(this.urlJwt)
       .subscribe({
         next: () => this.loggedIn.next(true),
@@ -33,7 +36,7 @@ export class AuthService {
 
       })
   }
-
+  //AQui comprobaremos si el token es válido
   isAuthenticated(): Observable<boolean> {
     return this.http.get(this.urlJwt)
       .pipe(switchMap(token => {
@@ -48,13 +51,13 @@ export class AuthService {
         return of(false)
       }))
   }
-
+  //El get para obtener el valor de isLoggedIn 
   get isLoggedIn() {
     return this.loggedIn.asObservable();
   }
 
+  //Recuperamos el usuario y comprobamos que la contraseña sea correcta
   login(email: string, password: string): Observable<boolean> {
-    //Recuperamos el usuario y comprobamos que la contraseña sea correcta
     return this.http.post<TokenInterface>(this.url, { email, password }, this.httpOptions)
       .pipe(switchMap(token => {
         this.loggedIn.next(true);
@@ -73,6 +76,7 @@ export class AuthService {
 
   }
 
+  //Borraremos las cookies y actualizaremos la página
   logout() {
     this.cookies.delete('token');
     this.cookies.delete('sub');

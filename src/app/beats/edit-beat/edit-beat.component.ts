@@ -19,14 +19,15 @@ export class EditBeatComponent implements OnInit {
 
   moods: Mood[] = []
   beat?: BeatInterface;
-  id:string=''
-  mood?:Mood
+  id: string = ''
+  mood?: Mood
 
   isLoggedIn!: boolean;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private beatService: BeatService, private moodService: MoodService, private genreService: GenreService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    //Este método nos indica si el token es valido
     this.authService.isLoggedIn.subscribe({
       next: (resp) => {
         this.isLoggedIn = resp;
@@ -34,12 +35,12 @@ export class EditBeatComponent implements OnInit {
     })
 
     this.id = this.route.snapshot.params['id']
-    this.id= this.id.toString()
-    
+    this.id = this.id.toString()
+    //Llamaremos al servicio para obtener todos los beats del parámetro que hemos recibido arriba
     this.beatService.getBeat(this.id)
       .subscribe({
         next: (resp) => {
-          if (resp) {            
+          if (resp) {
             this.myForm.reset({
               title: resp.title,
               price: resp.price,
@@ -52,7 +53,7 @@ export class EditBeatComponent implements OnInit {
 
         }
       })
-
+    //Llamaremos al servicio para obtener todos los moods
     this.moodService.getMoods()
       .subscribe({
         next: (resp) => {
@@ -79,23 +80,18 @@ export class EditBeatComponent implements OnInit {
   save() {
 
     if (this.myForm.invalid) {
-
       this.myForm.markAllAsTouched()
       return
     }
 
-    
-    
-    
-
+    //Una vez introducido los datos llamaremos al servicio y editará
     this.beatService.editBeat(this.id, this.myForm.value.title, this.myForm.value.price, this.myForm.value.bpm, this.myForm.value.time, this.myForm.value.mood)
       .subscribe({
         next: (resp) => {
           if (resp) {
             Swal.fire({
               icon: 'success',
-              title: 'Beat was added',
-              text: 'You will receive an answer soon'
+              title: 'Beat was edited'
             }),
               this.myForm.reset()
           }
@@ -103,7 +99,7 @@ export class EditBeatComponent implements OnInit {
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Hubo un error al subir su archivo',
+              text: 'Something went wrong!',
 
             })
           }
@@ -115,7 +111,7 @@ export class EditBeatComponent implements OnInit {
             text: 'Something went wrong!',
 
           })
-          console.log(error)
+          // console.log(error)
         }
       });
 

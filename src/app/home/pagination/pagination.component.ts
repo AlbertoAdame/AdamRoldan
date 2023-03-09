@@ -23,9 +23,10 @@ export class PaginationComponent implements OnInit {
   constructor(private beatService: BeatService) { }
 
   ngOnInit(): void {
+    //Cogeremos los beats del servicio al iniciar
     this.getBeats();
   }
-
+  //Cogeremos los beats del servicio 
   getBeats() {
     this.beatService.searchBeats(this.actualPage, this.numberOfElements)
       .subscribe({
@@ -38,15 +39,18 @@ export class PaginationComponent implements OnInit {
       })
   }
 
+  //Para mostrar mas o menos valores
   pageChangeEvent(event: number) {
     this.actualPage = event;
     this.getBeats();
   }
 
+  //Para mostrar mas o menos valores
   changePageSize() {
     this.getBeats();
   }
 
+  //Este método pasará los segundos a minutos en este formato '00:00'
   secondsToString(seconds: number) {
     var minute: string | number = Math.floor((seconds / 60) % 60);
     minute = (minute < 10) ? '0' + minute : minute;

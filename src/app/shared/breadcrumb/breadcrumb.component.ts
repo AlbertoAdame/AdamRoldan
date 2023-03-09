@@ -19,7 +19,7 @@ export class BreadcrumbComponent implements OnInit {
     //En caso de que haya un parametro lo cogeremos
     this.param = this.route.snapshot.params['id']
     //Convertiremos la ruta actual en un array
-    this.actualRoute = this.router.url.slice(1).toUpperCase().split(this.separator)
+    this.actualRoute = this.router.url.slice(1).split(this.separator)
     //Si tenemos un parámetro lo quitaremos para que no se nos añada en el breadCrumb
     this.actualRoute = this.actualRoute.filter(routeParam => routeParam != this.param);
     //Borramos el último ya que no queremos poder acceder a este

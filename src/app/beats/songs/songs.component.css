@@ -1,14 +1,13 @@
-
 /* --------------------------------------  TAG LIST OF SONGS ---------------------------------------------  */
 
-.songsList{
+.songsList {
     margin-bottom: 50px;
     margin-top: 40px;
     width: 90%;
 
 }
 
-.listProductTag{
+.listProductTag {
     margin-top: 50px;
     margin-bottom: 25px;
     color: grey;
@@ -16,137 +15,156 @@
 
 }
 
-.productTitleTag{
+.productTitleTag {
     text-align: center;
 }
 
-.productTimeTag{
+.productTimeTag {
     text-align: center;
 }
 
-.productBpmTag{
+.productBpmTag {
     text-align: center;
-    /* padding-left: 30px !important;
-    padding-right: 30px !important; */
 }
-
-
-
 
 
 /* --------------------------------------  LIST OF SONGS ---------------------------------------------  */
 
 
-.listProduct{
+.listProduct {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
 }
 
-.productImage{
+.productImage {
     border-radius: 8px;
     object-fit: cover;
     width: 180px;
 }
 
-.productTitle{
+.productTitle {
     text-align: center;
 }
 
-.productTime{
+.productTime {
     text-align: center;
 }
 
-.productBpm{
+.productBpm {
     text-align: center;
 
 }
 
-.share-button{
+.share-button {
     width: 190px;
     display: flex;
     justify-content: space-between;
 }
 
-.share{
-    /* margin-right: -25px; */
-
+.share {
     cursor: pointer;
-
     margin-top: 10px;
 }
 
-.cartButton{
-    width: 130px;
+.cartButton {
+    width: 140px;
     height: 50px;
     display: flex;
     align-items: center;
     background-color: #1b8d57;
+    padding-left: 15px;
+    padding-right: 15px;
     color: white;
     border: solid 2px #1b8d57;
     border-radius: 5px;
     margin-bottom: 2px;
-    justify-content: center;
+    justify-content: space-between;
     margin-left: 50px;
 
 }
 
-.cartButton:hover{
+.cartButton:hover {
     background-color: #1a9b5f;
     border: solid 2px #1a9b5f;
 }
 
 
-.division{
+.division {
     margin: auto;
     width: 69%;
     margin-top: 5px;
     margin-bottom: 5px;
 }
 
-.buttonEdit{
+.buttonEdit {
     margin: 2.5px;
     height: 50px !important;
 }
 
-.buttonDelete{
+.buttonDelete {
     margin: 2.5px;
     height: 50px !important;
     background-color: #ca2924 !important;
 }
 
-.iconAdmin{
+.buttonDelete:active {
+    color: black;
+}
+
+.buttonEdit:active {
+    color: black;
+}
+
+.buttonAddGenre {
+    margin: 2.5px;
+    height: 50px !important;
+    color: white;
+    background-color: #f0b914;
+    border-color: #f0b914;
+}
+
+.pictureGenre {
+    margin-bottom: 2.5px;
+    margin-right: -3px;
+}
+
+.iconAdmin {
     margin-bottom: 3px;
 
 }
 
-.adminArea{
+.adminArea {
     display: flex;
     justify-content: center;
 }
 
+/* -------------------------------------- TABLE ---------------------------------------------  */
 
-/* -------------------------------------- TABLA ---------------------------------------------  */
-
-.table>:not(caption)>*>*{
-    border-bottom:none;
+.table>:not(caption)>*>* {
+    border-bottom: none;
 }
 
-.td{
+.td {
     margin-top: 13px;
 }
 
-.tdPicture{
+.tdPicture {
     display: flex;
-    /* justify-content: center; */
     margin-top: 3px;
 
 }
 
+.genreTd {
+    display: flex;
+    padding-top: 15.5px;
+    padding-bottom: 15.5px;
+}
 
 
-.tdButtons{
+
+.tdButtons {
     display: flex;
     width: auto;
     justify-content: flex-end;
@@ -166,23 +184,30 @@ input {
 
 }
 
-.genreButton{
+.genreButton {
     width: auto;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
     color: white;
-    height: 40px;
+    height: 45px;
     background-color: black;
     border: none;
     border-radius: 30px;
     font-weight: bold;
+    margin-left: 5px;
+    cursor: default;
 }
 
-.price{
+.deleteGenre {
+    display: inline;
+    margin-bottom: 4px;
+    cursor: pointer;
+}
+
+
+.price {
     display: flex;
     justify-content: flex-end;
     margin-right: 8%;
 
 }
-
-

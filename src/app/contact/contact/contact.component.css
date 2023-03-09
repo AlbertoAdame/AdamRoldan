@@ -1,33 +1,59 @@
-.frontPage{
+.frontPage {
     display: flex;
     justify-content: center;
-    background: linear-gradient(#9e1815, #ca2c26) no-repeat; 
+    background: linear-gradient(#9e1815, #ca2c26) no-repeat;
     box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 0px 16px;
-  }
-  
-  .title{
-      display: flex;
-      justify-content: center;
-      margin-top: 15px;
-      margin-bottom: 25px;
-      font-weight: bolder;
-      font-size: xxx-large;
-      color: white;
-  }
+}
 
-input{
+.title {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    font-weight: bolder;
+    font-size: xxx-large;
+    color: white;
+}
+
+input {
     height: 45px;
 }
 
 
-.box{
+.box {
     margin-bottom: 20px;
 }
 
-label{
+label {
     margin-bottom: 10px;
 }
 
-.container{
+.buttons {
+    display: flex;
+    justify-content: center;
+}
 
+.button {
+    margin-right: 15px;
+}
+
+.groupButtons {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+}
+
+.btn {
+    height: 50px;
+    font-weight: 500;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.btn-danger {
+    background-color: #ca2924 !important;
+}
+
+.btn-danger:hover {
+    background-color: #bb2621 !important;
 }

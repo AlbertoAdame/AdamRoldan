@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-md-12 box">
                 <div class="form-group">
-                    <label class="label" for="title">Title</label>
+                    <label class="label" for="title">Title*</label>
                     <input type="text" class="form-control" formControlName="title" placeholder="Title">
 
                     <span class="form-text text-danger" *ngIf="isValidField('title')">
@@ -22,7 +22,7 @@
             </div>
             <div class="col-md-4 box">
                 <div class="form-group">
-                    <label class="label" for="price">Price</label>
+                    <label class="label" for="price">Price*</label>
                     <input type="number" class="form-control" formControlName="price" placeholder="Price">
 
                     <span class="form-text text-danger" *ngIf="isValidField('price')">
@@ -32,7 +32,7 @@
             </div>
             <div class="col-md-4 box">
                 <div class="form-group">
-                    <label class="label" for="time">Time</label>
+                    <label class="label" for="time">Time*</label>
                     <input type="number" class="form-control" formControlName="time" placeholder="Time">
 
                     <span class="form-text text-danger" *ngIf="isValidField('time')">
@@ -42,7 +42,7 @@
             </div>
             <div class="col-md-4 box">
                 <div class="form-group">
-                    <label class="label" for="bpm">Bpm</label>
+                    <label class="label" for="bpm">Bpm*</label>
                     <input type="number" class="form-control" formControlName="bpm" placeholder="Bpm">
 
                     <span class="form-text text-danger" *ngIf="isValidField('bpm')">
@@ -53,7 +53,7 @@
 
             <div class="col-md-6 box">
                 <div class="form-group">
-                    <label class="label" for="genre">Genre</label>
+                    <label class="label" for="genre">Genre*</label>
                     <select class="form-select" formControlName="genre">
                         <option [value]="genre.genre" *ngFor="let genre of genres">{{genre.genre}}</option>
                     </select>
@@ -66,7 +66,7 @@
 
             <div class="col-md-6 box">
                 <div class="form-group">
-                    <label class="label" for="mood">Mood</label>
+                    <label class="label" for="mood">Mood*</label>
                     <select class="form-select" formControlName="mood">
                         <option [value]="mood.mood" *ngFor="let mood of moods">{{mood.mood}}</option>
                     </select>
@@ -80,32 +80,28 @@
 
             <div class="col-md-12 box">
                 <div class="form-group">
-                    <label class="label" for="picture">Picture</label>
+                    <label class="label" for="picture">Picture*</label>
                     <input type="file" class="form-control picture" placeholder="picture" formControlName="picture"
                         name="picture" (change)="onFileChange($event)" />
                 </div>
+
+                <span class="form-text text-danger" *ngIf="isValidField('picture')">
+                    Picture is required
+                </span>
             </div>
-            <div class="col-md-12">
-                <div class="form-group">
-                    <input type="submit" value="Send Message" class="btn btn-primary">
+            <div class="col-md-12 buttons">
+                <div class="form-group groupButtons">
+                    <input type="submit" value="Save" class="btn btn-success button">
                     <div class="submitting"></div>
+
+                    <button type="button" class="btn btn-danger" [routerLink]="['/beats']">Cancel</button>
                 </div>
             </div>
         </div>
     </form>
 
 
-    <!-- <span>Valid</span>
-            <pre>{{myForm.valid}}</pre>
-    
-            <span>Pristine</span>
-            <pre>{{myForm.pristine}}</pre>
-    
-            <span>Touched</span>
-            <pre>{{myForm.touched}}</pre>
-    
-            <span>Value</span>
-            <pre>{{myForm.value | json}}</pre> -->
+
 
 
 
