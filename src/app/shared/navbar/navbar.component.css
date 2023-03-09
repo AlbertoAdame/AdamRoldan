@@ -2,20 +2,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
 
-*{
+* {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
-    
+
 }
 
-body{
+body {
     height: 100vh;
     background-color: var(--body-color);
 
 }
 
-nav{
+nav {
     /* position: fixed; */
     height: 70px;
     width: 100%;
@@ -25,13 +25,13 @@ nav{
     align-items: center;
     justify-content: space-between;
     /* font-size: 23px; */
-    padding-left:15px;
-    
+    padding-left: 15px;
 
-    
+
+
 }
 
-.logo{
+.logo {
     font-size: 25px;
     font-weight: 500;
     color: var(--text-color);
@@ -39,26 +39,27 @@ nav{
     padding: 0;
     margin: 0;
     margin-top: 1px;
-    
+
 }
 
 
-ul{
+ul {
     display: flex;
     margin: 0;
 
 }
 
-li{
+li {
 
     list-style: none;
 
 }
 
-.buttonNav{
+.buttonNav {
     border: 0;
     height: 70px;
-    width: 85px;;
+    width: 85px;
+    ;
     background-color: white;
     background-color: #9e1815;
     margin: 10px 5px;
@@ -67,19 +68,19 @@ li{
 
 }
 
-.buttonNav:hover{
+.buttonNav:hover {
     border-bottom: solid 3px white;
     border-top: solid 3px #9e1815;
-    
+
 }
 
-.buttonNav.active{
+.buttonNav.active {
     border-bottom: solid 3px white;
     border-top: solid 3px #9e1815;
-    
+
 }
 
-.buttonNav-search{
+.buttonNav-search {
     border: 0;
     height: 70px;
     width: max-content;
@@ -88,10 +89,10 @@ li{
     margin-left: 15px;
     margin-right: 20px;
     margin-top: 10px;
-    
+
 }
 
-.buttonCart{
+.buttonCart {
     border: 0;
     height: 70px;
     width: max-content;
@@ -104,7 +105,7 @@ li{
 
 }
 
-.login{
+.login {
     border: 0;
     height: 70px !important;
     width: max-content !important;
@@ -115,12 +116,12 @@ li{
     color: white;
 }
 
-.liBorder{
-    border-left:  solid 1px white;
+.liBorder {
+    border-left: solid 1px white;
     height: 79.9px;
 }
 
-.profilePicture{
+.profilePicture {
     margin-top: -5px;
 }
 
@@ -131,9 +132,9 @@ li{
     position: relative;
     height: 50px;
 
-  }
-  
-  .search .input {
+}
+
+.search .input {
     background-color: white;
     background-color: #9e1815;
     border: 0;
@@ -143,9 +144,9 @@ li{
     width: 50px;
     transition: width 0.26s ease;
     color: black;
-  }
-  
-  .btn {
+}
+
+.btn {
     background-color: white;
     background-color: #9e1815;
     border: 0;
@@ -158,39 +159,43 @@ li{
     width: 50px;
     transition: transform 0.3s ease;
     margin-top: -3px;
-  }
-  
-  .btn:focus,
-  .input:focus {
+}
+
+.btn:focus,
+.input:focus {
     outline: none;
-  }
-  
-  .search.active .input {
+}
+
+.search.active .input {
     width: 300px;
     background-color: white;
-    
+
     border-radius: 2px;
     height: 55px;
     margin-top: -3px;
     padding-right: 55px;
-  }
-  
-  .search.active .btn {
+}
+
+.search.active .btn {
     transform: translateX(245px);
     background-color: white;
-    
-    
-  }
 
-.cartPicture{
+
+}
+
+.cartPicture {
     margin-top: -7px;
+}
+
+.contact {
+    margin-right: 35px;
 }
 
 
 /* --------------------------------------  CART ---------------------------------------------  */
 
 
-.cart.active{
+.cart.active {
     position: absolute;
     top: 65px;
     right: 15px;
@@ -206,18 +211,18 @@ li{
     /* transition: 0.25s !important;  */
 }
 
-.cart{
+.cart {
     visibility: hidden;
     position: absolute;
 }
 
-.cartTitle{
+.cartTitle {
     font-weight: bold;
     color: black;
     letter-spacing: 0px !important;
 }
 
-.cartButton{
+.cartButton {
     width: 380px;
     height: 50px;
     display: flex;
@@ -233,39 +238,39 @@ li{
 }
 
 
-.cartProduct{
+.cartProduct {
     margin: 10px 0;
 }
 
-.productImage{
+.productImage {
     border-radius: 8px;
     object-fit: cover;
 }
 
-.productTitle{
+.productTitle {
     margin-left: 15px;
     color: black;
 }
 
-.productPrice{
+.productPrice {
     margin-left: 160px;
     color: black;
 }
 
-.productDelete{
+.productDelete {
     margin-left: 25px;
     color: black;
     cursor: pointer;
 }
 
-.products{
+.products {
     margin-top: 15px;
 }
 
 /* --------------------------------------  DROPDOWN ---------------------------------------------  */
 
 
-.logoutButton{
+.logoutButton {
     border: 0;
     height: 50px !important;
     width: 160px;
@@ -274,7 +279,7 @@ li{
     color: black;
 }
 
-.logoutButton:hover{
+.logoutButton:hover {
     border: 0;
     height: 50px !important;
     width: 160px;
@@ -283,7 +288,7 @@ li{
     color: black;
 }
 
-.caretDown{
+.caretDown {
     margin-bottom: -30px;
     padding-left: 3px;
 }
@@ -299,44 +304,46 @@ li{
     border: none;
     cursor: pointer;
     margin-top: 4px;
-  }
-  
-  /* The container <div> - needed to position the dropdown content */
-  .dropdown {
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
     position: relative;
     display: inline-block;
-  }
-  
-  /* Dropdown Content (Hidden by Default) */
-  .dropdown-content {
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
     display: none;
     position: absolute;
     right: 5px;
     background-color: #f9f9f9;
     width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-  }
-  
-  /* Links inside the dropdown */
-  .dropdown-content button {
+}
+
+/* Links inside the dropdown */
+.dropdown-content button {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-  }
-  
-  /* Change color of dropdown links on hover */
-  .dropdown-content a:hover {background-color: #f1f1f1}
-  
-  /* Show the dropdown menu on hover */
-  .dropdown:hover .dropdown-content {
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-  }
-  
-  /* Change the background color of the dropdown button when the dropdown content is shown */
-  /* .dropdown:hover .dropbtn {
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+/* .dropdown:hover .dropbtn {
     background-color: #3e8e41;
   } */
