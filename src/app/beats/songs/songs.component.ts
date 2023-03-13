@@ -17,7 +17,6 @@ import { Genre } from '../../interfaces/genre.interface';
   styleUrls: ['./songs.component.css']
 })
 export class SongsComponent implements OnInit, OnDestroy {
-
   flag: boolean = false;
   role: string = ''
 
@@ -114,22 +113,23 @@ export class SongsComponent implements OnInit, OnDestroy {
               }
             }
           );
-        window.location.reload()
+        // window.location.reload()
       }
     })
   }
-  //Al pulsar el botón de añadir beats hará esto
+
+  //Al pulsar el botón de añadir generos nos mostrará una lista con los géneros, y una vez elegido los añadirá 
   onAddGenre(id: number) {
+    //Reduce es más avanzado, y básicamente lo que hace es darle un formato en concreto a los valores del array que lo facilitamos
+    const genresObject = this.genres.reduce((obj, item) => 
+      Object.assign(obj, { [item.genre]: item.genre }), {});
+    // console.log(genresObject);
+    
     Swal.fire({
       title: 'Select Your New Genre',
       input: 'select',
-      inputOptions: {//esto mirar para mejorarlo, pq no puedo hacer un for de genres[]
-        'Drill': 'Drill',
-        'Electronic': 'Electronic',
-        'Folky': 'Folky',
-        'Jazz': 'Jazz',
-        'Trap': 'Trap'
-      },
+      inputOptions: this.genres.reduce(
+        (obj, item) => Object.assign(obj, { [item.genre]: item.genre }), {}),
       inputPlaceholder: '-- Select genre --',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -196,7 +196,7 @@ export class SongsComponent implements OnInit, OnDestroy {
             }
           );
         //es importante que recargemos la página para que se vean reflejados los cambios
-        window.location.reload()
+        // window.location.reload()
       }
     })
   }
