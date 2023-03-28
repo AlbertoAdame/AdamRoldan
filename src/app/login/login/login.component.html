@@ -43,7 +43,19 @@
                     Password does not match
                 </span>
 
+                <re-captcha (resolved)="resolved($event)" siteKey="6LeL3DwlAAAAADghCJPu7qoZwQw8nYA-hF-Y9Xi-"
+                    [(ngModel)]="captcha" name="captcha" required></re-captcha>
+
+
+                <!-- <span class="form-text text-danger" [hidden]="captcha"> -->
+                <span class="form-text text-danger captcha" *ngIf="notValidCaptcha('captcha')">
+                    Please complete the captcha
+                </span>
+
+
                 <button type="submit" class="signUp">Sign Up</button>
+
+
             </form>
         </div>
 

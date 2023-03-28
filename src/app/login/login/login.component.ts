@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
   touchedRepeatNewPassword: boolean = false;
   touchedUsername: boolean = false;
   touchedName: boolean = false;
+  touchedCaptcha: boolean = false;
 
   // ************************** LOGIN ***************************
 
@@ -55,6 +56,8 @@ export class LoginComponent implements OnInit {
   repeatNewPassword: string = "";
   newName: string = "";
   newUsername: string = "";
+
+  captcha: string = '';
 
   constructor(private authService: AuthService, private router: Router, private userService: UserService, private cookies: CookieService) { }
 
@@ -116,7 +119,7 @@ export class LoginComponent implements OnInit {
       return;
     }
     //Llamaremos al servicio para registrarnos
-    if (!this.validNewEmail && !this.validNewPassword && !this.validRepeatNewPassword && !this.validUsername && !this.validName && this.touchedNewEmail && this.touchedNewPassword && this.touchedRepeatNewPassword && this.touchedUsername && this.touchedName) {
+    if (!this.validNewEmail && !this.validNewPassword && !this.validRepeatNewPassword && !this.validUsername && !this.validName && this.touchedNewEmail && this.touchedNewPassword && this.touchedRepeatNewPassword && this.touchedUsername && this.touchedName && this.captcha != "") {
       this.userService.newUser(this.newUsername, this.newPassword, this.newName, this.newEmail)
         .subscribe({
           next: (resp) => {
@@ -262,5 +265,26 @@ export class LoginComponent implements OnInit {
     this.validRepeatNewPassword = result;
     return result
   }
+
+  // ************************** CAPTCHA *********************
+
+  //Mensaje del captcha
+  notValidCaptcha(campo: string): boolean {
+    let result: boolean = false;
+    if (this.registerForm?.controls[campo]?.touched) {
+      this.touchedCaptcha = true;
+      if (this.captcha == "")
+        result = true
+      else
+        result = false
+    }
+    return result
+  }
+
+  //Función para el captcha
+  resolved(captchaResponse: string) {
+    this.captcha = captchaResponse;
+  }
+
 
 }

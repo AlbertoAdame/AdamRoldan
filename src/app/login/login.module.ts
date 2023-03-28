@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { LoginRoutingModule } from './login-routing.module';
 import { RouterModule } from '@angular/router';
+import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 
 
 
@@ -16,6 +17,8 @@ import { RouterModule } from '@angular/router';
     LoginRoutingModule,
     FormsModule,
     RouterModule,
+    RecaptchaModule,
+    RecaptchaFormsModule
   ],
   exports: [
     LoginComponent

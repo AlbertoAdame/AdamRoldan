@@ -17,6 +17,7 @@ import { Genre } from '../../interfaces/genre.interface';
   styleUrls: ['./songs.component.css']
 })
 export class SongsComponent implements OnInit, OnDestroy {
+
   flag: boolean = false;
   role: string = ''
 
@@ -121,10 +122,10 @@ export class SongsComponent implements OnInit, OnDestroy {
   //Al pulsar el botón de añadir generos nos mostrará una lista con los géneros, y una vez elegido los añadirá 
   onAddGenre(id: number) {
     //Reduce es más avanzado, y básicamente lo que hace es darle un formato en concreto a los valores del array que lo facilitamos
-    const genresObject = this.genres.reduce((obj, item) => 
+    const genresObject = this.genres.reduce((obj, item) =>
       Object.assign(obj, { [item.genre]: item.genre }), {});
     // console.log(genresObject);
-    
+
     Swal.fire({
       title: 'Select Your New Genre',
       input: 'select',
@@ -200,4 +201,6 @@ export class SongsComponent implements OnInit, OnDestroy {
       }
     })
   }
+
+
 }

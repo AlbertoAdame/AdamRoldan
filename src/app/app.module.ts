@@ -17,7 +17,6 @@ import { RolGuardGuard } from './rol-guard.guard';
 import { EditUserModule } from './edit-user/edit-user.module';
 
 
-
 @NgModule({
   declarations: [
     AppComponent
