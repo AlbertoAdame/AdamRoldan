@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 
 import { BeatService } from '../../services/beat.service';
 import { Content, Pageable } from '../../interfaces/pageable.interface';
@@ -9,6 +9,8 @@ import Swal from 'sweetalert2';
 import { Subject } from 'rxjs';
 import { GenreService } from '../../services/genre.service';
 import { Genre } from '../../interfaces/genre.interface';
+import { BeatInterface } from 'src/app/interfaces/beat-response.interface';
+import { ComunicationService } from '../../services/comunication.service';
 
 
 @Component({
@@ -28,7 +30,9 @@ export class SongsComponent implements OnInit, OnDestroy {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>()
 
-  constructor(private beatService: BeatService, private authService: AuthService, private cookies: CookieService, private genreService: GenreService) {
+
+  constructor(private beatService: BeatService, private authService: AuthService, private cookies: CookieService, private genreService: GenreService,
+    private comunicationService: ComunicationService) {
   }
 
   ngOnInit(): void {
@@ -202,5 +206,10 @@ export class SongsComponent implements OnInit, OnDestroy {
     })
   }
 
+  audioPlayer(beat: any) {
+
+    this.comunicationService.currentBeatSubject.next(beat);
+
+  }
 
 }

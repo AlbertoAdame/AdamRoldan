@@ -1,20 +1,20 @@
-.main-bg{
+.main-bg {
     /* background: linear-gradient(#9e1815, #e52d27) no-repeat; 
     height: 700px; */
 
-    
+
 }
 
-.frontPage{
+.frontPage {
     display: flex;
     justify-content: center;
-    background: linear-gradient(#9e1815, #e52d27) no-repeat; 
-    box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;    
+    background: linear-gradient(#9e1815, #e52d27) no-repeat;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
     /* box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px; */
 
 }
 
-.gradient{
+.gradient {
     position: absolute;
     background-image: linear-gradient(to bottom, rgba(31, 14, 100, 0), #ffffff);
     height: 20px;
@@ -23,19 +23,46 @@
     /* border-radius: 0 0 5% 5%; */
 }
 
-.logo{
+.logo {
     margin-bottom: 50px;
+    width: 70%;
+    height: 70%;
+
 }
 
-h2{
-    margin-left: 120px;
-    margin-bottom: -20px;
-    margin-top: 25px;
+h2 {
+    margin-left: 16%;
+    margin-top: 10%;
 }
 
 
+/* ORDENADOR */
+@media screen and (min-width: 769px) {
+    .logo {
+        margin-bottom: 50px;
+        width: 21.9%;
+    }
 
 
+    h2 {
+        margin-left: 120px;
+        margin-bottom: -20px;
+        margin-top: 25px;
+    }
+}
+
+/* TABLET */
+@media screen and (min-width: 481px) and (max-width:768px) {
+    .logo {
+        margin-bottom: 50px;
+        width: 21.9%;
+    }
 
 
+    h2 {
+        margin-left: 120px;
+        margin-bottom: -20px;
+        margin-top: 25px;
+    }
 
+}

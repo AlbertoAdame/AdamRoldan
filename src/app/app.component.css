@@ -1,0 +1,37 @@
+.container-fluid html * {
+    overflow: overlay;
+}
+
+.side {
+    background-color: #FAFAFA !important;
+    box-shadow: rgba(50, 50, 93, 0.1) 0px 0px 20px -20px inset, rgba(0, 0, 0, 0.1) 0px 0px 35px -18px inset;
+}
+
+
+.home {
+    margin-left: 23%;
+    margin-top: 8%;
+    margin-bottom: 8%;
+}
+
+.beats {
+    margin-left: 23%;
+    margin-top: 8%;
+    margin-bottom: 8%;
+}
+
+.faq {
+    margin-left: 23%;
+    margin-bottom: 8%;
+    margin-top: 8%;
+}
+
+.contact {
+    margin-left: 23%;
+    margin-bottom: 8%;
+    margin-top: 8%;
+}
+
+.icon {
+    margin-right: 5%;
+}

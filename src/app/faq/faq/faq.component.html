@@ -10,87 +10,120 @@
     <div class="info">
         <button [ngClass]="{red: license}" class="box" (click)="showLicense()">
             EXCLUSIVE BEATS
-                <svg xmlns="http://www.w3.org/2000/svg" [ngClass]="{activeLi: license}" width="25" height="25" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-                </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" [ngClass]="{activeLi: license}" width="25" height="25"
+                fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+            </svg>
 
-                <svg xmlns="http://www.w3.org/2000/svg" [ngClass]="{activeLi: noLicense}" width="25" height="25" fill="currentColor" class="bi bi-chevron-down noActive" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-                </svg>
-          
-        </button>  
+            <svg xmlns="http://www.w3.org/2000/svg" [ngClass]="{activeLi: noLicense}" width="25" height="25"
+                fill="currentColor" class="bi bi-chevron-down noActive" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+            </svg>
+
+        </button>
         <div class="content">
             <p [ngClass]="{activeLi: noLicense}">
-                The exclusive license, as its name indicates allows to enjoy the instrumental with exclusivity, besides offering full rights for its use, monetization, etc. Once the purchase of an exclusive license, the instrument disappears instantly from the player. In  <strong>Terms and Conditions</strong> you can find all the detailed information about it.
+                The exclusive license, as its name indicates allows to enjoy the instrumental with exclusivity, besides
+                offering full rights for its use, monetization, etc. Once the purchase of an exclusive license, the
+                instrument disappears instantly from the player. In <strong>Terms and Conditions</strong> you can find
+                all the detailed information about it.
             </p>
         </div>
     </div>
 
     <div class="info">
-        <button [ngClass]="{red: youtube}" class="box" (click)="showYoutube()">YOUTUBE VIDEOS/CONTENT ID 
-                <svg xmlns="http://www.w3.org/2000/svg" [ngClass]="{activeYo: youtube}" width="25" height="25" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-                </svg>
+        <button [ngClass]="{red: youtube}" class="box" (click)="showYoutube()">YOUTUBE VIDEOS/CONTENT ID
+            <svg xmlns="http://www.w3.org/2000/svg" [ngClass]="{activeYo: youtube}" width="25" height="25"
+                fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+            </svg>
 
-                <svg xmlns="http://www.w3.org/2000/svg" [ngClass]="{activeYo: noYoutube}" width="25" height="25" fill="currentColor" class="bi bi-chevron-down noActive" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-                </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" [ngClass]="{activeYo: noYoutube}" width="25" height="25"
+                fill="currentColor" class="bi bi-chevron-down noActive" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+            </svg>
         </button>
         <div class="content">
             <p [ngClass]="{activeYo: noYoutube}">
-                If you want to be able to monetize your video on YouTube you need a <strong>Premium</strong>  license. The <strong>Standard</strong>  license and / or the free download do not allow monetization .            </p>
+                If you want to be able to monetize your video on YouTube you need a <strong>Premium</strong> license.
+                The <strong>Standard</strong> license and / or the free download do not allow monetization . </p>
         </div>
     </div>
 
     <div class="info">
-        <button  [ngClass]="{red: leasing}" class="box" (click)="showLeasing()">WHAT IS A BEAT WITH 'LEASING RIGHTS'
-                <svg xmlns="http://www.w3.org/2000/svg" [ngClass]="{activeLe: leasing}" width="25" height="25" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-                </svg>
+        <button [ngClass]="{red: leasing}" class="box" (click)="showLeasing()">WHAT IS A BEAT WITH 'LEASING RIGHTS'
+            <svg xmlns="http://www.w3.org/2000/svg" [ngClass]="{activeLe: leasing}" width="25" height="25"
+                fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+            </svg>
 
-                <svg xmlns="http://www.w3.org/2000/svg"  [ngClass]="{activeLe: noLeasing}" width="25" height="25" fill="currentColor" class="bi bi-chevron-down noActive" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-                </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" [ngClass]="{activeLe: noLeasing}" width="25" height="25"
+                fill="currentColor" class="bi bi-chevron-down noActive" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+            </svg>
         </button>
         <div class="content">
             <p [ngClass]="{activeLe: noLeasing}">
-                In summary, a beat with <strong>Leasing rights</strong> is an intermediate point between a free and an exclusive download instrument. It is a non-exclusive license, which allows you to use instruments for a low price without being available to everyone with a simple click of download.            </p>
+                In summary, a beat with <strong>Leasing rights</strong> is an intermediate point between a free and an
+                exclusive download instrument. It is a non-exclusive license, which allows you to use instruments for a
+                low price without being available to everyone with a simple click of download. </p>
         </div>
     </div>
 
     <div class="info">
         <button [ngClass]="{red: payment}" class="box" (click)="showPaiment()">WHAT PAYMENT METHODS CAN I CHOOSE
-                <svg xmlns="http://www.w3.org/2000/svg" [ngClass]="{activePa: payment}" width="25" height="25" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-                </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" [ngClass]="{activePa: payment}" width="25" height="25"
+                fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+            </svg>
 
-                <svg xmlns="http://www.w3.org/2000/svg" [ngClass]="{activePa: noPayment}" width="25" height="25" fill="currentColor" class="bi bi-chevron-down noActive" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-                </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" [ngClass]="{activePa: noPayment}" width="25" height="25"
+                fill="currentColor" class="bi bi-chevron-down noActive" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+            </svg>
         </button>
         <div class="content">
             <p [ngClass]="{activePa: noPayment}">
-                You can pay by credit card or PayPal . Both options are made through the PayPal gateway, so all payments will be managed automatically without the need for manual checks. </p>
+                You can pay by credit card or PayPal . Both options are made through the PayPal gateway, so all payments
+                will be managed automatically without the need for manual checks. </p>
         </div>
     </div>
 
 
 
     <div class="info">
-        <button  [ngClass]="{red: order}" class="box red" (click)="showOrder()">WHEN WILL I RECEIVE MY ORDER
-                <svg xmlns="http://www.w3.org/2000/svg" [ngClass]="{activeOr: order}"  width="25" height="25" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-                </svg>
+        <button [ngClass]="{red: order}" class="box red" (click)="showOrder()">WHEN WILL I RECEIVE MY ORDER
+            <svg xmlns="http://www.w3.org/2000/svg" [ngClass]="{activeOr: order}" width="25" height="25"
+                fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+            </svg>
 
-                <svg xmlns="http://www.w3.org/2000/svg" [ngClass]="{activeOr: noOrder}" width="25" height="25" fill="currentColor" class="bi bi-chevron-down noActive" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-                </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" [ngClass]="{activeOr: noOrder}" width="25" height="25"
+                fill="currentColor" class="bi bi-chevron-down noActive" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+            </svg>
         </button>
         <div class="content">
             <p [ngClass]="{activeOr: noOrder}">
-                Once the order is placed, the delivery of the files is immediately . You will be redirected to a screen where you can perform all downloads. You will also receive two emails after your purchase, where you can download the files and save your <strong>proof of purchase</strong>. After a few minutes, if you do not see these emails in your inbox, they are probably in the Unwanted / Spam folder.
+                Once the order is placed, the delivery of the files is immediately . You will be redirected to a screen
+                where you can perform all downloads. You will also receive two emails after your purchase, where you can
+                download the files and save your <strong>proof of purchase</strong>. After a few minutes, if you do not
+                see these emails in your inbox, they are probably in the Unwanted / Spam folder.
             </p>
         </div>
     </div>
 
 </div>
+
+
+<app-footer></app-footer>

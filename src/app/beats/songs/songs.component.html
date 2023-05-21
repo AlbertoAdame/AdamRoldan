@@ -108,21 +108,24 @@
         </thead>
         <tbody>
             <tr *ngFor="let beat of results">
-                <td>
+                <td (click)="audioPlayer(beat)">
                     <div class="tdPicture">
                         <img src={{beat.img}} alt="image" width="50" height="50" class="productImage">
+                        <div class="filtro">
+                            <i class="fa-solid fa-play fa-2xl" style="color: #e0e0e0;"></i>
+                        </div>
                     </div>
                 </td>
-                <td>
+                <td (click)="audioPlayer(beat)">
                     <div class="td">{{ beat.title }}</div>
                 </td>
-                <td>
+                <td (click)="audioPlayer(beat)">
                     <div class="td">{{secondsToString(beat.time)}}</div>
                 </td>
-                <td>
+                <td (click)="audioPlayer(beat)">
                     <div class="td">{{ beat.bpm }}</div>
                 </td>
-                <td>
+                <td (click)="audioPlayer(beat)">
                     <div class="td">{{beat.mood.mood || beat.mood}}</div>
                 </td>
                 <td class="genreTd"> <span *ngFor="let itemGenre of beat.genreList">
@@ -177,7 +180,7 @@
                                 <path fill-rule="evenodd"
                                     d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
                             </svg>
-                            <span style="margin-left: 10px; font-weight: 500;">Ad Genre</span>
+                            <span style="margin-left: 10px; font-weight: 500;">Add Genre</span>
                         </button>
 
                         <button class="btn btn-danger buttonDelete" (click)="onDelete(beat.idBeat)">

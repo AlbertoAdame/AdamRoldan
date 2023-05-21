@@ -1,3 +1,5 @@
+/* -------------------------------------------  MOBILE --------------------------------------------------  */
+
 /* --------------------------------------  TAG LIST OF SONGS ---------------------------------------------  */
 
 .songsList {
@@ -39,6 +41,7 @@
 }
 
 .productImage {
+    cursor: pointer;
     border-radius: 8px;
     object-fit: cover;
     width: 180px;
@@ -153,7 +156,23 @@
 .tdPicture {
     display: flex;
     margin-top: 3px;
+}
 
+.filtro {
+    padding: 13px;
+    padding-left: 75px;
+    padding-right: 82px;
+    cursor: pointer;
+
+    position: absolute;
+
+    opacity: 0;
+}
+
+.filtro:hover {
+    opacity: 1;
+    background-color: rgba(53, 53, 53, 0.7);
+    border-radius: 8px;
 }
 
 .genreTd {
@@ -211,3 +230,12 @@ input {
     margin-right: 8%;
 
 }
+
+
+
+
+/* ORDENADOR */
+@media screen and (min-width: 769px) {}
+
+/* TABLET */
+@media screen and (min-width: 481px) and (max-width:768px) {}

@@ -28,6 +28,7 @@ export interface Content {
     time: number;
     bpm: number;
     img: string;
+    audio: string;
     genreList: GenreList[];
     mood: MoodClass;
     datetime: number[];

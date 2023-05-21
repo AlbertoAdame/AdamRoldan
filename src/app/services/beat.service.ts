@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BeatInterface } from '../interfaces/beat-response.interface';
-import { Observable, switchMap, of, catchError } from 'rxjs';
+import { Observable, switchMap, of, catchError, Subject } from 'rxjs';
 import { Pageable, MoodClass } from '../interfaces/pageable.interface';
 import { Mood, MoodNew } from '../interfaces/mood.interface';
 import { Genre } from '../interfaces/genre.interface';
@@ -16,6 +16,9 @@ export class BeatService {
   moodClass!: MoodNew
 
   _beats!: Pageable;
+
+  currentBeatSubject: Subject<any> = new Subject<any>();
+
   constructor(private http: HttpClient) {
 
   }
@@ -92,5 +95,19 @@ export class BeatService {
   deleteBeat(id: number): Observable<BeatInterface[]> {
     return this.http.delete<BeatInterface[]>(`${this.url}/${id}`)
   }
+
+
+  // setCurrentBeat(beat: any): void {
+  //   const song = {beat}
+  //   this.currentBeatSubject.next(song);
+  // }
+
+  // getCurrentBeat(): any {
+  //   return this.currentBeat
+  // }
+
+  // getCurrentBeatObservable(): Observable<any> {
+  //   return this.currentBeatSubject.asObservable();
+  // }
 
 }

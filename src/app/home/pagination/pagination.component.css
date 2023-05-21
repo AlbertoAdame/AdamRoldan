@@ -137,16 +137,10 @@ body {
   margin-top: 25px;
 }
 
-
-
-
-
-
 /* --------------------------------------  TAG LIST OF SONGS ---------------------------------------------  */
 
 .songsList {
-  margin-bottom: 50px;
-  margin-top: 45px;
+  display: none;
 
 }
 
@@ -155,7 +149,6 @@ body {
   margin-bottom: 25px;
   color: grey;
   font-size: small;
-  margin: 25px 100px;
 }
 
 .productTitleTag {
@@ -168,6 +161,7 @@ body {
 
 .productBpmTag {
   text-align: center;
+
 }
 
 
@@ -175,16 +169,38 @@ body {
 
 
 .listProduct {
-  display: flex;
+  margin-top: 11%;
+  display: block;
+  margin-left: 15%;
+  /* display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin: 0 100px;
+  margin-left: 20%;
+  justify-content: flex-end; */
 }
+
 
 .productImage {
   border-radius: 8px;
   object-fit: cover;
-  width: 180px;
+  width: 250px;
+}
+
+.filtro {
+  padding: 13px;
+  padding-left: 75px;
+  padding-right: 82px;
+  cursor: pointer;
+
+  position: absolute;
+
+  opacity: 0;
+  margin-top: -50px;
+}
+
+.filtro:hover {
+  opacity: 1;
+  background-color: rgba(53, 53, 53, 0.7);
+  border-radius: 8px;
 }
 
 .productTitle {
@@ -197,17 +213,18 @@ body {
 
 .productBpm {
   text-align: center;
-
+  margin-left: 31%;
 }
 
 .share-button {
-  width: 190px;
+  margin-top: 15px;
+  width: 250px;
   display: flex;
   justify-content: space-between;
 }
 
 .share {
-  /* margin-right: -25px; */
+  margin-right: 7%;
 
   cursor: pointer;
 
@@ -239,8 +256,275 @@ body {
 
 
 .division {
-  margin: auto;
-  width: 600px;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  width: 85%;
+  margin-top: 10%;
 }
+
+
+
+
+
+
+
+
+
+
+
+/* ORDENADOR */
+@media screen and (min-width: 769px) {
+
+  html,
+  body {
+    font: 100%/1.5 Verdana, sans-serif;
+  }
+
+  #wrapper {
+    margin: 0 auto;
+    display: block;
+    width: 960px;
+    margin-top: -15px;
+
+  }
+
+  .page-header {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: normal;
+    border-bottom: 1px solid #ddd;
+    margin: 30px 0
+  }
+
+  #pagination {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    margin-bottom: 25px;
+
+  }
+
+  #pagination li {
+    display: inline;
+    cursor: pointer;
+  }
+
+  #pagination li a {
+    display: inline-block;
+    text-decoration: none;
+    padding: 5px 10px;
+    color: #000;
+    /* box-shadow: rgba(50, 50, 93, 0.15) 0px 6px 12px -2px, rgba(0, 0, 0, 0.1) 0px 3px 7px -3px; */
+  }
+
+  /* Active and Hoverable Pagination */
+  #pagination li a {
+    border-radius: 100%;
+    width: 35px;
+    -webkit-transition: background-color 0.3s;
+    transition: background-color 0.3s
+  }
+
+  #pagination li a.active {
+    background-color: #e52d27;
+    color: #fff
+  }
+
+  #pagination li a:hover:not(.active) {
+    background-color: #ddd;
+  }
+
+  /* border-pagination */
+  .b-pagination-outer {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    overflow: hidden;
+    display: flex
+  }
+
+  #border-pagination {
+    margin: 0 auto;
+    padding: 0;
+    text-align: center
+  }
+
+  #border-pagination li {
+    display: inline;
+
+  }
+
+  #border-pagination li a {
+    display: block;
+    text-decoration: none;
+    color: #000;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    float: left;
+
+  }
+
+  #border-pagination li a {
+    -webkit-transition: background-color 0.4s;
+    transition: background-color 0.4s
+  }
+
+  #border-pagination li a.active {
+    background-color: #4caf50;
+    color: #fff;
+  }
+
+  #border-pagination li a:hover:not(.active) {
+    background: #ddd;
+  }
+
+  .my-pagination ::ng-deep .ngx-pagination .current {
+    background: #e52d27;
+    border-radius: 8px;
+  }
+
+  .my-pagination ::ng-deep .ngx-pagination a {
+    border-radius: 8px;
+  }
+
+  .my-pagination ::ng-deep ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  .my-pagination {
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
+  }
+
+
+  .text {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 6px;
+    color: rgb(159, 159, 159);
+  }
+
+  .form-select {
+    width: 17.5%;
+  }
+
+  .row {
+    margin-top: 25px;
+  }
+
+
+  /* --------------------------------------  TAG LIST OF SONGS ---------------------------------------------  */
+
+  .songsList {
+    display: unset;
+    margin-bottom: 50px;
+    margin-top: 45px;
+
+  }
+
+  .songsList-mobile {
+    display: none;
+
+  }
+
+  .listProductTag {
+    margin-top: 50px;
+    margin-bottom: 25px;
+    color: grey;
+    font-size: small;
+    margin: 25px 100px;
+  }
+
+  .productTitleTag {
+    text-align: center;
+  }
+
+  .productTimeTag {
+    text-align: center;
+  }
+
+  .productBpmTag {
+    text-align: center;
+  }
+
+
+  /* --------------------------------------  LIST OF SONGS ---------------------------------------------  */
+
+
+  .listProduct {
+    display: flex;
+    align-items: center;
+    padding: 0% 8%;
+    padding-right: 20%;
+    justify-content: space-between;
+    margin-top: 0;
+  }
+
+  .productImage {
+    border-radius: 8px;
+    object-fit: cover;
+    width: 180px;
+  }
+
+  .productTitle {
+    text-align: center;
+  }
+
+  .productTime {
+    text-align: center;
+  }
+
+  .productBpm {
+    text-align: center;
+    margin-left: 0;
+  }
+
+  .share-button {
+    width: 190px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .share {
+    /* margin-right: -25px; */
+
+    cursor: pointer;
+
+    margin-top: 10px;
+  }
+
+
+
+  .cartButton {
+    width: 140px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    background-color: #1b8d57;
+    padding-left: 15px;
+    padding-right: 15px;
+    color: white;
+    border: solid 2px #1b8d57;
+    border-radius: 5px;
+    margin-bottom: 2px;
+    justify-content: space-between;
+    margin-left: 2%;
+
+  }
+
+  .cartButton:hover {
+    background-color: #1a9b5f;
+    border: solid 2px #1a9b5f;
+  }
+
+
+  .division {
+    margin: auto;
+    width: 600px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+}
+
+/* TABLET */
+@media screen and (min-width: 481px) and (max-width:768px) {}

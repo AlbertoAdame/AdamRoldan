@@ -1,9 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
-body{
+body {
     /* background: #cb2d3e;   */
     /* background: linear-gradient(#9e1815, #e52d27) no-repeat;  */
     /* min-height: 100vh; */
     /* background: -webkit-linear-gradient(90deg, #9E1815, #e52d27);   */
     overflow-y: scroll;
 
+
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+mat-sidenav {
+    width: 250px;
+}
+
+.mat-drawer-container {
+    margin: 0;
+    padding: 0;
+}
+
+.mat-drawer-content {
+    display: contents !important;
 }

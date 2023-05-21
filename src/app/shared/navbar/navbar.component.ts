@@ -1,9 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BeatService } from '../../services/beat.service';
 import { TokenInterface } from '../../interfaces/token.interface';
+import { log } from 'console';
 
 @Component({
   selector: 'app-navbar',
@@ -12,11 +13,15 @@ import { TokenInterface } from '../../interfaces/token.interface';
 })
 export class NavbarComponent implements OnInit {
 
+  @Output() enviarHijo: EventEmitter<boolean> = new EventEmitter();
+
   search: boolean = false;
   cart: boolean = false;
   color: string = 'white';
   username: string = "";
   query: string = "";
+
+  sideBar: boolean = false;
 
   currentUrl = this.router.url;
 
@@ -58,6 +63,12 @@ export class NavbarComponent implements OnInit {
   showCart(): void {
     this.cart = !this.cart
   }
+
+  showSideBar(): void {
+    this.sideBar = !this.sideBar
+    this.enviarHijo.emit(this.sideBar);
+  }
+
 
   //Cerraremos sesión
   logout(): void {

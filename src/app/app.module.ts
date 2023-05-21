@@ -15,6 +15,13 @@ import { AuthInterceptorService } from './auth-interceptor.service';
 import { AuthService } from './services/auth.service';
 import { RolGuardGuard } from './rol-guard.guard';
 import { EditUserModule } from './edit-user/edit-user.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { FormsModule } from '@angular/forms';
+
+
 
 
 @NgModule({
@@ -30,7 +37,13 @@ import { EditUserModule } from './edit-user/edit-user.module';
     LoginModule,
     FaqModule,
     HttpClientModule,
-    EditUserModule
+    EditUserModule,
+    BrowserAnimationsModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatToolbarModule,
+    FormsModule,
+
 
   ],
   providers: [

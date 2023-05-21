@@ -3,6 +3,7 @@ import { BeatInterface } from 'src/app/interfaces/beat-response.interface';
 import { Pageable } from 'src/app/interfaces/pageable.interface';
 import { BeatService } from '../../services/beat.service';
 import { Content } from '../../interfaces/pageable.interface';
+import { ComunicationService } from 'src/app/services/comunication.service';
 
 @Component({
   selector: 'app-pagination',
@@ -20,7 +21,7 @@ export class PaginationComponent implements OnInit {
 
 
 
-  constructor(private beatService: BeatService) { }
+  constructor(private beatService: BeatService, private comunicationService: ComunicationService) { }
 
   ngOnInit(): void {
     //Cogeremos los beats del servicio al iniciar
@@ -57,6 +58,12 @@ export class PaginationComponent implements OnInit {
     var second: string | number = seconds % 60;
     second = (second < 10) ? '0' + second : second;
     return minute + ':' + second;
+  }
+
+  audioPlayer(beat: any) {
+
+    this.comunicationService.currentBeatSubject.next(beat);
+
   }
 
 }
