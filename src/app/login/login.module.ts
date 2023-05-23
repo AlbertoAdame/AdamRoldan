@@ -5,6 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { LoginRoutingModule } from './login-routing.module';
 import { RouterModule } from '@angular/router';
 import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpLoaderFactory } from '../app.module';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -18,7 +21,14 @@ import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
     FormsModule,
     RouterModule,
     RecaptchaModule,
-    RecaptchaFormsModule
+    RecaptchaFormsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   exports: [
     LoginComponent

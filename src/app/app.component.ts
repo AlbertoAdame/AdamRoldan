@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComunicationService } from './services/comunication.service';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -15,7 +16,11 @@ export class AppComponent {
 
   reproductor: boolean = false;
 
-  constructor(private comunicationService: ComunicationService) {
+  currentLanguage: boolean = true;
+
+  constructor(private comunicationService: ComunicationService, private translate: TranslateService) {
+    this.translate.addLangs(['es', 'en']);
+    this.translate.setDefaultLang('en');
 
   }
 

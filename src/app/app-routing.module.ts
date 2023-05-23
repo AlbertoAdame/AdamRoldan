@@ -25,20 +25,23 @@ const routes: Routes = [
     path: 'contact',
     loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule)
   },
-  {     
-    canActivate : [RolGuardGuard], 
-    path: 'editUser', 
-    loadChildren: () => import('./edit-user/edit-user.module').then(m => m.EditUserModule) 
+  {
+    canActivate: [RolGuardGuard],
+    path: 'editUser',
+    loadChildren: () => import('./edit-user/edit-user.module').then(m => m.EditUserModule)
+  },
+  {
+    path: 'shoppingCart',
+    loadChildren: () => import('./shopping-cart/shopping-cart.module').then(m => m.ShoppingCartModule)
   },
   {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
   },
-  
   {
     path: '**',
-    component: NotFoundComponent
+    redirectTo: 'home',
   }
 ];
 

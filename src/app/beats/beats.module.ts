@@ -11,6 +11,9 @@ import { UploadComponent } from './upload/upload.component';
 import { RouterModule } from '@angular/router';
 import { EditBeatComponent } from './edit-beat/edit-beat.component';
 import { DataTablesModule } from 'angular-datatables';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpLoaderFactory } from '../app.module';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -30,7 +33,14 @@ import { DataTablesModule } from 'angular-datatables';
     HttpClientModule,
     RouterModule,
     ReactiveFormsModule,
-    DataTablesModule
+    DataTablesModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [
     BeatService

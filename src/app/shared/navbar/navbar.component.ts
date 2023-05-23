@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BeatService } from '../../services/beat.service';
 import { TokenInterface } from '../../interfaces/token.interface';
 import { log } from 'console';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-navbar',
@@ -29,10 +31,18 @@ export class NavbarComponent implements OnInit {
   role: boolean = false
 
 
-  constructor(private cookies: CookieService, private authService: AuthService, private router: Router, private beatService: BeatService) { }
+  constructor(private cookies: CookieService, private authService: AuthService, private router: Router, private beatService: BeatService, private translate: TranslateService, private language: LanguageService) {
+    this.translate.addLangs(['es', 'en']);
+  }
 
 
   ngOnInit(): void {
+
+    this.language.currentLanguageSubject.subscribe((lang: any) => {
+      this.translate.use(lang);
+    });
+
+    this.translate.use(this.language.currentLanguage);
 
     this.authService.isLoggedIn.subscribe({
       next: (resp) => {

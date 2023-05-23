@@ -1,5 +1,5 @@
 <div class="frontPage">
-    <h1 class="title">ACOUNT</h1>
+    <h1 class="title">{{ "ACOUNT" | translate }}</h1>
 
 </div>
 
@@ -11,40 +11,41 @@
         <div class="row">
             <div class="col-md-12 box">
                 <div class="form-group">
-                    <label class="label" for="name">Name</label>
+                    <label class="label" for="name">{{ "Name" | translate }}</label>
                     <input type="text" class="form-control" formControlName="name" placeholder="Name">
 
                     <span class="form-text text-danger" *ngIf="isValidField('name')">
-                        Name is required
+                        {{ "Name is required" | translate }}
                     </span>
                 </div>
             </div>
             <div class="col-md-12 box">
                 <div class="form-group">
-                    <label class="label" for="email">Email Address</label>
+                    <label class="label" for="email">{{ "Email Address" | translate }}</label>
                     <input type="email" class="form-control" formControlName="email" placeholder="Email">
 
                     <span class="form-text text-danger" *ngIf="isValidField('email')">
-                        Please provide a valid e-mail
+                        {{ "Please provide a valid e-mail" | translate }}
                     </span>
                 </div>
             </div>
             <div class="col-md-12 box">
                 <div class="form-group">
-                    <label class="label" for="password">Password</label>
-                    <input type="password" class="form-control" formControlName="password" placeholder="******">
+                    <label class="label" for="password">{{ "Password" | translate }}</label>
+                    <input type="password" class="form-control" formControlName="password" placeholder="********">
 
                     <span class="form-text text-danger" *ngIf="isValidField('password')">
-                        Password is required
+                        {{ "Password is required" | translate }}
                     </span>
                 </div>
             </div>
             <div class="col-md-12 buttons">
                 <div class="form-group groupButtons">
-                    <input type="submit" value="Save" class="btn btn-success button">
+                    <input type="submit" value="{{ 'Save' | translate }}" class="btn btn-success button">
                     <div class="submitting"></div>
 
-                    <button type="button" class="btn btn-danger" [routerLink]="['/home']">Cancel</button>
+                    <button type="button" class="btn btn-danger" [routerLink]="['/home']">{{ "Cancel" | translate }}
+                    </button>
                 </div>
             </div>
         </div>

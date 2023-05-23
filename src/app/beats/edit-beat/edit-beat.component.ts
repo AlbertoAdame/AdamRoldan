@@ -9,6 +9,7 @@ import { MoodService } from '../../services/mood.service';
 import { GenreService } from '../../services/genre.service';
 import { BeatInterface } from '../../interfaces/beat-response.interface';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-beat',
@@ -24,7 +25,9 @@ export class EditBeatComponent implements OnInit {
 
   isLoggedIn!: boolean;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private beatService: BeatService, private moodService: MoodService, private genreService: GenreService, private route: ActivatedRoute) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private beatService: BeatService, private moodService: MoodService, private translate: TranslateService, private route: ActivatedRoute) {
+    this.translate.addLangs(['es', 'en']);
+  }
 
   ngOnInit() {
     //Este método nos indica si el token es valido

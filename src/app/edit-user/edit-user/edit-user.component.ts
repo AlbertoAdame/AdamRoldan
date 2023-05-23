@@ -6,6 +6,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { UserResponseInterface } from '../../interfaces/user-response.interface';
 import { CookieService } from 'ngx-cookie-service';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -25,9 +27,16 @@ export class EditUserComponent {
 
   })
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private userService: UserService, private cookies: CookieService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private userService: UserService, private cookies: CookieService, private translate: TranslateService, private language: LanguageService) {
+    this.translate.addLangs(['es', 'en']);
+  }
 
   ngOnInit() {
+    if (this.language.currentLanguage == undefined)
+      this.translate.use('en');
+    else
+      this.translate.use(this.language.currentLanguage);
+
     //Este método nos indica si el token es valido
     this.authService.isLoggedIn.subscribe({
       next: (resp) => {

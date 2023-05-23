@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-contact',
@@ -22,7 +23,9 @@ export class ContactComponent implements OnInit {
 
   })
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private userService: UserService, private router: Router) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private userService: UserService, private translate: TranslateService) {
+    this.translate.addLangs(['es', 'en']);
+  }
 
   ngOnInit() {
     //Este método nos indica si el token es valido

@@ -5,6 +5,8 @@ import Swal from 'sweetalert2'
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { CookieService } from 'ngx-cookie-service';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-login',
@@ -59,11 +61,21 @@ export class LoginComponent implements OnInit {
 
   captcha: string = '';
 
-  constructor(private authService: AuthService, private router: Router, private userService: UserService, private cookies: CookieService) { }
+  constructor(private authService: AuthService, private router: Router, private userService: UserService, private cookies: CookieService, private translate: TranslateService, private language: LanguageService) {
+    this.translate.addLangs(['es', 'en']);
+  }
 
   // ************************** Si entramos en el login borramos las cookies ***************************
 
   ngOnInit(): void {
+    if (this.language.currentLanguage == undefined)
+      this.translate.use('en');
+    else {
+      console.log(this.language.currentLanguage);
+
+      this.translate.use(this.language.currentLanguage);
+    }
+
     this.cookies.deleteAll()
   }
 

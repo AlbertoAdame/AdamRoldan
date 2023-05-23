@@ -16,21 +16,25 @@
                             alt="logo" class="logo">
                     </div>
                     <ul class="list-unstyled nav-links mb-4 ">
-                        <li class="route" [routerLink]="['/home']">Home</li>
-                        <li class="route" [routerLink]="['/beats']">Beats</li>
-                        <li class="route" [routerLink]="['/contact']">Contact</li>
-                        <li class="route" [routerLink]="['/login']">Login</li>
+                        <li class="route" [routerLink]="['/home']" (click)="scrollToTop()">{{ "Home" | translate }}
+                        </li>
+                        <li class="route" [routerLink]="['/beats']" (click)="scrollToTop()">Beats</li>
+                        <li class="route" [routerLink]="['/contact']" (click)="scrollToTop()">{{ "Contact" | translate
+                            }}</li>
+                        <li class="route" [routerLink]="['/login']" (click)="scrollToTop()">Login</li>
                     </ul>
 
                     <ul class="list-unstyled nav-links mb-5">
-                        <li>
+                        <li (click)="cambiarIdioma('es')">
                             <img src="https://img.freepik.com/fotos-premium/bandera-espana-ilustracion-3d-bandera-espanola-ondeando_2227-2339.jpg"
-                                class="rounded-circle flag" width="40" height="40" />
+                                class="rounded-circle flag" width="40" height="40"
+                                [ngClass]="{flagActive: this.currentLanguage == 'es'}" />
                         </li>
 
-                        <li>
+                        <li (click)="cambiarIdioma('en')">
                             <img src="https://www.cambiator.es/wp-content/uploads/usa-750x421.jpg"
-                                class="rounded-circle flag" width="40" height="40" />
+                                class="rounded-circle flag" width="40" height="40"
+                                [ngClass]="{flagActive: this.currentLanguage == 'en'}" />
                         </li>
 
                     </ul>

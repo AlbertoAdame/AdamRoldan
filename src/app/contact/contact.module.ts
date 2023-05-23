@@ -3,7 +3,10 @@ import { CommonModule } from '@angular/common';
 import { ContactComponent } from './contact/contact.component';
 import { ContactRoutingModule } from './contact-routing.module';
 import { SharedModule } from '../shared/shared.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpLoaderFactory } from '../app.module';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -16,7 +19,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     ContactRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   exports: [
     ContactComponent

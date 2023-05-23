@@ -5,9 +5,10 @@
 
     <span class="col"></span>
 
-    <span class="productTitleTag col">TITLE</span>
+    <span class="productTitleTag col">{{ "TITLE" | translate }}
+    </span>
 
-    <span class="productTimeTag col">TIME</span>
+    <span class="productTimeTag col">{{ "TIME" | translate }}</span>
 
     <span class="productBpmTag col">BPM</span>
 
@@ -63,7 +64,8 @@
 
   <div id="pagination container">
     <div class="row">
-      <span class="col text">Showing 1 to {{numberOfElements}} of {{totalElements}} entries</span>
+      <span class="col text">{{ "Showing" | translate }}{{numberOfElements}} {{ "of" | translate }} {{totalElements}} {{
+        "entries" | translate }}</span>
       <pagination-controls (pageChange)="pageChangeEvent($event)" class="my-pagination col"></pagination-controls>
       <div class="selection col">
         <form action="pageSize()">
@@ -109,7 +111,7 @@
 
     <br>
 
-    <span class="productTime">Time: {{secondsToString(beat.time)}}</span>
+    <span class="productTime">{{ "Time" | translate }}: {{secondsToString(beat.time)}}</span>
 
 
 

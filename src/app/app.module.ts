@@ -10,7 +10,7 @@ import { LoginModule } from './login/login.module';
 import { FaqModule } from './faq/faq.module';
 import { UserService } from './services/user.service';
 import { BeatService } from './services/beat.service';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { AuthInterceptorService } from './auth-interceptor.service';
 import { AuthService } from './services/auth.service';
 import { RolGuardGuard } from './rol-guard.guard';
@@ -20,8 +20,14 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormsModule } from '@angular/forms';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart/shopping-cart.component';
+import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
 
-
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 
 @NgModule({
@@ -43,6 +49,14 @@ import { FormsModule } from '@angular/forms';
     MatIconModule,
     MatToolbarModule,
     FormsModule,
+    ShoppingCartModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
 
 
   ],
@@ -60,3 +74,5 @@ import { FormsModule } from '@angular/forms';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+

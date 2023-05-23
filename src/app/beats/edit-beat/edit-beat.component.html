@@ -1,5 +1,5 @@
 <div class="frontPage">
-    <h1 class="title">EDIT BEAT</h1>
+    <h1 class="title">{{ "EDIT BEAT" | translate }}</h1>
 
 </div>
 
@@ -12,11 +12,11 @@
         <div class="row">
             <div class="col-md-12 box">
                 <div class="form-group">
-                    <label class="label" for="title">Title</label>
+                    <label class="label" for="title">{{ "Title" | translate }}</label>
                     <input type="text" class="form-control" formControlName="title" placeholder="Title">
 
                     <span class="form-text text-danger" *ngIf="isValidField('title')">
-                        Title is required
+                        {{ "Title is required" | translate }}
                     </span>
                 </div>
             </div>
@@ -26,17 +26,17 @@
                     <input type="number" class="form-control" formControlName="price" placeholder="Price">
 
                     <span class="form-text text-danger" *ngIf="isValidField('price')">
-                        Price is required
+                        {{ "Price is required" | translate }}
                     </span>
                 </div>
             </div>
             <div class="col-md-4 box">
                 <div class="form-group">
-                    <label class="label" for="time">Time</label>
+                    <label class="label" for="time"> {{ "Time" | translate }}</label>
                     <input type="number" class="form-control" formControlName="time" placeholder="Time">
 
                     <span class="form-text text-danger" *ngIf="isValidField('time')">
-                        Time is required
+                        {{ "Time is required" | translate }}
                     </span>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                     <input type="number" class="form-control" formControlName="bpm" placeholder="Bpm">
 
                     <span class="form-text text-danger" *ngIf="isValidField('bpm')">
-                        Bpm is required
+                        {{ "Bpm is required" | translate }}
                     </span>
                 </div>
             </div>
@@ -54,13 +54,13 @@
 
             <div class="col-md-12 box">
                 <div class="form-group">
-                    <label class="label" for="mood">Mood</label>
+                    <label class="label" for="mood">{{ "Mood" | translate }}</label>
                     <select class="form-select" formControlName="mood">
                         <option *ngFor="let mood of moods">{{mood.mood}}</option>
                     </select>
 
                     <span class="form-text text-danger" *ngIf="isValidField('mood')">
-                        Mood is required
+                        {{ "Mood is required" | translate }}
                     </span>
                 </div>
             </div>
@@ -70,26 +70,11 @@
                     <input type="submit" value="Save" class="btn btn-success button">
                     <div class="submitting"></div>
 
-                    <button type="button" class="btn btn-danger" [routerLink]="['/beats']">Cancel</button>
+                    <button type="button" class="btn btn-danger" [routerLink]="['/beats']">{{ "Cancel" |
+                        translate }}</button>
                 </div>
             </div>
         </div>
     </form>
-
-
-    <!-- <span>Valid</span>
-            <pre>{{myForm.valid}}</pre>
-    
-            <span>Pristine</span>
-            <pre>{{myForm.pristine}}</pre>
-    
-            <span>Touched</span>
-            <pre>{{myForm.touched}}</pre>
-    
-            <span>Value</span>
-            <pre>{{myForm.value | json}}</pre> -->
-
-
-
 
 </div>

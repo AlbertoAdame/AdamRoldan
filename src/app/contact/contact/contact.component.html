@@ -1,9 +1,7 @@
 <div class="frontPage">
-    <h1 class="title">CONTACT</h1>
+    <h1 class="title">{{ "CONTACT" | translate }}</h1>
 
 </div>
-
-
 
 
 <div class="container">
@@ -15,69 +13,56 @@
         <div class="row">
             <div class="col-md-6 box">
                 <div class="form-group">
-                    <label class="label" for="name">Name</label>
-                    <input type="text" class="form-control" formControlName="name" placeholder="Name">
+                    <label class="label" for="name">{{ "Name" | translate }}</label>
+                    <input type="text" class="form-control" formControlName="name"
+                        placeholder="{{ 'Name' | translate }}">
 
                     <span class="form-text text-danger" *ngIf="isValidField('name')">
-                        Name is required
+                        {{ "Name is required" | translate }}
                     </span>
                 </div>
             </div>
             <div class="col-md-6 box">
                 <div class="form-group">
-                    <label class="label" for="email">Email Address</label>
-                    <input type="email" class="form-control" formControlName="email" placeholder="Email">
+                    <label class="label" for="email">{{ "Email Address" | translate }}</label>
+                    <input type="email" class="form-control" formControlName="email"
+                        placeholder="{{ 'Email Address' | translate }}">
 
                     <span class="form-text text-danger" *ngIf="isValidField('email')">
-                        Please provide a valid e-mail
+                        {{ "Please provide a valid e-mail" | translate }}
                     </span>
                 </div>
             </div>
             <div class="col-md-12 box">
                 <div class="form-group">
-                    <label class="label" for="subject">Subject</label>
-                    <input type="text" class="form-control" formControlName="subject" placeholder="Subject">
+                    <label class="label" for="subject">{{ "Subject" | translate }}</label>
+                    <input type="text" class="form-control" formControlName="subject"
+                        placeholder="{{ 'Subject' | translate }}">
 
                     <span class="form-text text-danger" *ngIf="isValidField('subject')">
-                        Subject is required
+                        {{ "Subject is required" | translate }}
                     </span>
                 </div>
             </div>
             <div class="col-md-12 box">
                 <div class="form-group">
-                    <label class="label" for="#">Message</label>
+                    <label class="label" for="#">{{ "Message" | translate }}</label>
                     <textarea name="message" class="form-control" formControlName="message" cols="30" rows="4"
-                        placeholder="Message"></textarea>
+                        placeholder="{{ 'Message' | translate }}"></textarea>
 
                     <span class="form-text text-danger" *ngIf="isValidField('message')">
-                        Message is required
+                        {{ "Message is required" | translate }}
                     </span>
                 </div>
             </div>
             <div class="col-md-12 buttons">
                 <div class="form-group groupButtons">
-                    <input type="submit" value="Send" class="btn btn-success button">
+                    <input type="submit" value="{{ 'Send' | translate }}" class="btn btn-success button">
                     <div class="submitting"></div>
                 </div>
             </div>
         </div>
     </form>
-
-
-    <!-- <span>Valid</span>
-            <pre>{{myForm.valid}}</pre>
-    
-            <span>Pristine</span>
-            <pre>{{myForm.pristine}}</pre>
-    
-            <span>Touched</span>
-            <pre>{{myForm.touched}}</pre>
-    
-            <span>Value</span>
-            <pre>{{myForm.value | json}}</pre> -->
-
-
-
 
 </div>
 

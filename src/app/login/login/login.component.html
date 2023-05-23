@@ -4,43 +4,43 @@
     <div class="container" [ngClass]="{'right-panel-active': view}" id="container">
         <div class="form-container sign-up-container">
             <form action="#" (ngSubmit)="newAccount()" #registerForm="ngForm">
-                <h1>Create account</h1>
+                <h1>{{ "Create account" | translate }}</h1>
                 <div class="social-container">
                     <!-- <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a> -->
                 </div>
                 <!-- <span>or use your username for registration</span> -->
-                <input type="name" class="form-control" placeholder="Name" [(ngModel)]="newName" name="name"
-                    minlength="3" required>
+                <input type="name" class="form-control" placeholder="{{ 'Name' | translate }}" [(ngModel)]="newName"
+                    name="name" minlength="3" required>
                 <span class="form-text text-danger" *ngIf="notValidName('name')">
-                    Name is required
+                    {{ "Name is required" | translate }}
                 </span>
 
-                <input type="username" class="form-control" placeholder="Username" [(ngModel)]="newUsername"
-                    name="username" minlength="3" required>
+                <input type="username" class="form-control" placeholder="{{ 'Username' | translate }}"
+                    [(ngModel)]="newUsername" name="username" minlength="3" required>
                 <span class="form-text text-danger" *ngIf="notValidUsername('username')">
-                    Username is required
+                    {{ "Username is required" | translate }}
                 </span>
 
-                <input type="email" class="form-control" placeholder="E-mail" [(ngModel)]="newEmail" name="NewEmail"
-                    minlength="3" required>
+                <input type="email" class="form-control" placeholder="{{ 'E-mail' | translate }}" [(ngModel)]="newEmail"
+                    name="NewEmail" minlength="3" required>
                 <span class="form-text text-danger" *ngIf="notValidNewEmail('NewEmail')">
-                    Please provide a valid e-mail
+                    {{ "Please provide a valid e-mail" | translate }}
                 </span>
 
-                <input type="password" class="form-control" placeholder="Password" [(ngModel)]="newPassword"
-                    name="NewPassword" required autocomplete="">
+                <input type="password" class="form-control" placeholder="{{ 'Password' | translate }}"
+                    [(ngModel)]="newPassword" name="NewPassword" required autocomplete="">
 
                 <span class="form-text text-danger" *ngIf="notValidNewPassword('NewPassword')">
-                    Password is required
+                    {{ "Password is required" | translate }}
                 </span>
 
-                <input type="password" class="form-control" placeholder="Repeat Password"
+                <input type="password" class="form-control" placeholder="{{ 'Repeat Password' | translate }}"
                     [(ngModel)]="repeatNewPassword" name="RepeatNewPassword" required autocomplete="">
 
                 <span class="form-text text-danger" *ngIf="notValidRepeatNewPassword('RepeatNewPassword')">
-                    Password does not match
+                    {{ "Password does not match" | translate }}
                 </span>
 
                 <re-captcha (resolved)="resolved($event)" siteKey="6LeL3DwlAAAAADghCJPu7qoZwQw8nYA-hF-Y9Xi-"
@@ -49,11 +49,11 @@
 
                 <!-- <span class="form-text text-danger" [hidden]="captcha"> -->
                 <span class="form-text text-danger captcha" *ngIf="notValidCaptcha('captcha')">
-                    Please complete the captcha
+                    {{ "Please complete the captcha" | translate }}
                 </span>
 
 
-                <button type="submit" class="signUp">Sign Up</button>
+                <button type="submit" class="signUp">{{ "Sign Up" | translate }}</button>
 
 
             </form>
@@ -63,29 +63,29 @@
 
         <div class="form-container sign-in-container">
             <form action="#" (ngSubmit)="login()" #logInForm="ngForm">
-                <h1>Sign in</h1>
+                <h1>{{ "Sign in" | translate }}</h1>
                 <div class="social-container">
                     <!-- <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a> -->
                 </div>
                 <!-- <span>or use your account</span> -->
-                <input type="username" class="form-control" placeholder="Username" name="username" minlength="3"
-                    [(ngModel)]="username" required>
+                <input type="username" class="form-control" placeholder="{{ 'Username' | translate }}" name="username"
+                    minlength="3" [(ngModel)]="username" required>
 
                 <span class="form-text text-danger" *ngIf="notValidUsernameLogin('username')">
-                    Please provide a valid username
+                    {{ "Please provide a valid username" | translate }}
                 </span>
 
 
-                <input type="password" class="form-control" placeholder="Password" name="password"
+                <input type="password" class="form-control" placeholder="{{ 'Password' | translate }}" name="password"
                     [(ngModel)]="password" required autocomplete="">
 
                 <span class="form-text text-danger" *ngIf="notValidPassword('password')">
-                    Password is required
+                    {{ "Password is required" | translate }}
                 </span>
-                <p>Forgot your password?</p>
-                <button type="submit">Sign In</button>
+                <p>{{ "Forgot your password?" | translate }}</p>
+                <button type="submit">{{ "Sign In" | translate }}</button>
 
             </form>
         </div>
@@ -95,19 +95,19 @@
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-left">
-                    <h1>Welcome Back!</h1>
-                    <p>To keep connected with us please login with your personal info</p>
+                    <h1>{{ "Welcome Back!" | translate }}</h1>
+                    <p>{{ "To keep connected" | translate }}</p>
                     <button class="ghost" id="signIn" (click)="changeView()">Sign In</button>
                 </div>
 
                 <!-- ***************************************   GO REGISTER   *******************************************-->
 
                 <div class="overlay-panel overlay-right">
-                    <h1>Hello, Friend!</h1>
-                    <p>Enter your personal details and start journey with us</p>
+                    <h1>{{ "Hello, Friend!" | translate }}</h1>
+                    <p>{{ "Enter your personal" | translate }}</p>
 
                     <button class="ghost" id="signUp" (click)="changeView()">
-                        Sign Up
+                        {{ "Sign Up" | translate }}
                     </button>
                 </div>
             </div>

@@ -4,6 +4,7 @@ import { Pageable } from 'src/app/interfaces/pageable.interface';
 import { BeatService } from '../../services/beat.service';
 import { Content } from '../../interfaces/pageable.interface';
 import { ComunicationService } from 'src/app/services/comunication.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-pagination',
@@ -21,7 +22,9 @@ export class PaginationComponent implements OnInit {
 
 
 
-  constructor(private beatService: BeatService, private comunicationService: ComunicationService) { }
+  constructor(private beatService: BeatService, private comunicationService: ComunicationService, private translate: TranslateService) {
+    this.translate.addLangs(['es', 'en']);
+  }
 
   ngOnInit(): void {
     //Cogeremos los beats del servicio al iniciar

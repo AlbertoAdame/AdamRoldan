@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -8,7 +9,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class BreadcrumbComponent implements OnInit {
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private router: Router, private route: ActivatedRoute, private translate: TranslateService) {
+    this.translate.addLangs(['es', 'en']);
+  }
 
   actualRoute: string[] = []
   firstRoute: string | undefined = ""

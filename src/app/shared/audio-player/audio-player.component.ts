@@ -13,7 +13,6 @@ export class AudioPlayerComponent implements OnInit {
   audio = new Audio();
   iconVolumen: number = 4
   randomSong: boolean = false;
-  @ViewChild('audioPlayer') audioPlayer: any;
 
   constructor(private comunicationService: ComunicationService) { }
 

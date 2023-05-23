@@ -17,7 +17,6 @@ export class BeatsComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private beatService: BeatService,
     private cookies: CookieService) { }
 
   ngOnInit(): void {

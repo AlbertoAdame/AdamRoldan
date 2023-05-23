@@ -1,5 +1,5 @@
 <div class="frontPage">
-    <h1 class="title">UPLOAD BEAT</h1>
+    <h1 class="title">{{ "UPLOAD BEAT" | translate }}</h1>
 
 </div>
 
@@ -12,31 +12,31 @@
         <div class="row">
             <div class="col-md-12 box">
                 <div class="form-group">
-                    <label class="label" for="title">Title*</label>
+                    <label class="label" for="title">{{ "Title" | translate }}*</label>
                     <input type="text" class="form-control" formControlName="title" placeholder="Title">
 
                     <span class="form-text text-danger" *ngIf="isValidField('title')">
-                        Title is required
+                        {{ "Title is required" | translate }}
                     </span>
                 </div>
             </div>
             <div class="col-md-4 box">
                 <div class="form-group">
-                    <label class="label" for="price">Price*</label>
+                    <label class="label" for="price">{{ "Price" | translate }}*</label>
                     <input type="number" class="form-control" formControlName="price" placeholder="Price">
 
                     <span class="form-text text-danger" *ngIf="isValidField('price')">
-                        Price is required
+                        {{ "Price is required" | translate }}
                     </span>
                 </div>
             </div>
             <div class="col-md-4 box">
                 <div class="form-group">
-                    <label class="label" for="time">Time*</label>
+                    <label class="label" for="time">{{ "Time" | translate }}*</label>
                     <input type="number" class="form-control" formControlName="time" placeholder="Time">
 
                     <span class="form-text text-danger" *ngIf="isValidField('time')">
-                        Time is required
+                        {{ "Time is required" | translate }}
                     </span>
                 </div>
             </div>
@@ -46,20 +46,20 @@
                     <input type="number" class="form-control" formControlName="bpm" placeholder="Bpm">
 
                     <span class="form-text text-danger" *ngIf="isValidField('bpm')">
-                        Bpm is required
+                        {{ "Bpm is required" | translate }}
                     </span>
                 </div>
             </div>
 
             <div class="col-md-6 box">
                 <div class="form-group">
-                    <label class="label" for="genre">Genre*</label>
+                    <label class="label" for="genre">{{ "Genre" | translate }}*</label>
                     <select class="form-select" formControlName="genre">
                         <option [value]="genre.genre" *ngFor="let genre of genres">{{genre.genre}}</option>
                     </select>
 
                     <span class="form-text text-danger" *ngIf="isValidField('genre')">
-                        Genre is required
+                        {{ "Genre is required" | translate }}
                     </span>
                 </div>
             </div>
@@ -72,7 +72,7 @@
                     </select>
 
                     <span class="form-text text-danger" *ngIf="isValidField('mood')">
-                        Genre is required
+                        {{ "Mood is required" | translate }}
                     </span>
                 </div>
             </div>
@@ -80,13 +80,13 @@
 
             <div class="col-md-12 box">
                 <div class="form-group">
-                    <label class="label" for="picture">Picture*</label>
+                    <label class="label" for="picture">{{ "Picture" | translate }}*</label>
                     <input type="file" class="form-control picture" placeholder="picture" formControlName="picture"
                         name="picture" (change)="onFileChange($event)" />
                 </div>
 
                 <span class="form-text text-danger" *ngIf="isValidField('picture')">
-                    Picture is required
+                    {{ "Picture is required" | translate }}
                 </span>
             </div>
             <div class="col-md-12 buttons">
@@ -94,7 +94,8 @@
                     <input type="submit" value="Save" class="btn btn-success button">
                     <div class="submitting"></div>
 
-                    <button type="button" class="btn btn-danger" [routerLink]="['/beats']">Cancel</button>
+                    <button type="button" class="btn btn-danger" [routerLink]="['/beats']">{{ "Cancel" | translate
+                        }}</button>
                 </div>
             </div>
         </div>

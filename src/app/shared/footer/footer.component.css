@@ -87,6 +87,15 @@ a:hover {
     transition: width 0.2s, height 0.2s;
 }
 
+.flagActive {
+    border: solid white 2.5px;
+}
+
+/* .flagActive {
+    border-bottom: solid 3.5px white;
+    border-top: solid 3.5px white;
+} */
+
 .flag:hover {
     width: 50px;
     height: 50px;

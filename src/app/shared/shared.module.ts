@@ -12,6 +12,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { AudioPlayerComponent } from './audio-player/audio-player.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { FooterComponent } from './footer/footer.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpLoaderFactory } from '../app.module';
+import { HttpClient } from '@angular/common/http';
+
 
 
 
@@ -32,7 +36,14 @@ import { FooterComponent } from './footer/footer.component';
     MatIconModule,
     MatToolbarModule,
     MatSliderModule,
-    FormsModule
+    FormsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   exports: [
     NavbarComponent,

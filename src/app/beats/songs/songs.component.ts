@@ -11,6 +11,7 @@ import { GenreService } from '../../services/genre.service';
 import { Genre } from '../../interfaces/genre.interface';
 import { BeatInterface } from 'src/app/interfaces/beat-response.interface';
 import { ComunicationService } from '../../services/comunication.service';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -32,7 +33,8 @@ export class SongsComponent implements OnInit, OnDestroy {
 
 
   constructor(private beatService: BeatService, private authService: AuthService, private cookies: CookieService, private genreService: GenreService,
-    private comunicationService: ComunicationService) {
+    private comunicationService: ComunicationService, private translate: TranslateService) {
+    this.translate.addLangs(['es', 'en']);
   }
 
   ngOnInit(): void {

@@ -9,6 +9,7 @@ import { MoodService } from '../../services/mood.service';
 import { GenreService } from '../../services/genre.service';
 import { ActivatedRoute } from '@angular/router';
 import { BeatInterface } from '../../interfaces/beat-response.interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-upload',
@@ -49,7 +50,9 @@ export class UploadComponent implements OnInit {
     mood: ['Accomplished', [Validators.required]]
   })
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private beatService: BeatService, private moodService: MoodService, private genreService: GenreService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private beatService: BeatService, private moodService: MoodService, private genreService: GenreService, private translate: TranslateService) {
+    this.translate.addLangs(['es', 'en']);
+  }
 
   ngOnInit() {
     //Este método nos indica si el token es valido
