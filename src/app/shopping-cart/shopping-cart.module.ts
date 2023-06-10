@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { ShoppingCartRoutingModule } from './shopping-cart-routing.module';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { FormsModule } from '@angular/forms';
+import { MatDividerModule } from '@angular/material/divider';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -11,7 +14,10 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
   ],
   imports: [
     CommonModule,
-    ShoppingCartRoutingModule
+    ShoppingCartRoutingModule,
+    FormsModule,
+    MatDividerModule,
+    SharedModule
   ]
 })
 export class ShoppingCartModule { }

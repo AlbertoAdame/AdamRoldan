@@ -34,6 +34,7 @@ export class FooterComponent implements OnInit {
   cambiarIdioma(idioma: string) {
 
     if (this.currentLanguage !== 'es' && idioma == 'es') {
+      localStorage.setItem('lang', 'es');
       this.translate.use('es');
       this.currentLanguage = 'es';
       this.language.setLanguage('es');
@@ -41,6 +42,7 @@ export class FooterComponent implements OnInit {
 
     }
     else if (this.currentLanguage !== 'en' && idioma == 'en') {
+      localStorage.setItem('lang', 'en');
       this.translate.use('en');
       this.currentLanguage = 'en';
       this.language.setLanguage('en');

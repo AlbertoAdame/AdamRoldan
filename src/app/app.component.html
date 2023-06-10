@@ -1,6 +1,8 @@
 <app-navbar (enviarHijo)="guardar($event)"></app-navbar>
 <mat-sidenav-container class="container-fluid">
+
     <mat-sidenav #sidebar mode='over' [opened]="sideBar" class="side">
+
         <div class="home" [routerLink]="['/home']" routerLinkActive="router-link-active" (click)="esconder()">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                 class="bi bi-house-fill icon" viewBox="0 0 16 16">
@@ -40,6 +42,7 @@
         <hr>
     </mat-sidenav>
     <mat-sidenav-content>
+
         <div class="content">
             <div class="toolbar">
 
@@ -55,3 +58,7 @@
         </div>
     </mat-sidenav-content>
 </mat-sidenav-container>
+
+<div class="backgroundSpinner" *ngIf="spinner">
+    <span class="loader"></span>
+</div>

@@ -36,13 +36,13 @@ export class UserService {
     return this.http.post<UserResponseInterface>(this.url, { username, password, name, email })
   }
 
-  //Envairemos el correo electrónico
+  //Enviaremos el correo electrónico
   contact(name: string, email: string, subject: string, message: string): Observable<Contact> {
     return this.http.post<Contact>(this.urlContact, { name, email, subject, message })
   }
 
   //Editarmos un user
-  editUser(name: string, email: string, password: string): Observable<UserResponseInterface> {
-    return this.http.put<UserResponseInterface>(`${this.url}/${this.cookies.get('sub')}`, { name, email, password })
+  editUser(name: string, email: string, password: string, address: string): Observable<UserResponseInterface> {
+    return this.http.put<UserResponseInterface>(`${this.url}/${this.cookies.get('sub')}`, { name, email, password, address })
   }
 }

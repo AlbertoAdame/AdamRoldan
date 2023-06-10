@@ -5,6 +5,7 @@ import { UserService } from '../../services/user.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 @Component({
   selector: 'app-contact',
@@ -23,7 +24,8 @@ export class ContactComponent implements OnInit {
 
   })
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private userService: UserService, private translate: TranslateService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private userService: UserService, private translate: TranslateService
+    , private spinnerService: SpinnerService) {
     this.translate.addLangs(['es', 'en']);
   }
 
@@ -47,10 +49,12 @@ export class ContactComponent implements OnInit {
       this.myForm.markAllAsTouched()
       return
     }
+    this.activeSpinner(true);
     //Llamaremos al servicio para enviar un correo con la información introducida
     this.userService.contact(this.myForm.value.name, this.myForm.value.email, this.myForm.value.subject, this.myForm.value.message)
       .subscribe({
         next: (resp) => {
+          this.activeSpinner(false);
           Swal.fire({
             icon: 'success',
             title: 'Your message was sent',
@@ -59,6 +63,7 @@ export class ContactComponent implements OnInit {
             this.myForm.reset()
         },
         error: (error) => {
+          this.activeSpinner(false);
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
@@ -68,6 +73,14 @@ export class ContactComponent implements OnInit {
           console.log(error)
         }
       });
+  }
+
+  /**
+* Para activar o desactivar el spinner
+* @param value 
+*/
+  activeSpinner(value: boolean) {
+    this.spinnerService.spinnerSubject.next(value);
   }
 }
 

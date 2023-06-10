@@ -40,14 +40,12 @@ export class AuthService {
   isAuthenticated(): Observable<boolean> {
     return this.http.get(this.urlJwt)
       .pipe(switchMap(token => {
-        console.log(true)
         return of(true)
       }), catchError(error => {
         this.cookies.delete('token');
         this.cookies.delete('sub');
         this.cookies.delete('role');
 
-        console.log(false)
         return of(false)
       }))
   }

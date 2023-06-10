@@ -1,6 +1,5 @@
 <div class="frontPage">
     <h1 class="title">{{ "UPLOAD BEAT" | translate }}</h1>
-
 </div>
 
 <div class="container">
@@ -89,6 +88,14 @@
                     {{ "Picture is required" | translate }}
                 </span>
             </div>
+
+            <div class="col-md-12 box">
+                <div class="form-group">
+                    <label class="label" for="audio">{{ "Audio" | translate }}</label>
+                    <input type="text" class="form-control" formControlName="audio" placeholder="Audio Link">
+                </div>
+            </div>
+
             <div class="col-md-12 buttons">
                 <div class="form-group groupButtons">
                     <input type="submit" value="Save" class="btn btn-success button">

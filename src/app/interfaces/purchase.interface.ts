@@ -14,7 +14,6 @@ export interface IDBeatClass {
     date: number[];
     genreList: IDBeatGenreList[];
     mood: string;
-    datetime: number[];
 }
 
 export interface IDBeatGenreList {
@@ -43,7 +42,6 @@ export interface BeatListClass {
     date: number[];
     genreList: BeatListGenreList[];
     mood: MoodClass | string;
-    datetime: number[];
 }
 
 export interface BeatListGenreList {
@@ -256,7 +254,6 @@ const typeMap: any = {
         { json: "date", js: "date", typ: a(0) },
         { json: "genreList", js: "genreList", typ: a(r("IDBeatGenreList")) },
         { json: "mood", js: "mood", typ: "" },
-        { json: "datetime", js: "datetime", typ: a(0) },
     ], false),
     "IDBeatGenreList": o([
         { json: "idBeat", js: "idBeat", typ: 0 },
@@ -282,7 +279,6 @@ const typeMap: any = {
         { json: "date", js: "date", typ: a(0) },
         { json: "genreList", js: "genreList", typ: a(r("BeatListGenreList")) },
         { json: "mood", js: "mood", typ: u(r("MoodClass"), "") },
-        { json: "datetime", js: "datetime", typ: a(0) },
     ], false),
     "BeatListGenreList": o([
         { json: "idBeat", js: "idBeat", typ: 0 },

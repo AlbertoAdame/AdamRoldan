@@ -9,7 +9,7 @@ export interface BeatInterface {
     img: FormData,
     audio: FormData,
     date: Date,
-    genre: Genre[],
+    genreList: Genre[], //En caso de que haya cualquier problema, cambiar genreList por genre
     mood: Mood
 }
 

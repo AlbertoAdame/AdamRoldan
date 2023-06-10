@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ComunicationService } from '../../services/comunication.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-audio-player',
@@ -77,20 +78,31 @@ export class AudioPlayerComponent implements OnInit {
 
 
   start() {
-    this.audio.src = this.currentBeat.audio;
-    this.audio.load();
-    this.audio.play();
-    this.audio.volume = this.volume / 100;
-    this.totalDuration = this.currentBeat.time
-    this.audio.loop = false;
-    this.audio.addEventListener('timeupdate', () => {
-      this.currentPosition = this.audio.currentTime;
-    });
+    if (this.currentBeat.audio == null) {
+      this.audio.src = this.currentBeat.audio;
+      this.audio.load();
+      Swal.fire({
+        icon: 'error',
+        title: 'Lo sentimos',
+        text: 'Audio no encontrado'
+      })
+    }
+    else {
+      this.audio.src = this.currentBeat.audio;
+      this.audio.load();
+      this.audio.play();
+      this.audio.volume = this.volume / 100;
+      this.totalDuration = this.currentBeat.time
+      this.audio.loop = false;
+      this.audio.addEventListener('timeupdate', () => {
+        this.currentPosition = this.audio.currentTime;
+      });
 
-    //este temporizador es necesario para que cargue el botón de play por primera vez
-    setTimeout(() => {
-      this.currentState = true
-    }, 1);
+      //este temporizador es necesario para que cargue el botón de play por primera vez
+      setTimeout(() => {
+        this.currentState = true
+      }, 1);
+    }
   }
 
 

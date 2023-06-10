@@ -33,6 +33,7 @@
     "ng-recaptcha": "^11.0.0",
     "ngx-cookie-service": "^15.0.0",
     "ngx-pagination": "^6.0.3",
+    "primeng": "^15.4.1",
     "rxjs": "~7.5.0",
     "sweetalert2": "^11.7.1",
     "tslib": "^2.3.0",

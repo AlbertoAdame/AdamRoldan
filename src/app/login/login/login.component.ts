@@ -50,6 +50,8 @@ export class LoginComponent implements OnInit {
   username: string = ""
   password: string = "";
 
+  imagenCargadaLogin = false;
+
 
   // ************************** REGISTER ***************************
 
@@ -61,6 +63,8 @@ export class LoginComponent implements OnInit {
 
   captcha: string = '';
 
+  imagenCargadaRegister = false;
+
   constructor(private authService: AuthService, private router: Router, private userService: UserService, private cookies: CookieService, private translate: TranslateService, private language: LanguageService) {
     this.translate.addLangs(['es', 'en']);
   }
@@ -68,6 +72,20 @@ export class LoginComponent implements OnInit {
   // ************************** Si entramos en el login borramos las cookies ***************************
 
   ngOnInit(): void {
+
+    const backgroundImageLogin = new Image();
+    const backgroundImageRegister = new Image();
+    backgroundImageLogin.onload = () => {
+      this.imagenCargadaLogin = true;
+    };
+
+    backgroundImageRegister.onload = () => {
+      this.imagenCargadaRegister = true;
+    };
+    backgroundImageLogin.src = 'https://res.cloudinary.com/dk4t712zm/image/upload/v1678383896/product2_ndxevk.png';
+    backgroundImageRegister.src = 'https://res.cloudinary.com/dk4t712zm/image/upload/v1678383897/product3_htg6yl.png';
+
+
     if (this.language.currentLanguage == undefined)
       this.translate.use('en');
     else {

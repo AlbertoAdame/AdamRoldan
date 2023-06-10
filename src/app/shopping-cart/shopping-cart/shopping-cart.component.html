@@ -1,1 +1,105 @@
-<p>shopping-cart works!</p>
+<div class="frontPage">
+    <h1 class="title">CESTA</h1>
+</div>
+<div class="container">
+    <div class="divIzquierda">
+        <div class="fondoCarritoDerecha row">
+            <div class="container">
+                <div class="row">
+                    <div class="infoProducto">
+                        <span class="subtotalTitle col">Gross:</span>
+                        <span class="letrasFinal col">{{totalPrice}} €</span> <br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="infoProducto">
+                        <span class="subtotalTitle col">Discount:</span>
+                        <span class="letrasFinal col">-0.00 €</span> <br>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <mat-divider></mat-divider>
+
+                </div>
+
+                <div class="row">
+                    <div class="infoProducto">
+                        <b class="subtotalTitle col">Total:</b>
+                        <b class="letrasFinal col">{{totalPrice}} €</b> <br>
+                    </div>
+                </div>
+
+                <div id="introducir" class="row">
+                    <button class="realizarCompra btn btn-warning" (click)="newPurchase()">
+                        Terminar Pedido
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row fondoDireccionDerecha">
+            <div class="col">
+                <b>
+                    Dirección de facturación
+                </b>
+                <br>
+                <small>
+                    Su dirección actual es:
+                </small>
+                <input type="text" name="address" class="form-control" id="address" [(ngModel)]="address">
+                <span class="form-text text-danger" *ngIf="address == ''">
+                    <!-- {{ "Please provide a valid e-mail" | translate }} -->
+                    NO puede estar vacío
+                </span>
+                <!-- <button class="cambiarDireccion btn btn-success">
+                        Cambiar Dirección
+                    </button> -->
+            </div>
+        </div>
+    </div>
+    <!-- <div class="fondoCarritoDerecha">
+        <div class="infoProducto">
+            <span class="subtotalTitle">Subtotal ( {{currentCartItems.length}} ) :</span> <span class="letrasFinal">
+                {{totalPrice}} €</span> <br>
+        </div>
+        <br>
+        <div id="introducir">
+            <button class="realizarCompra btn btn-warning" (click)="newPurchase()">
+                Terminar Pedido
+            </button>
+        </div>
+    </div> -->
+
+    <div class="CarritoIzquierda" *ngIf="currentCartItems.length>0" [ngStyle]="{ 'margin-bottom': getMarginBottom() }">
+        <div class="fondoCarritoIzquierda" *ngFor="let item of currentCartItems">
+            <div class="photoCarritoFinal">
+                <img [src]="item.img" alt="image" width="50" height="50" class="productImage">
+            </div>
+
+            <div>
+                <b class="titulitos"> {{item.title}} </b> <br>
+                <small> {{item.price}} €</small>
+            </div>
+            <div class="introducir">
+                <button class="cancelar btn btn-danger" (click)="deleteProduct(item)">
+                    Eliminar
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="CarritoIzquierda noProducts extra" *ngIf="currentCartItems.length==0">
+
+        <div class="marginCart">
+            <svg xmlns="http://www.w3.org/2000/svg" width="75" height="75" fill="currentColor" class="bi bi-cart2"
+                viewBox="0 0 16 16">
+                <path
+                    d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+            </svg>
+            <p>
+                No hay productos
+            </p>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

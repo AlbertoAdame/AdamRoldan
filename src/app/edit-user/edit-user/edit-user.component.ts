@@ -8,6 +8,7 @@ import { UserResponseInterface } from '../../interfaces/user-response.interface'
 import { CookieService } from 'ngx-cookie-service';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from 'src/app/services/language.service';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -23,11 +24,13 @@ export class EditUserComponent {
   myForm: FormGroup = this.fb.group({
     name: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
+    address: ['', [Validators.required]],
     password: ['']
 
   })
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private userService: UserService, private cookies: CookieService, private translate: TranslateService, private language: LanguageService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private userService: UserService, private cookies: CookieService,
+    private translate: TranslateService, private language: LanguageService, private spinnerService: SpinnerService) {
     this.translate.addLangs(['es', 'en']);
   }
 
@@ -56,7 +59,8 @@ export class EditUserComponent {
             this.myForm.reset({
               name: resp.name,
               email: resp.email,
-              password: ''
+              password: '',
+              address: resp.address
             })
 
           }
@@ -76,10 +80,12 @@ export class EditUserComponent {
       this.myForm.markAllAsTouched()
       return
     }
+    this.activeSpinner(true);
     //Llamaremos al servicio para editar el user
-    this.userService.editUser(this.myForm.value.name, this.myForm.value.email, this.myForm.value.password)
+    this.userService.editUser(this.myForm.value.name, this.myForm.value.email, this.myForm.value.password, this.myForm.value.address)
       .subscribe({
         next: (resp) => {
+          this.activeSpinner(false);
           Swal.fire({
             icon: 'success',
             title: 'Perfect',
@@ -87,6 +93,7 @@ export class EditUserComponent {
           })
         },
         error: (error) => {
+          this.activeSpinner(false);
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
@@ -96,6 +103,14 @@ export class EditUserComponent {
           console.log(error)
         }
       });
+  }
+
+  /**
+ * Para activar o desactivar el spinner
+ * @param value 
+ */
+  activeSpinner(value: boolean) {
+    this.spinnerService.spinnerSubject.next(value);
   }
 }
 

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 
 import { BeatService } from '../../services/beat.service';
 import { Content, Pageable } from '../../interfaces/pageable.interface';
@@ -9,9 +9,10 @@ import Swal from 'sweetalert2';
 import { Subject } from 'rxjs';
 import { GenreService } from '../../services/genre.service';
 import { Genre } from '../../interfaces/genre.interface';
-import { BeatInterface } from 'src/app/interfaces/beat-response.interface';
 import { ComunicationService } from '../../services/comunication.service';
 import { TranslateService } from '@ngx-translate/core';
+import { ShoppingCartService } from '../../services/shopping-cart.service';
+import { DataTableDirective } from 'angular-datatables';
 
 
 @Component({
@@ -21,29 +22,34 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class SongsComponent implements OnInit, OnDestroy {
 
+  @ViewChild(DataTableDirective, { static: false })
+  dataTableElement!: DataTableDirective;
+
   flag: boolean = false;
-  role: string = ''
+  role: string = '';
 
   results: Content[] = [];
+  currentCartItems: Content[] = [];
   genres: Genre[] = []
 
   //Necesitamos esto para el datatable
   dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject<any> = new Subject<any>()
+  dtTrigger: Subject<any> = new Subject<any>();
 
 
   constructor(private beatService: BeatService, private authService: AuthService, private cookies: CookieService, private genreService: GenreService,
-    private comunicationService: ComunicationService, private translate: TranslateService) {
+    private comunicationService: ComunicationService, private translate: TranslateService, private shoppingCartService: ShoppingCartService) {
     this.translate.addLangs(['es', 'en']);
   }
 
   ngOnInit(): void {
-    //Para el datatable
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 200,
-      processing: true
-    };
+
+    this.currentCartItems = this.shoppingCartService.beats;
+
+    this.shoppingCartService.totalPrice$.subscribe((totalPrice) => {
+      this.changeButtonCart();
+    });
+
     //recibiremos los beats llamando al servicio
     this.beatService.searchBeats(0, 200)
       .subscribe({
@@ -51,6 +57,8 @@ export class SongsComponent implements OnInit, OnDestroy {
 
           this.results = resp.content
           this.dtTrigger.next(this.results)
+
+          this.changeButtonCart();
         },
         error: (error) => {
           console.log(error);
@@ -58,22 +66,17 @@ export class SongsComponent implements OnInit, OnDestroy {
         }
       })
 
+    //Opciones necesarias para el datatable
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 200,
+      processing: true
+    };
 
     // this.beatService.searchBeatsPageable(0, 200, "date", '')
 
     this.authService.isAuthenticated();
     this.role = this.cookies.get('role')
-
-    //obtenemos todos lo géneros
-    this.genreService.getGenres()
-      .subscribe({
-        next: (resp) => {
-          this.genres = resp
-        },
-        error: (error) => {
-          console.log(error);
-        }
-      })
 
   }
   //Destruiremos la promesa de la datatable
@@ -97,6 +100,29 @@ export class SongsComponent implements OnInit, OnDestroy {
     return minute + ':' + second;
   }
 
+  refreshBeats() {
+    this.beatService.searchBeats(0, 200)
+      .subscribe({
+        next: (resp) => {
+          this.results = resp.content
+
+          this.dataTableElement.dtInstance.then((dtInstance: DataTables.Api) => {
+            // Destruir la DataTable actual
+            dtInstance.destroy();
+
+            // Reinicializar la DataTable
+            this.dtTrigger.next(this.results);
+          });
+
+        },
+        error: (error) => {
+          console.log(error);
+
+        }
+      })
+
+  }
+
   //Al pulsar el botón de borrar beats hará esto
   onDelete(id: number) {
     Swal.fire({
@@ -113,6 +139,7 @@ export class SongsComponent implements OnInit, OnDestroy {
           .subscribe(
             {
               next: (resp) => {
+                this.refreshBeats();
                 console.log(resp)
               },
               error: (error) => {
@@ -120,36 +147,58 @@ export class SongsComponent implements OnInit, OnDestroy {
               }
             }
           );
-        // window.location.reload()
       }
     })
   }
 
+
   //Al pulsar el botón de añadir generos nos mostrará una lista con los géneros, y una vez elegido los añadirá 
   onAddGenre(id: number) {
-    //Reduce es más avanzado, y básicamente lo que hace es darle un formato en concreto a los valores del array que lo facilitamos
+    //Reduce es más avanzado, y básicamente lo que hace es darle un formato en concreto a los valores del array que le facilitamos
     const genresObject = this.genres.reduce((obj, item) =>
       Object.assign(obj, { [item.genre]: item.genre }), {});
     // console.log(genresObject);
 
-    Swal.fire({
-      title: 'Select Your New Genre',
-      input: 'select',
-      inputOptions: this.genres.reduce(
-        (obj, item) => Object.assign(obj, { [item.genre]: item.genre }), {}),
-      inputPlaceholder: '-- Select genre --',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.addGenre(id, result.value);
-        Swal.fire({
-          icon: 'success',
-          html: 'You selected: ' + result.value
-        });
+    this.genreService.getGenresNoAdded(id).subscribe({
+      next: (resp: any) => {
+        this.genres = resp;
+        let assignedGenres = 6 - this.genres.length;
+        console.log(assignedGenres);
+
+        if (assignedGenres < 3) {
+          Swal.fire({
+            title: 'Select Your New Genre',
+            input: 'select',
+            inputOptions: this.genres.reduce(
+              (obj, item) => Object.assign(obj, { [item.genre]: item.genre }), {}),
+            inputPlaceholder: '-- Select genre --',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.addGenre(id, result.value);
+              Swal.fire({
+                icon: 'success',
+                html: 'You selected: ' + result.value
+              });
+            }
+          });
+        }
+        else {
+          Swal.fire({
+            icon: 'error',
+            text: 'No puedes añadir mas de 3 géneros',
+          })
+        }
+      },
+      error: (error: any) => {
+        console.log(error);
+
       }
-    });
+    })
+
+
   }
 
   //Cuando el método superior acabe satisfactoriamente llamaremos al servicio y añadiremos un género
@@ -158,7 +207,7 @@ export class SongsComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (resp) => {
           if (resp) {
-            window.location.reload()
+            this.refreshBeats();
           }
 
           else {
@@ -181,36 +230,88 @@ export class SongsComponent implements OnInit, OnDestroy {
   }
   //Cuando pulsemos el boton de borrar género de un beat en concreto lo borrará
   onDeleteGenre(idBeat: number, genre: string) {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.genreService.deleteBeatGenre(idBeat, genre)
-          .subscribe(
-            {
-              next: (resp) => {
-                console.log(resp)
-              },
-              error: (error) => {
-                console.log(error)
+    this.genreService.getGenresNoAdded(idBeat).subscribe({
+      next: (resp: any) => {
+        this.genres = resp;
+        let assignedGenres = 6 - this.genres.length;
+
+        if (assignedGenres > 1) {
+          this.genreService.deleteBeatGenre(idBeat, genre)
+            .subscribe(
+              {
+                next: (resp) => {
+                  this.refreshBeats();
+                },
+                error: (error) => {
+                  console.log(error)
+                }
               }
-            }
-          );
-        //es importante que recargemos la página para que se vean reflejados los cambios
-        // window.location.reload()
+            );
+        }
+        else {
+          this.refreshBeats();
+          Swal.fire({
+            icon: 'error',
+            text: 'No puedes quitar todos los géneros',
+          })
+        }
+      },
+      error: (error: any) => {
+        console.log(error);
+
       }
     })
   }
 
+  /**
+   * Utilizaremos este método para mandar el beat al reproductor
+   * @param beat 
+   */
   audioPlayer(beat: any) {
 
     this.comunicationService.currentBeatSubject.next(beat);
+
+  }
+
+  /**
+   * Añadimos un beat al carrito
+   * @param beat 
+   */
+  addToCart(beat: Content) {
+    if (this.role != 'ADMIN') {
+      this.shoppingCartService.addToCart(beat);
+      beat.bought = true;
+    }
+    else if (this.role == 'ADMIN') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Con el rol de admin no puedes realizar compras',
+        confirmButtonColor: '#9e1815',
+      })
+    }
+  }
+
+  removeFromCart(beat: Content) {
+    this.shoppingCartService.eliminarDelCarrito(beat);
+    beat.bought = false;
+  }
+  /**
+   * Este método lo usamos para cambiar el botón del carrito de rojo a verde y viceversa
+   */
+  changeButtonCart() {
+    this.results.forEach(element => {
+      let beatIndex = this.currentCartItems.findIndex(cartBeat => cartBeat.idBeat === element.idBeat);
+      if (beatIndex == -1) {
+        element.bought = false;
+      }
+      else
+        element.bought = true;
+    });
+  }
+
+  onRemoveChip() {
+    console.log("hola");
 
   }
 

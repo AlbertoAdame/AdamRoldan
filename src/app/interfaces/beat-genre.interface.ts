@@ -26,7 +26,7 @@ export interface IDBeat {
     img: string;
     genreList: GenreList[];
     mood: Mood;
-    datetime: number[];
+    date: number[];
 }
 
 export interface GenreList {
@@ -220,7 +220,7 @@ const typeMap: any = {
         { json: "img", js: "img", typ: "" },
         { json: "genreList", js: "genreList", typ: a(r("GenreList")) },
         { json: "mood", js: "mood", typ: r("Mood") },
-        { json: "datetime", js: "datetime", typ: a(0) },
+        { json: "date", js: "date", typ: a(0) },
     ], false),
     "GenreList": o([
         { json: "idBeat", js: "idBeat", typ: 0 },

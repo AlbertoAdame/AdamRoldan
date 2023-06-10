@@ -260,22 +260,21 @@ body {
   margin-top: 10%;
 }
 
+.esconder {
+  display: none !important;
+}
 
-
-
-
-
-
-
+.show {
+  display: flex !important;
+}
 
 
 
 /* ORDENADOR */
 @media screen and (min-width: 769px) {
 
-  html,
-  body {
-    font: 100%/1.5 Verdana, sans-serif;
+  .newDiv {
+    display: contents;
   }
 
   #wrapper {
@@ -515,6 +514,27 @@ body {
   .cartButton:hover {
     background-color: #1a9b5f;
     border: solid 2px #1a9b5f;
+  }
+
+  .cartButtonDelete {
+    width: 140px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    background-color: #ca2924;
+    padding-left: 15px;
+    padding-right: 15px;
+    color: white;
+    border-radius: 5px;
+    margin-bottom: 2px;
+    justify-content: space-between;
+    margin-left: 2%;
+    border: 0;
+    display: none;
+  }
+
+  .cartButtonDelete:hover {
+    background: #d81515;
   }
 
 

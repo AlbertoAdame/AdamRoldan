@@ -1,7 +1,10 @@
-<div class="background" [ngClass]="{backgroundAlternative: view}">
+<div class="background"
+    [ngClass]="{'background': true, 'imagen-cargada': imagenCargadaLogin, backgroundAlternative: view}">
+
     <!-- ***************************************   REGISTER   *******************************************-->
 
-    <div class="container" [ngClass]="{'right-panel-active': view}" id="container">
+    <div class="container" [ngClass]="{'right-panel-active': view, 'imagen-cargada': imagenCargadaLogin}"
+        id="container">
         <div class="form-container sign-up-container">
             <form action="#" (ngSubmit)="newAccount()" #registerForm="ngForm">
                 <h1>{{ "Create account" | translate }}</h1>

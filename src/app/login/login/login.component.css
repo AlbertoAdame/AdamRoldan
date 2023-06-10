@@ -1,8 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
-
-* {
+/* * {
 	box-sizing: border-box;
-}
+} */
 
 .background {
 	padding-top: 90px;
@@ -11,6 +9,11 @@
 	background-repeat: repeat;
 	background-size: cover;
 	height: 100vh;
+	background-color: #e6e6e6;
+}
+
+.background.imagen-cargada {
+	background-color: transparent;
 }
 
 .backgroundAlternative {
@@ -19,6 +22,11 @@
 	background-repeat: repeat-y;
 	background-size: cover;
 	height: 100vh;
+	background-color: #e6e6e6;
+}
+
+.backgroundAlternative.imagen-cargada {
+	background-color: transparent;
 }
 
 
@@ -104,7 +112,7 @@ input {
 }
 
 .container {
-	background-color: rgba(255, 255, 255, 0.3) !important;
+	background-color: rgba(78, 78, 78, 0.5) !important;
 	backdrop-filter: blur(20px);
 	border-radius: 10px;
 	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
@@ -115,6 +123,10 @@ input {
 	max-width: 100%;
 	min-height: 735px;
 	margin: auto;
+}
+
+.container.imagen-cargada {
+	background-color: rgba(255, 255, 255, 0.3) !important;
 }
 
 .form-container {

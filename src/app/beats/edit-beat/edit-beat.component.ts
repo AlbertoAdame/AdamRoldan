@@ -8,8 +8,9 @@ import { Mood } from '../../interfaces/mood.interface';
 import { MoodService } from '../../services/mood.service';
 import { GenreService } from '../../services/genre.service';
 import { BeatInterface } from '../../interfaces/beat-response.interface';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 @Component({
   selector: 'app-edit-beat',
@@ -25,7 +26,8 @@ export class EditBeatComponent implements OnInit {
 
   isLoggedIn!: boolean;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private beatService: BeatService, private moodService: MoodService, private translate: TranslateService, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private beatService: BeatService, private moodService: MoodService,
+    private translate: TranslateService, private route: ActivatedRoute, private router: Router, private spinnerService: SpinnerService) {
     this.translate.addLangs(['es', 'en']);
   }
 
@@ -87,37 +89,48 @@ export class EditBeatComponent implements OnInit {
       return
     }
 
+    this.activeSpinner(true);
+
     //Una vez introducido los datos llamaremos al servicio y editará
     this.beatService.editBeat(this.id, this.myForm.value.title, this.myForm.value.price, this.myForm.value.bpm, this.myForm.value.time, this.myForm.value.mood)
       .subscribe({
         next: (resp) => {
+          this.activeSpinner(false);
           if (resp) {
             Swal.fire({
               icon: 'success',
               title: 'Beat was edited'
             }),
-              this.myForm.reset()
+              this.router.navigateByUrl('beats');
           }
           else {
             Swal.fire({
               icon: 'error',
-              title: 'Oops...',
-              text: 'Something went wrong!',
+              text: 'Este título ya existe',
 
             })
           }
         },
         error: (error) => {
+          this.activeSpinner(false);
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Something went wrong!',
+            text: 'Something was wrong!',
 
           })
-          // console.log(error)
         }
       });
 
+  }
+
+
+  /**
+ * Para activar o desactivar el spinner
+ * @param value 
+ */
+  activeSpinner(value: boolean) {
+    this.spinnerService.spinnerSubject.next(value);
   }
 
 

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { CartComponent } from './cart/cart.component';
 import { RouterModule, Router } from '@angular/router';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { FormsModule } from '@angular/forms';
@@ -15,6 +14,7 @@ import { FooterComponent } from './footer/footer.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../app.module';
 import { HttpClient } from '@angular/common/http';
+import { MatBadgeModule } from '@angular/material/badge';
 
 
 
@@ -23,7 +23,6 @@ import { HttpClient } from '@angular/common/http';
   declarations: [
     NavbarComponent,
     NotFoundComponent,
-    CartComponent,
     BreadcrumbComponent,
     AudioPlayerComponent,
     FooterComponent
@@ -43,12 +42,12 @@ import { HttpClient } from '@angular/common/http';
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    MatBadgeModule
   ],
   exports: [
     NavbarComponent,
     NotFoundComponent,
-    CartComponent,
     BreadcrumbComponent,
     AudioPlayerComponent,
     FooterComponent

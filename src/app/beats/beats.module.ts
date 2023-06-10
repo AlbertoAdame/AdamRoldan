@@ -14,6 +14,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../app.module';
 import { HttpClient } from '@angular/common/http';
+import { ChipModule } from 'primeng/chip';
 
 
 
@@ -40,7 +41,8 @@ import { HttpClient } from '@angular/common/http';
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    ChipModule
   ],
   providers: [
     BeatService

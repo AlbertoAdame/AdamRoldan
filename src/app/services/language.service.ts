@@ -10,7 +10,14 @@ export class LanguageService {
 
   currentLanguageSubject: Subject<any> = new Subject<any>();
 
-  constructor() { }
+  constructor() {
+    let lang = localStorage.getItem('lang')
+
+    if (lang != null) {
+      this.setLanguage(lang);
+      this.currentLanguageSubject.next(lang);
+    }
+  }
 
   get currentLanguage(): string {
     return this._currentLanguage;

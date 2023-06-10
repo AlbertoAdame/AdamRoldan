@@ -10,6 +10,7 @@ import { GenreService } from '../../services/genre.service';
 import { ActivatedRoute } from '@angular/router';
 import { BeatInterface } from '../../interfaces/beat-response.interface';
 import { TranslateService } from '@ngx-translate/core';
+import { SpinnerService } from '../../services/spinner.service';
 
 @Component({
   selector: 'app-upload',
@@ -18,12 +19,12 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class UploadComponent implements OnInit {
 
-
   jsonBeat: any = {
     title: '',
     price: null,
     bpm: null,
-    time: null
+    time: null,
+    audio: ''
   }
 
   jsonGenre: Genre = {
@@ -45,12 +46,14 @@ export class UploadComponent implements OnInit {
     bpm: ['', [Validators.required]],
     time: ['', [Validators.required]],
     picture: ['', [Validators.required]],
+    audio: [''],
     fileSource: [''],
     genre: ['Drill', [Validators.required]],
     mood: ['Accomplished', [Validators.required]]
   })
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private beatService: BeatService, private moodService: MoodService, private genreService: GenreService, private translate: TranslateService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private beatService: BeatService, private moodService: MoodService,
+    private genreService: GenreService, private translate: TranslateService, private spinnerService: SpinnerService) {
     this.translate.addLangs(['es', 'en']);
   }
 
@@ -103,11 +106,14 @@ export class UploadComponent implements OnInit {
       return
     }
 
+    this.activeSpinner(true);
+
     //Pasaremos todos los valores recibidos a los jsons
     this.jsonBeat.title = this.myForm.value.title
     this.jsonBeat.price = this.myForm.value.price
     this.jsonBeat.bpm = this.myForm.value.bpm
     this.jsonBeat.time = this.myForm.value.time
+    this.jsonBeat.audio = this.myForm.value.audio
 
     this.jsonGenre.genre = this.myForm.value.genre
 
@@ -118,6 +124,7 @@ export class UploadComponent implements OnInit {
       .subscribe({
         next: (resp) => {
           if (resp) {
+            this.activeSpinner(false);
             Swal.fire({
               icon: 'success',
               title: 'Beat was added',
@@ -126,6 +133,7 @@ export class UploadComponent implements OnInit {
               this.myForm.reset()
           }
           else {
+            this.activeSpinner(false);
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
@@ -135,6 +143,7 @@ export class UploadComponent implements OnInit {
           }
         },
         error: (error) => {
+          this.activeSpinner(false);
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
@@ -145,6 +154,14 @@ export class UploadComponent implements OnInit {
         }
       });
 
+  }
+
+  /**
+   * Para activar o desactivar el spinner
+   * @param value 
+   */
+  activeSpinner(value: boolean) {
+    this.spinnerService.spinnerSubject.next(value);
   }
 
 

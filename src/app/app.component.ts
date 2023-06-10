@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComunicationService } from './services/comunication.service';
 import { TranslateService } from '@ngx-translate/core';
+import { SpinnerService } from './services/spinner.service';
 
 
 @Component({
@@ -18,9 +19,19 @@ export class AppComponent {
 
   currentLanguage: boolean = true;
 
-  constructor(private comunicationService: ComunicationService, private translate: TranslateService) {
+  spinner: boolean = false;
+
+  constructor(private comunicationService: ComunicationService, private translate: TranslateService, private spinnerService: SpinnerService) {
     this.translate.addLangs(['es', 'en']);
-    this.translate.setDefaultLang('en');
+    let lang = localStorage.getItem('lang')
+
+    if (lang == null) {
+      localStorage.setItem('lang', 'en');
+      this.translate.setDefaultLang('en');
+    }
+    else {
+      this.translate.setDefaultLang(lang);
+    }
 
   }
 
@@ -35,6 +46,10 @@ export class AppComponent {
       if (beat != null) {
         this.reproductor = true;
       }
+    });
+
+    this.spinnerService.spinnerSubject.subscribe((value: any) => {
+      this.spinner = value;
     });
   }
 

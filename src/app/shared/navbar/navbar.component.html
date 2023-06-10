@@ -1,4 +1,4 @@
-<nav class="sticky-top">
+<nav class="sticky-top scroll" id="navbar">
 
     <div class="buttonList noMovil" (click)="showSideBar()">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-list list"
@@ -58,13 +58,23 @@
 
             <li class="liBorder" (click)="showCart()">
                 <button class="buttonCart">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="26" fill="currentColor"
-                        class="bi bi-cart4 cartPicture" viewBox="0 0 16 16">
-                        <path
-                            d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
-                    </svg>
-                    <div class="movil">
-                        0,00 $
+                    <div [matBadge]="currentCartItems.length" matBadgeColor="primary" matBadgePosition="after"
+                        matBadgeSize="small" *ngIf="currentCartItems.length>0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="26" fill="currentColor"
+                            class="bi bi-cart4 cartPicture" viewBox="0 0 16 16">
+                            <path
+                                d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                        </svg>
+                    </div>
+                    <div *ngIf="currentCartItems.length<=0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="26" fill="currentColor"
+                            class="bi bi-cart4 cartPicture" viewBox="0 0 16 16">
+                            <path
+                                d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                        </svg>
+                    </div>
+                    <div class="movil price">
+                        {{totalPrice}} $
 
                     </div>
                 </button>
@@ -83,17 +93,19 @@
 
                 <div class="dropdown" *ngIf="isLoggedIn">
                     <button class="dropbtn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                            class="bi bi-person-circle hombre" viewBox="0 0 16 16">
-                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                            <path fill-rule="evenodd"
-                                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
-                            class="bi bi-caret-down-fill caretDown movil" viewBox="0 0 16 16">
-                            <path
-                                d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-                        </svg>
+                        <div class="dropbtnIcons">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                class="bi bi-person-circle hombre" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                <path fill-rule="evenodd"
+                                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
+                                class="bi bi-caret-down-fill caretDown movil" viewBox="0 0 16 16">
+                                <path
+                                    d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                            </svg>
+                        </div>
                     </button>
                     <div class="dropdown-content">
                         <button class="logoutButton" *ngIf="isLoggedIn" [routerLink]="['/editUser']">
@@ -127,53 +139,64 @@
         </ul>
     </div>
 
-    <div class="cart" [ngClass]="{active: cart}">
+    <div class="closeHidden" [ngClass]="{active: cart}" (click)="showCart()">
+        <div class="cart" [ngClass]="{active: cart}" (click)="notChangeCart()">
 
 
-        <p class="cartTitle"> {{ "YOUR CART" | translate }} ( # ) </p>
-        <div class="products">
 
-            <div class="cartProduct">
-                <img src="/assets/images/product.png" alt="image" width="50" height="50" class="productImage">
+            <p class="cartTitle"> {{ "YOUR CART" | translate }} ( {{currentCartItems.length}} ) </p>
+            <div class="products" *ngIf="currentCartItems.length>0">
 
-                <span class="productTitle">BEAT 1</span>
+                <div class="cartProduct" *ngFor="let item of currentCartItems">
 
-                <span class="productPrice">14.95 $</span>
+                    <div class="alignLeft">
+                        <img [src]="item.img" alt="image" width="50" height="50" class="productImage">
 
-                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="productDelete"
+                        <span class="productTitle">{{item.title}}</span>
+                    </div>
+
+                    <div class="alignRight">
+                        <span class="productPrice">{{item.price}} $</span>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black"
+                            class="productDelete" viewBox="0 0 16 16" (click)="deleteProduct(item)">
+                            <path
+                                d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                        </svg>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="noProducts" *ngIf="currentCartItems.length==0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart2"
                     viewBox="0 0 16 16">
                     <path
-                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                        d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
                 </svg>
+                <p>
+                    No hay productos
+                </p>
             </div>
 
-            <div class="cartProduct">
-                <img src="/assets/images/product.png" alt="image" width="50" height="50" class="productImage">
 
-                <span class="productTitle">BEAT 1</span>
 
-                <span class="productPrice">14.95 $</span>
-
-                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="productDelete"
-                    viewBox="0 0 16 16">
-                    <path
-                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+            <button class="cartButton" [routerLink]="['/shoppingCart']" routerLinkActive="router-link-active"
+                (click)="closeCart()">
+                <span style="margin-top: -2px !important; font-weight: 500;">{{ "PROCEED TO
+                    CHECK OUT" | translate
+                    }}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black"
+                    class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
                 </svg>
-            </div>
+            </button>
 
         </div>
-
-
-
-        <button class="cartButton" [routerLink]="['/shoppingCart']" routerLinkActive="router-link-active">
-            <span style="margin-top: -3px !important; font-weight: 500;">{{ "PROCEED TO CHECK OUT" | translate }}</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-arrow-right-circle"
-                viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                    d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
-            </svg>
-        </button>
 
     </div>
 
 </nav>
+<div class="extraMargin"></div>
