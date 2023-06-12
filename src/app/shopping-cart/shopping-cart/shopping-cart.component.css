@@ -47,27 +47,23 @@ button {
     height: 95px;
     box-shadow: 0 2px 2px rgb(0 0 0 / 1%), 0 8px 16px rgb(0 0 0 / 10%);
     border-radius: 8px;
-    margin-bottom: 0;
+    margin-top: 0;
     margin-left: 0;
+    margin-right: 0;
+    width: 97%;
+
 }
 
 .CarritoIzquierda {
-    margin-top: 3em;
-    width: 65.5%;
-    margin-left: 2%;
+    width: 100%;
     margin-bottom: 50px;
+    margin-top: 0;
 }
 
 .CarritoIzquierda.extra {
     margin-bottom: 18em;
 }
 
-.divIzquierda {
-    float: right;
-    position: relative;
-    margin-right: 1%;
-    width: 30%;
-}
 
 .fondoCarritoDerecha {
     padding: 30px;
@@ -82,6 +78,7 @@ button {
     box-shadow: 0 2px 2px rgb(0 0 0 / 1%), 0 8px 16px rgb(0 0 0 / 10%);
     border-radius: 8px;
     margin-top: 25px;
+    margin-bottom: 70px;
 }
 
 .extraMargin {
@@ -97,7 +94,6 @@ button {
 .cancelar {
     color: white;
     text-decoration: none;
-    width: 50%;
     height: 50px;
     text-align: center;
     background-color: #ca2924 !important;
@@ -167,4 +163,47 @@ mat-divider {
 
 .marginCart {
     padding-top: 45px;
+}
+
+/* ORDENADOR */
+@media screen and (min-width: 992px) {
+
+    .CarritoIzquierda {
+        width: 65.5%;
+        margin-bottom: 50px;
+        margin-top: 0;
+    }
+
+    .fondoDireccionDerecha {
+        margin-bottom: 100%;
+    }
+}
+
+/* TABLET */
+@media screen and (min-width: 481px) and (max-width:991px) {
+
+
+    /* .fondoCarritoIzquierda {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        align-items: center;
+        background-color: rgb(255, 255, 255);
+        margin: 20px;
+        height: 95px;
+        box-shadow: 0 2px 2px rgb(0 0 0 / 1%), 0 8px 16px rgb(0 0 0 / 10%);
+        border-radius: 8px;
+        margin-bottom: 0;
+        margin-left: 0;
+        width: 100%;
+    }*/
+
+    .CarritoIzquierda {
+        width: 100%;
+        padding: 0;
+    }
+
+    .fondoCarritoIzquierda {
+        margin-right: 0;
+        width: 100%;
+    }
 }

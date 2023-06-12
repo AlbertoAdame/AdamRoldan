@@ -19,10 +19,14 @@ export class ShoppingCartComponent implements OnInit {
   totalPrice: string = "0.00";
   address: string = "";
 
+  paymentHandler: any = null;
+
   constructor(private shoppingCartService: ShoppingCartService, private cookies: CookieService, private route: Router,
     private userService: UserService, private spinnerService: SpinnerService) { }
 
   ngOnInit() {
+
+    this.invokeStripe();
 
     this.role = this.cookies.get('role')
 
@@ -32,6 +36,13 @@ export class ShoppingCartComponent implements OnInit {
 
           if (resp) {
             this.address = resp.address;
+          }
+          else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong with the address!'
+            })
           }
         }
       })
@@ -45,12 +56,7 @@ export class ShoppingCartComponent implements OnInit {
     });
   }
 
-  deleteProduct(item: Content) {
-    this.shoppingCartService.eliminarDelCarrito(item);
-  }
-
-  newPurchase() {
-    this.activeSpinner(false);
+  comprobacionesPurchase() {
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-end',
@@ -72,7 +78,7 @@ export class ShoppingCartComponent implements OnInit {
       })
     }
 
-    else if (this.address == '') {
+    else if (this.address == '' || this.address == null) {
       this.activeSpinner(false);
       Swal.fire({
         icon: 'error',
@@ -82,50 +88,37 @@ export class ShoppingCartComponent implements OnInit {
     }
 
     else {
-
-      this.shoppingCartService.addPurchase(this.address).subscribe(
-        {
-          next: (resp) => {
-            this.activeSpinner(false);
-            this.shoppingCartService.clearCart();
-            this.route.navigateByUrl('home');
-            Toast.fire({
-              icon: 'success',
-              title: 'Gracias por su compra'
-            })
-          },
-          error: (error) => {
-            this.activeSpinner(false);
-            console.log(error)
-
-          }
-        }
-      );
+      this.makePayment();
     }
   }
 
-  /**
-   * Método que controla el margin-botton para el footer
-   * @returns 
-   */
-  getMarginBottom(): string {
-    const itemCount = this.currentCartItems.length;
+  deleteProduct(item: Content) {
+    this.shoppingCartService.eliminarDelCarrito(item);
+  }
 
-    if (itemCount === 1) {
-      return '40em';
-    } else if (itemCount === 2) {
-      return '35em';
-    } else if (itemCount === 3) {
-      return '28em';
-    } else if (itemCount === 4) {
-      return '19em';
-    } else if (itemCount === 5) {
-      return '13em';
-    } else if (itemCount === 6) {
-      return '8em';
-    } else {
-      return '50px'; // Valor predeterminado o para cualquier otro número de elementos
-    }
+  newPurchase() {
+    this.shoppingCartService.addPurchase(this.address).subscribe(
+      {
+        next: (resp) => {
+          this.activeSpinner(false);
+          this.shoppingCartService.clearCart();
+          this.route.navigateByUrl('home');
+          Swal.fire({
+            icon: 'success',
+            title: 'Gracias por su compra'
+          })
+        },
+        error: (error) => {
+          this.activeSpinner(false);
+          console.log(error)
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!'
+          })
+        }
+      }
+    );
   }
 
   /**
@@ -134,5 +127,60 @@ export class ShoppingCartComponent implements OnInit {
  */
   activeSpinner(value: boolean) {
     this.spinnerService.spinnerSubject.next(value);
+  }
+
+  makePayment() {
+    const paymentHandler = (<any>window).StripeCheckout.configure({
+      key: 'pk_test_51NG2j9CMke1RcMKngfxV72PHxCyziVd0fvtp3WHs2foTu1gYZHRi44Fd6f0wTrad4mxxPM94uB1Ca5neYT1SANa600QYNC1nUi',
+      locale: 'auto',
+      token: function (stripeToken: any) {
+        // console.log(stripeToken);
+        paymentstripe(stripeToken);
+      },
+    });
+
+    const paymentstripe = (stripeToken: any) => {
+      this.activeSpinner(true);
+      this.shoppingCartService.makePayment(stripeToken, this.totalPrice).subscribe((data: any) => {
+        // console.log(data);
+        if (data.data === "success") {
+          this.newPurchase();
+        }
+        else {
+          this.activeSpinner(false);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!'
+          })
+        }
+      });
+    };
+
+    paymentHandler.open({
+      name: 'Pago con tarjeta',
+      description: 'Powered by Stripe',
+      amount: parseFloat(this.totalPrice) * 100,
+    });
+  }
+
+  invokeStripe() {
+    if (!window.document.getElementById('stripe-script')) {
+      const script = window.document.createElement('script');
+      script.id = 'stripe-script';
+      script.type = 'text/javascript';
+      script.src = 'https://checkout.stripe.com/checkout.js';
+      script.onload = () => {
+        this.paymentHandler = (<any>window).StripeCheckout.configure({
+          key: 'pk_test_51NG2j9CMke1RcMKngfxV72PHxCyziVd0fvtp3WHs2foTu1gYZHRi44Fd6f0wTrad4mxxPM94uB1Ca5neYT1SANa600QYNC1nUi',
+          locale: 'auto',
+          token: function (stripeToken: any) {
+            console.log(stripeToken);
+          },
+        });
+      };
+
+      window.document.body.appendChild(script);
+    }
   }
 }

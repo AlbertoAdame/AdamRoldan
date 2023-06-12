@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ComunicationService } from '../../services/comunication.service';
 import Swal from 'sweetalert2';
+import { SpinnerService } from '../../services/spinner.service';
 
 @Component({
   selector: 'app-audio-player',
@@ -15,10 +16,18 @@ export class AudioPlayerComponent implements OnInit {
   iconVolumen: number = 4
   randomSong: boolean = false;
 
-  constructor(private comunicationService: ComunicationService) { }
+  spinner: boolean = false;
+
+  constructor(private comunicationService: ComunicationService, private spinnerService: SpinnerService) { }
 
   ngOnInit() {
+
+    this.spinnerService.spinnerSubject.subscribe((value: any) => {
+      this.spinner = value;
+    });
+
     this.comunicationService.currentBeatSubject.subscribe((beat: any) => {
+      this.spinner = true
       this.currentBeat = beat;
       if (this.currentBeat != null) {
         this.start()
@@ -89,8 +98,11 @@ export class AudioPlayerComponent implements OnInit {
     }
     else {
       this.audio.src = this.currentBeat.audio;
+      this.audio.addEventListener('canplaythrough', () => {
+        this.spinner = false,
+          this.audio.play();
+      });
       this.audio.load();
-      this.audio.play();
       this.audio.volume = this.volume / 100;
       this.totalDuration = this.currentBeat.time
       this.audio.loop = false;

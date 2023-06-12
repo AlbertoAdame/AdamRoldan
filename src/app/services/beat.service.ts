@@ -50,7 +50,7 @@ export class BeatService {
   }
 
   //Recogeremos lo beats
-  getBeat(id: string): Observable<BeatInterface> {
+  getBeat(id: string): Observable<BeatInterface | any> {
     return this.http.get<BeatInterface>(`${this.url}/${id}`)
   }
 

@@ -58,6 +58,8 @@
 
                 <button type="submit" class="signUp">{{ "Sign Up" | translate }}</button>
 
+                <button type="button" class="ghost" id="signIn" (click)="changeView()" *ngIf="buttonGhost">Sign
+                    In</button>
 
             </form>
         </div>
@@ -90,6 +92,10 @@
                 <p>{{ "Forgot your password?" | translate }}</p>
                 <button type="submit">{{ "Sign In" | translate }}</button>
 
+                <button type="button" class="ghost" id="signUp" (click)="changeView()" *ngIf="buttonGhost">
+                    {{ "Sign Up" | translate }}
+                </button>
+
             </form>
         </div>
 
@@ -97,7 +103,7 @@
 
         <div class="overlay-container">
             <div class="overlay">
-                <div class="overlay-panel overlay-left">
+                <div class="overlay-panel">
                     <h1>{{ "Welcome Back!" | translate }}</h1>
                     <p>{{ "To keep connected" | translate }}</p>
                     <button class="ghost" id="signIn" (click)="changeView()">Sign In</button>

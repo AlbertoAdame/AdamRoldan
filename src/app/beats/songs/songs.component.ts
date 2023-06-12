@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 
 import { BeatService } from '../../services/beat.service';
-import { Content, Pageable } from '../../interfaces/pageable.interface';
-import { Page } from 'ngx-pagination';
+import { Content } from '../../interfaces/pageable.interface';
+import * as $ from 'jquery';
 import { AuthService } from 'src/app/services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import Swal from 'sweetalert2';
@@ -36,6 +36,8 @@ export class SongsComponent implements OnInit, OnDestroy {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
 
+  vetanaWidth: boolean = false;
+
 
   constructor(private beatService: BeatService, private authService: AuthService, private cookies: CookieService, private genreService: GenreService,
     private comunicationService: ComunicationService, private translate: TranslateService, private shoppingCartService: ShoppingCartService) {
@@ -43,6 +45,10 @@ export class SongsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
+    if (window.innerWidth < 1375) {
+      this.vetanaWidth = true
+    }
 
     this.currentCartItems = this.shoppingCartService.beats;
 
@@ -70,7 +76,8 @@ export class SongsComponent implements OnInit, OnDestroy {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 200,
-      processing: true
+      processing: true,
+      responsive: true
     };
 
     // this.beatService.searchBeatsPageable(0, 200, "date", '')
@@ -78,7 +85,41 @@ export class SongsComponent implements OnInit, OnDestroy {
     this.authService.isAuthenticated();
     this.role = this.cookies.get('role')
 
+    const self = this;
+
+    //Esto lo tendremos que hacer ya que cuando hemos hecho la dataTable responsive los botones han dejado de funcionar
+    // $(document).ready(function () {
+    //   $('#my-table tbody').on('click', '.cartButton', function () {
+    //     const parametro = $(this).data('parametro');
+
+    //     self.beatService.getBeat(parametro)
+    //       .subscribe({
+    //         next: (resp) => {
+    //           console.log(resp);
+
+    //           self.addToCart(resp);
+    //         },
+    //         error: (error) => {
+    //           console.log(error);
+
+    //         }
+    //       })
+    //   });
+    // });
+
+
   }
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize(event: Event) {
+    if (window.innerWidth < 1375) {
+      this.vetanaWidth = true
+
+    } else {
+      this.vetanaWidth = false
+    }
+  }
+
   //Destruiremos la promesa de la datatable
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
@@ -278,18 +319,8 @@ export class SongsComponent implements OnInit, OnDestroy {
    * @param beat 
    */
   addToCart(beat: Content) {
-    if (this.role != 'ADMIN') {
-      this.shoppingCartService.addToCart(beat);
-      beat.bought = true;
-    }
-    else if (this.role == 'ADMIN') {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Con el rol de admin no puedes realizar compras',
-        confirmButtonColor: '#9e1815',
-      })
-    }
+    this.shoppingCartService.addToCart(beat);
+    beat.bought = true;
   }
 
   removeFromCart(beat: Content) {
@@ -310,9 +341,5 @@ export class SongsComponent implements OnInit, OnDestroy {
     });
   }
 
-  onRemoveChip() {
-    console.log("hola");
-
-  }
 
 }

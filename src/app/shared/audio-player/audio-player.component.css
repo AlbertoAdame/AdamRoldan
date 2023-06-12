@@ -74,6 +74,41 @@ button {
     margin-left: 5px;
 }
 
+/* ---------------------------------------SPINNER------------------------------------------- */
+
+.backgroundSpinner {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    padding-left: 12px;
+    padding-right: 10px;
+    padding-bottom: 3px;
+    padding-top: 12px;
+    animation: show 0.6s;
+
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #00000056;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 /* ORDENADOR */
 @media screen and (min-width: 769px) {
 
@@ -130,6 +165,30 @@ button {
     .slider {
         visibility: visible;
         margin-left: 20px;
+    }
+
+    .backgroundSpinner {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding-left: 12px;
+        padding-right: 10px;
+        padding-bottom: 3px;
+        padding-top: 12px;
+        animation: show 0.6s;
+
+    }
+
+    .loader {
+        width: 48px;
+        height: 48px;
+        border: 5px solid #ffffff;
+        border-bottom-color: transparent;
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
     }
 
     /* BOTONES */

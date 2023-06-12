@@ -31,6 +31,7 @@ label {
 .buttons {
     display: flex;
     justify-content: center;
+    margin-bottom: 16em;
 }
 
 .button {

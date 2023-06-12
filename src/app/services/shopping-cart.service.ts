@@ -95,7 +95,9 @@ export class ShoppingCartService {
     return this.http.post<any>(`${environment.url}purchase?address=${address}`, beatList);
   }
 
-  getPurchases(username: string): Observable<any> {
-    return this.http.get<any>(`${environment.url}purchase/${username}`)
+  makePayment(stripeToken: any, totalPrice: any): Observable<any> {
+    const url = "http://localhost:5000/checkout/"
+
+    return this.http.post<any>(url, { token: stripeToken, price: totalPrice })
   }
 }

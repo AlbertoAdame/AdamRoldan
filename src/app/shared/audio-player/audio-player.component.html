@@ -6,9 +6,12 @@
 </div>
 
 <!-- ORDENADOR -->
-<div class="audio-player-container">
+<div class="audio-player-container" *ngIf="currentBeat!=null">
     <div class="cover-art">
         <img [src]="currentBeat.img" alt="" srcset="" class="portada">
+        <div class="backgroundSpinner" *ngIf="spinner">
+            <span class="loader"></span>
+        </div>
     </div>
     <div class="song-details">
         <b>
@@ -109,7 +112,7 @@
 </div>
 
 <!-- MOVIL -->
-<div class="audio-player-container-mobile">
+<div class="audio-player-container-mobile" *ngIf="currentBeat!=null">
     <div class="controls">
         <!-- Boton left -->
         <button>
@@ -154,6 +157,10 @@
         <p>
             AdamRoldan
         </p>
+    </div>
+
+    <div class="backgroundSpinner" *ngIf="spinner">
+        <span class="loader"></span>
     </div>
 
 </div>

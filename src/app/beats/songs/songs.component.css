@@ -44,7 +44,8 @@
     cursor: pointer;
     border-radius: 8px;
     object-fit: cover;
-    width: 180px;
+    /* width: 180px; */
+    width: 150px;
 }
 
 .productTitle {
@@ -86,6 +87,21 @@
     justify-content: space-between;
     margin-left: 50px;
 
+}
+
+.cartButtonShort {
+    width: 60px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    background-color: #1b8d57;
+    padding-left: 15px;
+    padding-right: 15px;
+    color: white;
+    border: solid 2px #1b8d57;
+    border-radius: 5px;
+    margin-bottom: 2px;
+    justify-content: space-between;
 }
 
 .esconder {
@@ -188,10 +204,9 @@
 
 .filtro {
     padding: 13px;
-    padding-left: 75px;
-    padding-right: 82px;
+    padding-left: 67px;
+    padding-right: 60px;
     cursor: pointer;
-
     position: absolute;
 
     opacity: 0;
@@ -282,6 +297,8 @@ input {
 }
 
 .chip {
+    margin-bottom: 15px;
+    margin-top: 15px;
     margin-right: 10px;
     letter-spacing: 0.5px !important;
 }
@@ -290,7 +307,18 @@ input {
 
 
 /* ORDENADOR */
-@media screen and (min-width: 769px) {}
+@media screen and (min-width: 1300px) {
+    .chip {
+        margin-bottom: 0px;
+        margin-top: 0px;
+    }
+}
 
 /* TABLET */
-@media screen and (min-width: 481px) and (max-width:768px) {}
+@media screen and (min-width: 481px) and (max-width:1299px) {
+
+    .chip {
+        margin-bottom: 15px;
+        margin-top: 15px;
+    }
+}

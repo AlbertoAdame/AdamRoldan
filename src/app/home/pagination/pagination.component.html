@@ -1,18 +1,21 @@
-<div class="container songsList">
+<div class="container table-container songsList">
+
+  <h2 class="row">{{ "Recommended" | translate }}</h2>
+
 
   <!-- **************************** TAG ********************************** -->
   <div class="listProductTag row">
 
-    <span class="col"></span>
+    <span class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6"></span>
 
-    <span class="productTitleTag col">{{ "TITLE" | translate }}
+    <span class="productTitleTag col-xl-4 col-lg-5 col-md-5 col-sm-5 d-none d-sm-block">{{ "TITLE" | translate }}
     </span>
 
-    <span class="productTimeTag col">{{ "TIME" | translate }}</span>
+    <span class="productTimeTag col-xl-2 col-lg-1 d-none d-lg-block">{{ "TIME" | translate }}</span>
 
-    <span class="productBpmTag col">BPM</span>
+    <span class="productBpmTag col-xl-2 col-lg-1 d-none d-lg-block">BPM</span>
 
-    <span class="col"></span>
+    <span class="col-xl-2 col-lg-3 col-md-5 col-sm-5 col-6"></span>
 
   </div>
 
@@ -22,35 +25,33 @@
 
   <div class="listProduct row"
     *ngFor="let beat of results| paginate: { itemsPerPage: numberOfElements, currentPage: actualPage, totalItems: totalElements }">
-    <div (click)="audioPlayer(beat)" class="newDiv">
+    <div (click)="audioPlayer(beat)" class="newDiv ">
 
-      <div class="picture col" alt="portada">
-        <img src={{beat.img}} alt="image" width="50" height="50" class="productImage">
+      <div class="picture col-xl-2 col-lg-2 col-md-2 col-sm-2 col-6" alt="portada">
+        <img src={{beat.img}} alt="image" width="100%" height="50" class="productImage">
         <div class="filtro">
           <i class="fa-solid fa-play fa-2xl" style="color: #e0e0e0;"></i>
         </div>
       </div>
 
-      <span class="productTitle col">{{beat.title}}</span>
+      <span class="productTitle col-xl-4 col-lg-5 col-md-5 col-sm-5 d-none d-sm-block">{{beat.title}}</span>
 
-      <span class="productTime col">{{secondsToString(beat.time)}}</span>
+      <span class="productTime col-xl-2 col-lg-1 d-none d-lg-block">{{secondsToString(beat.time)}}</span>
 
-      <span class="productBpm col">{{beat.bpm}}</span>
+      <span class="productBpm col-xl-2 col-lg-1 d-none d-lg-block">{{beat.bpm}}</span>
 
     </div>
 
-    <div class="share-button col">
+    <div class="share-button col-xl-2 col-lg-3 col-md-5 col-sm-5 col-6">
 
-      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-share-fill share"
+      <!-- <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-share-fill share"
         viewBox="0 0 16 16">
         <path
           d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
-      </svg>
-
-
+      </svg> -->
 
       <button class="cartButton" (click)="addToCart(beat)" [ngClass]="{esconder: beat.bought}">
-        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart-plus "
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart-plus"
           viewBox="0 0 16 16">
           <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z" />
           <path
@@ -72,17 +73,22 @@
 
     </div>
 
-
-    <hr class="division">
+    <div class="row-12">
+      <hr class="division">
+    </div>
 
   </div>
 
   <div id="pagination container">
     <div class="row">
-      <span class="col text">{{ "Showing" | translate }}{{numberOfElements}} {{ "of" | translate }} {{totalElements}} {{
+      <span class="text paginas col-xl-3 col-lg-3 d-none d-lg-block">{{ "Showing" | translate
+        }}{{numberOfElements}} {{ "of" | translate }}
+        {{totalElements}}
+        {{
         "entries" | translate }}</span>
-      <pagination-controls (pageChange)="pageChangeEvent($event)" class="my-pagination col"></pagination-controls>
-      <div class="selection col">
+      <pagination-controls (pageChange)="pageChangeEvent($event)"
+        class="my-pagination paginas col-xl-6 col-lg-7 col-md-12 col-sm-12 col-12"></pagination-controls>
+      <div class="selection paginas col-xl-3 col-lg-2 d-none d-lg-block">
         <form action="pageSize()">
           <select class="form-select" name="myselect" [(ngModel)]="numberOfElements" (change)="changePageSize()">
             <option [value]="5">5</option>
@@ -92,76 +98,5 @@
         </form>
       </div>
     </div>
-  </div>
-</div>
-
-<!-- MOBILE -->
-
-<div class="container songsList-mobile">
-
-  <!-- **************************** TAG ********************************** -->
-  <!-- <div class="listProductTag row">
-
-    <span class="col"></span>
-
-    <span class="productTitleTag col">TITLE</span>
-
-    <span class="productTimeTag col">TIME</span>
-
-    <span class="productBpmTag col">BPM</span>
-
-    <span class="col"></span>
-
-  </div> -->
-
-  <!-- ************************** END TAG ********************************** -->
-
-
-
-  <div class="listProduct"
-    *ngFor="let beat of results| paginate: { itemsPerPage: numberOfElements, currentPage: actualPage, totalItems: totalElements }">
-    <div class="picture" alt="portada">
-      <img src={{beat.img}} alt="image" width="50" height="50" class="productImage">
-    </div>
-
-    <br>
-
-    <span class="productTime">{{ "Time" | translate }}: {{secondsToString(beat.time)}}</span>
-
-
-
-    <span class="productBpm">BPM: {{beat.bpm}}</span>
-
-
-
-    <div class="share-button">
-
-
-      <button class="cartButton">
-        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart-plus "
-          viewBox="0 0 16 16">
-          <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z" />
-          <path
-            d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
-        </svg>
-        <span style="margin-left: 10px; font-weight: 500;">{{beat.price}} $</span>
-      </button>
-
-      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-share-fill share"
-        viewBox="0 0 16 16">
-        <path
-          d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
-      </svg>
-
-    </div>
-
-    <hr class="division">
-
-  </div>
-  <div class="">
-    <pagination-controls (pageChange)="pageChangeEvent($event)" class="my-pagination"></pagination-controls>
-  </div>
-
-  <div id="pagination container">
   </div>
 </div>

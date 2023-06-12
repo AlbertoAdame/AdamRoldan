@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2'
@@ -63,6 +63,8 @@ export class LoginComponent implements OnInit {
 
   captcha: string = '';
 
+  buttonGhost: boolean = false;
+
   imagenCargadaRegister = false;
 
   constructor(private authService: AuthService, private router: Router, private userService: UserService, private cookies: CookieService, private translate: TranslateService, private language: LanguageService) {
@@ -72,6 +74,10 @@ export class LoginComponent implements OnInit {
   // ************************** Si entramos en el login borramos las cookies ***************************
 
   ngOnInit(): void {
+
+    if (window.innerWidth < 768) {
+      this.buttonGhost = true
+    }
 
     const backgroundImageLogin = new Image();
     const backgroundImageRegister = new Image();
@@ -89,8 +95,6 @@ export class LoginComponent implements OnInit {
     if (this.language.currentLanguage == undefined)
       this.translate.use('en');
     else {
-      console.log(this.language.currentLanguage);
-
       this.translate.use(this.language.currentLanguage);
     }
 
@@ -317,4 +321,13 @@ export class LoginComponent implements OnInit {
   }
 
 
+  @HostListener('window:resize', ['$event'])
+  onWindowResize(event: Event) {
+    if (window.innerWidth < 768) {
+      this.buttonGhost = true
+
+    } else {
+      this.buttonGhost = false
+    }
+  }
 }
