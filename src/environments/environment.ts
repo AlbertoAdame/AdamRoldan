@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // url: 'https://adamroldanapi-production.up.railway.app/'
-  url: 'http://localhost:8086/'
+  url: 'https://adamroldanapi-production.up.railway.app/'
+  // url: 'http://localhost:8086/'
 };
 
 /*
