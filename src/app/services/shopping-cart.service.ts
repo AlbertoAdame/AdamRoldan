@@ -97,7 +97,7 @@ export class ShoppingCartService {
 
   makePayment(stripeToken: any, totalPrice: any): Observable<any> {
     // const url = "http://localhost:5000/checkout/"
-    const urlDeploy = "https://stripeserver-production.up.railway.app/"
+    const urlDeploy = "https://stripeserver-production.up.railway.app/checkout/"
 
     return this.http.post<any>(urlDeploy, { token: stripeToken, price: totalPrice })
   }
