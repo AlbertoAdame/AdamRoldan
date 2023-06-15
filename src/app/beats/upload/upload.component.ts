@@ -39,12 +39,14 @@ export class UploadComponent implements OnInit {
   moods: Mood[] = []
 
   isLoggedIn!: boolean;
+  audio = new Audio();
+
 
   myForm: FormGroup = this.fb.group({
     title: ['', [Validators.required]],
     price: ['', [Validators.required]],
     bpm: ['', [Validators.required]],
-    time: ['', [Validators.required]],
+    time: [''],
     picture: ['', [Validators.required]],
     audio: [''],
     fileSource: [''],
@@ -105,55 +107,126 @@ export class UploadComponent implements OnInit {
       this.myForm.markAllAsTouched()
       return
     }
-
     this.activeSpinner(true);
 
-    //Pasaremos todos los valores recibidos a los jsons
-    this.jsonBeat.title = this.myForm.value.title
-    this.jsonBeat.price = this.myForm.value.price
-    this.jsonBeat.bpm = this.myForm.value.bpm
-    this.jsonBeat.time = this.myForm.value.time
-    this.jsonBeat.audio = this.myForm.value.audio
+    this.audio.src = this.myForm.value.audio;
+    console.log(this.myForm.value.audio);
 
-    this.jsonGenre.genre = this.myForm.value.genre
 
-    this.jsonMood.mood = this.myForm.value.mood
+    this.audio.load()
+    //Para detectar la duración del beat
+    if (this.myForm.value.audio != '') {
+      this.audio.addEventListener('loadedmetadata', () => {
+        this.jsonBeat.time = this.audio.duration
+        this.jsonBeat.audio = this.myForm.value.audio
+        this.jsonBeat.title = this.myForm.value.title
+        this.jsonBeat.price = this.myForm.value.price
+        this.jsonBeat.bpm = this.myForm.value.bpm
 
-    //Llamaremos al servicio para subir el beat
-    this.beatService.uploadBeat(this.jsonBeat, this.myForm.get('fileSource')?.value, this.jsonGenre, this.jsonMood)
-      .subscribe({
-        next: (resp) => {
-          if (resp) {
-            this.activeSpinner(false);
-            Swal.fire({
-              icon: 'success',
-              title: 'Beat was added',
-              text: 'You will receive an answer soon'
-            }),
-              this.myForm.reset()
-          }
-          else {
+        this.jsonGenre.genre = this.myForm.value.genre
+
+        this.jsonMood.mood = this.myForm.value.mood
+
+        //Llamaremos al servicio para subir el beat
+        this.beatService.uploadBeat(this.jsonBeat, this.myForm.get('fileSource')?.value, this.jsonGenre, this.jsonMood)
+          .subscribe({
+            next: (resp) => {
+              console.log(resp);
+              if (resp == true) {
+                this.activeSpinner(false);
+                Swal.fire({
+                  icon: 'success',
+                  text: 'Beat was added'
+                }),
+                  this.myForm.reset()
+              }
+              else {
+                this.activeSpinner(false);
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Your file is too heavy',
+
+                })
+              }
+            },
+            error: (error) => {
+              this.activeSpinner(false);
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+
+              })
+              console.log(error)
+            }
+          });
+      });
+    }
+    else {
+      this.jsonBeat.time = this.audio.duration
+      this.jsonBeat.audio = this.myForm.value.audio
+      this.jsonBeat.title = this.myForm.value.title
+      this.jsonBeat.price = this.myForm.value.price
+      this.jsonBeat.bpm = this.myForm.value.bpm
+
+      this.jsonGenre.genre = this.myForm.value.genre
+
+      this.jsonMood.mood = this.myForm.value.mood
+
+      //Llamaremos al servicio para subir el beat
+      this.beatService.uploadBeat(this.jsonBeat, this.myForm.get('fileSource')?.value, this.jsonGenre, this.jsonMood)
+        .subscribe({
+          next: (resp) => {
+            if (resp == true) {
+              this.activeSpinner(false);
+              Swal.fire({
+                icon: 'success',
+                text: 'Beat was added'
+              }),
+                this.myForm.reset()
+            }
+            else if (resp.error.status == 'CONFLICT') {
+              this.activeSpinner(false);
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Ya existe un beat con este nombre',
+
+              })
+            }
+
+            else if (resp.error.message == 'Maximum upload size exceeded') {
+              this.activeSpinner(false);
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Your file is too heavy',
+
+              })
+            }
+            else {
+              this.activeSpinner(false);
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+
+              })
+            }
+          },
+          error: (error) => {
             this.activeSpinner(false);
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Your file is too heavy',
+              text: 'Something went wrong!',
 
             })
+            console.log(error)
           }
-        },
-        error: (error) => {
-          this.activeSpinner(false);
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong!',
-
-          })
-          console.log(error)
-        }
-      });
-
+        });
+    }
   }
 
   /**

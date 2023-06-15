@@ -1,9 +1,18 @@
+// To parse this data:
+//
+//   import { Convert } from "./file";
+//
+//   const purchase = Convert.toPurchase(json);
+//
+// These functions will throw an error if the JSON doesn't
+// match the expected interface, even if the JSON is valid.
+
 export interface Purchase {
-    idRequest: IDRequest;
-    idBeat: IDBeatClass | number;
+    idRequest: IDRequestClass | number;
+    idBeat: IDBeat;
 }
 
-export interface IDBeatClass {
+export interface IDBeat {
     idBeat: number;
     title: string;
     price: number;
@@ -12,49 +21,30 @@ export interface IDBeatClass {
     img: string;
     audio: string;
     date: number[];
-    genreList: IDBeatGenreList[];
-    mood: string;
+    genreList: GenreList[];
+    mood: MoodClass;
 }
 
-export interface IDBeatGenreList {
+export interface GenreList {
     idBeat: number;
+    genre: Genre;
+}
+
+export interface Genre {
     genre: string;
 }
 
-export interface IDRequest {
+export interface MoodClass {
+    mood: string;
+}
+
+export interface IDRequestClass {
     idRequest: number;
     address: string;
     date: number[];
     totalPrice: number;
     iva: number;
     username: Username;
-    beatList: Array<BeatListClass | number>;
-}
-
-export interface BeatListClass {
-    idBeat: number;
-    title: string;
-    price: number;
-    time: number;
-    bpm: number;
-    img: string;
-    audio: string;
-    date: number[];
-    genreList: BeatListGenreList[];
-    mood: MoodClass | string;
-}
-
-export interface BeatListGenreList {
-    idBeat: number;
-    genre: GenreClass | string;
-}
-
-export interface GenreClass {
-    genre: string;
-}
-
-export interface MoodClass {
-    mood: string;
 }
 
 export interface Username {
@@ -63,6 +53,7 @@ export interface Username {
     name: string;
     email: string;
     role: string;
+    address: string;
     enabled: boolean;
     authorities: Authority[];
     accountNonExpired: boolean;
@@ -240,10 +231,10 @@ function r(name: string) {
 
 const typeMap: any = {
     "Purchase": o([
-        { json: "idRequest", js: "idRequest", typ: r("IDRequest") },
-        { json: "idBeat", js: "idBeat", typ: u(r("IDBeatClass"), 0) },
+        { json: "idRequest", js: "idRequest", typ: u(r("IDRequestClass"), 0) },
+        { json: "idBeat", js: "idBeat", typ: r("IDBeat") },
     ], false),
-    "IDBeatClass": o([
+    "IDBeat": o([
         { json: "idBeat", js: "idBeat", typ: 0 },
         { json: "title", js: "title", typ: "" },
         { json: "price", js: "price", typ: 3.14 },
@@ -252,43 +243,26 @@ const typeMap: any = {
         { json: "img", js: "img", typ: "" },
         { json: "audio", js: "audio", typ: "" },
         { json: "date", js: "date", typ: a(0) },
-        { json: "genreList", js: "genreList", typ: a(r("IDBeatGenreList")) },
-        { json: "mood", js: "mood", typ: "" },
+        { json: "genreList", js: "genreList", typ: a(r("GenreList")) },
+        { json: "mood", js: "mood", typ: u(r("MoodClass"), "") },
     ], false),
-    "IDBeatGenreList": o([
+    "GenreList": o([
         { json: "idBeat", js: "idBeat", typ: 0 },
+        { json: "genre", js: "genre", typ: r("Genre") },
+    ], false),
+    "Genre": o([
         { json: "genre", js: "genre", typ: "" },
     ], false),
-    "IDRequest": o([
+    "MoodClass": o([
+        { json: "mood", js: "mood", typ: "" },
+    ], false),
+    "IDRequestClass": o([
         { json: "idRequest", js: "idRequest", typ: 0 },
         { json: "address", js: "address", typ: "" },
         { json: "date", js: "date", typ: a(0) },
         { json: "totalPrice", js: "totalPrice", typ: 3.14 },
         { json: "iva", js: "iva", typ: 0 },
         { json: "username", js: "username", typ: r("Username") },
-        { json: "beatList", js: "beatList", typ: a(u(r("BeatListClass"), 0)) },
-    ], false),
-    "BeatListClass": o([
-        { json: "idBeat", js: "idBeat", typ: 0 },
-        { json: "title", js: "title", typ: "" },
-        { json: "price", js: "price", typ: 3.14 },
-        { json: "time", js: "time", typ: 0 },
-        { json: "bpm", js: "bpm", typ: 0 },
-        { json: "img", js: "img", typ: "" },
-        { json: "audio", js: "audio", typ: "" },
-        { json: "date", js: "date", typ: a(0) },
-        { json: "genreList", js: "genreList", typ: a(r("BeatListGenreList")) },
-        { json: "mood", js: "mood", typ: u(r("MoodClass"), "") },
-    ], false),
-    "BeatListGenreList": o([
-        { json: "idBeat", js: "idBeat", typ: 0 },
-        { json: "genre", js: "genre", typ: u(r("GenreClass"), "") },
-    ], false),
-    "GenreClass": o([
-        { json: "genre", js: "genre", typ: "" },
-    ], false),
-    "MoodClass": o([
-        { json: "mood", js: "mood", typ: "" },
     ], false),
     "Username": o([
         { json: "username", js: "username", typ: "" },
@@ -296,6 +270,7 @@ const typeMap: any = {
         { json: "name", js: "name", typ: "" },
         { json: "email", js: "email", typ: "" },
         { json: "role", js: "role", typ: "" },
+        { json: "address", js: "address", typ: "" },
         { json: "enabled", js: "enabled", typ: true },
         { json: "authorities", js: "authorities", typ: a(r("Authority")) },
         { json: "accountNonExpired", js: "accountNonExpired", typ: true },

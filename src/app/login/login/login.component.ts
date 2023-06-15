@@ -7,6 +7,7 @@ import { UserService } from '../../services/user.service';
 import { CookieService } from 'ngx-cookie-service';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from '../../services/language.service';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 @Component({
   selector: 'app-login',
@@ -67,7 +68,8 @@ export class LoginComponent implements OnInit {
 
   imagenCargadaRegister = false;
 
-  constructor(private authService: AuthService, private router: Router, private userService: UserService, private cookies: CookieService, private translate: TranslateService, private language: LanguageService) {
+  constructor(private authService: AuthService, private router: Router, private userService: UserService, private cookies: CookieService,
+    private translate: TranslateService, private language: LanguageService, private spinnerService: SpinnerService) {
     this.translate.addLangs(['es', 'en']);
   }
 
@@ -105,6 +107,7 @@ export class LoginComponent implements OnInit {
 
   //Aquí haremos el login
   login() {
+    this.activeSpinner(true);
     if (this.logInForm.invalid) {
       this.logInForm.control.markAllAsTouched();
       return;
@@ -115,10 +118,12 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.username, this.password)
         .subscribe({
           next: (resp) => {
-            if (resp) {
+            this.activeSpinner(false);
+            if (resp == true) {
               this.router.navigate(['/']);
             }
-            else {
+            else if (resp.error.status == 'UNAUTHORIZED') {
+
               this.username = '';
               this.password = '';
               Swal.fire({
@@ -126,11 +131,22 @@ export class LoginComponent implements OnInit {
                 title: 'Oops...',
                 text: 'Mail or password incorrect',
                 confirmButtonColor: '#9e1815',
-
+              })
+            }
+            else {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+                confirmButtonColor: '#9e1815',
               })
             }
           },
-          error: error => console.log(error)
+          error: (error) => {
+            console.log(error)
+            this.activeSpinner(false);
+          }
+
         })
     }
     else {
@@ -148,6 +164,7 @@ export class LoginComponent implements OnInit {
 
   //Aquí haremos el register
   newAccount(): void {
+    this.activeSpinner(true);
     if (this.registerForm.invalid) {
       this.registerForm.control.markAllAsTouched();
       return;
@@ -157,6 +174,7 @@ export class LoginComponent implements OnInit {
       this.userService.newUser(this.newUsername, this.newPassword, this.newName, this.newEmail)
         .subscribe({
           next: (resp) => {
+            this.activeSpinner(false);
             if (resp) {
               Swal.fire({
                 icon: 'success',
@@ -171,8 +189,26 @@ export class LoginComponent implements OnInit {
 
             }
           },
-          error: (error) =>
+          error: (error) => {
+            this.activeSpinner(false);
+            if (error.error.status == 'CONFLICT') {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Este usuario ya existe',
+                confirmButtonColor: '#9e1815',
+              })
+            }
+            else {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+                confirmButtonColor: '#9e1815',
+              })
+            }
             console.log(error)
+          }
         });
 
     }
@@ -329,5 +365,13 @@ export class LoginComponent implements OnInit {
     } else {
       this.buttonGhost = false
     }
+  }
+
+  /**
+* Para activar o desactivar el spinner
+* @param value 
+*/
+  activeSpinner(value: boolean) {
+    this.spinnerService.spinnerSubject.next(value);
   }
 }

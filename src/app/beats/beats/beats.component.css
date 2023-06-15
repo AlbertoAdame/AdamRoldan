@@ -16,11 +16,9 @@
   color: white;
 }
 
-.addButton {
-  position: absolute;
-  right: 20%;
-  top: 145px;
 
+
+.addButton {
   font-size: large;
   width: 130px;
   height: 50px;
@@ -34,7 +32,11 @@
   border: none;
   border-radius: 5px;
   margin-bottom: 2px;
+  margin-top: 25px;
+  margin-left: 38px;
+
 }
+
 
 .addButton:hover {
   background-color: #226db3;
@@ -87,3 +89,35 @@
 .cartPicture {
   margin-top: -7px;
 }
+
+
+/* ORDENADOR */
+@media screen and (min-width: 1300px) {
+
+  .addButton {
+    position: absolute;
+    right: 20%;
+    top: 145px;
+
+    font-size: large;
+    width: 130px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2574bf;
+    color: white;
+    letter-spacing: 5%;
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 2px;
+    margin-top: 0px;
+    margin-left: 0px;
+  }
+
+
+}
+
+/* TABLET */
+@media screen and (min-width: 481px) and (max-width:1299px) {}

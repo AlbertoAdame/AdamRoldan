@@ -1,4 +1,4 @@
-<div class="progress-slider">
+<div class="progress-slider" (click)="changeIcon()">
     <mat-slider min="0" [max]="totalDuration" (input)="seekToPosition()" discrete class="current" color="warn"
         [displayWith]="formatLabel">
         <input matSliderThumb [(ngModel)]="currentPosition">
@@ -32,7 +32,7 @@
             </svg>
         </button>
         <!-- Boton left -->
-        <button>
+        <button (click)="previousSong()">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                 class="bi bi-skip-start-fill left" viewBox="0 0 16 16">
                 <path
@@ -54,7 +54,7 @@
             </svg>
         </button>
         <!-- Boton right -->
-        <button>
+        <button (click)="nextSong()">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                 class="bi bi-skip-end-fill right" viewBox="0 0 16 16">
                 <path

@@ -21,7 +21,9 @@
 
   <!-- ************************** END TAG ********************************** -->
 
-
+  <div class="backgroundSpinner" *ngIf="spinner">
+    <span class="loader"></span>
+  </div>
 
   <div class="listProduct row"
     *ngFor="let beat of results| paginate: { itemsPerPage: numberOfElements, currentPage: actualPage, totalItems: totalElements }">
@@ -73,8 +75,8 @@
 
     </div>
 
-    <div class="row-12">
-      <hr class="division">
+    <div class="row-12 division">
+      <hr style="width: 100%;">
     </div>
 
   </div>

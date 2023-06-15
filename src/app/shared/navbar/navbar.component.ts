@@ -21,6 +21,7 @@ export class NavbarComponent implements OnInit {
 
   search: boolean = false;
   cart: boolean = false;
+  animation: boolean = true;
   color: string = 'white';
   username: string = "";
   query: string = "";
@@ -30,7 +31,7 @@ export class NavbarComponent implements OnInit {
   currentUrl = this.router.url;
 
   isLoggedIn!: boolean;
-  role: boolean = false;
+  role: string = '';
 
   currentCartItems: Content[] = [];
   totalPrice: string = "0.00";
@@ -43,6 +44,8 @@ export class NavbarComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+
 
     this.currentCartItems = this.shoppingCartService.beats;
 
@@ -65,6 +68,9 @@ export class NavbarComponent implements OnInit {
     this.authService.isLoggedIn.subscribe({
       next: (resp) => {
         this.isLoggedIn = resp;
+        setTimeout(() => {
+          this.role = this.cookies.get('role');
+        }, 0.01);
       }
 
     })
@@ -86,23 +92,24 @@ export class NavbarComponent implements OnInit {
   }
 
   //Hemos desactivado la barra de búsqueda para esta parte del proyecto
-  showSearchBar(): void {
-    this.search = !this.search;
+  // showSearchBar(): void {
+  //   this.search = !this.search;
 
-    if (this.color === 'white')
-      this.color = 'black';
-    else
-      this.color = 'white';
-  }
+  //   if (this.color === 'white')
+  //     this.color = 'black';
+  //   else
+  //     this.color = 'white';
+  // }
 
-  //Al pulsar mostraremos el carrito, aunque lo tendremos desactivado para esta partde del proyecto
   showCart(): void {
+    this.animation = true
     this.cart = !this.cart
   }
 
   //Este método lo usaremos para que no se cierre la ventana emergente al hacer click encima
   notChangeCart() {
     setTimeout(() => {
+      this.animation = false
       this.cart = true;
     }, 0.01);
   }

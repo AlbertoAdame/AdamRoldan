@@ -286,8 +286,6 @@ body {
 
 
 .division {
-  width: 100%;
-  margin-top: 15px;
   display: flex;
   justify-content: center;
 
@@ -307,275 +305,35 @@ body {
   display: contents;
 }
 
+/* ---------------------------------------SPINNER------------------------------------------- */
 
-/* 
-@media screen and (min-width: 769px) {
+.backgroundSpinner {
+  padding-top: 45px;
+  padding-bottom: 10px;
+  animation: show 0.6s;
+  display: flex;
+  justify-content: center;
+  animation: show 0.6s;
 
-
-  #wrapper {
-    margin: 0 auto;
-    display: block;
-    width: 960px;
-    margin-top: -15px;
-
-  }
-
-  .page-header {
-    text-align: center;
-    font-size: 1.5em;
-    font-weight: normal;
-    border-bottom: 1px solid #ddd;
-    margin: 30px 0
-  }
-
-  #pagination {
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    margin-bottom: 25px;
-
-  }
-
-  #pagination li {
-    display: inline;
-    cursor: pointer;
-  }
-
-  #pagination li a {
-    display: inline-block;
-    text-decoration: none;
-    padding: 5px 10px;
-    color: #000;
-  }
-
-  #pagination li a {
-    border-radius: 100%;
-    width: 35px;
-    -webkit-transition: background-color 0.3s;
-    transition: background-color 0.3s
-  }
-
-  #pagination li a.active {
-    background-color: #e52d27;
-    color: #fff
-  }
-
-  #pagination li a:hover:not(.active) {
-    background-color: #ddd;
-  }
-
-  .b-pagination-outer {
-    width: 100%;
-    margin: 0 auto;
-    text-align: center;
-    overflow: hidden;
-    display: flex
-  }
-
-  #border-pagination {
-    margin: 0 auto;
-    padding: 0;
-    text-align: center
-  }
-
-  #border-pagination li {
-    display: inline;
-
-  }
-
-  #border-pagination li a {
-    display: block;
-    text-decoration: none;
-    color: #000;
-    padding: 5px 10px;
-    border: 1px solid #ddd;
-    float: left;
-
-  }
-
-  #border-pagination li a {
-    -webkit-transition: background-color 0.4s;
-    transition: background-color 0.4s
-  }
-
-  #border-pagination li a.active {
-    background-color: #4caf50;
-    color: #fff;
-  }
-
-  #border-pagination li a:hover:not(.active) {
-    background: #ddd;
-  }
-
-  .my-pagination ::ng-deep .ngx-pagination .current {
-    background: #e52d27;
-    border-radius: 8px;
-  }
-
-  .my-pagination ::ng-deep .ngx-pagination a {
-    border-radius: 8px;
-  }
-
-  .my-pagination ::ng-deep ul {
-    margin: 0;
-    padding: 0;
-  }
-
-  .my-pagination {
-    display: flex;
-    justify-content: space-around;
-    margin: auto;
-  }
-
-
-  .text {
-    display: flex;
-    flex-direction: row-reverse;
-    margin-top: 6px;
-    color: rgb(159, 159, 159);
-  }
-
-  .form-select {
-    width: 17.5%;
-  }
-
-  .row {
-    margin-top: 0px;
-  }
-
-
-
-
-  .songsList {
-    display: unset;
-    margin-bottom: 50px;
-    margin-top: 45px;
-
-  }
-
-  .songsList-mobile {
-    display: none;
-
-  }
-
-  .listProductTag {
-    color: grey;
-    font-size: small;
-    margin: 25px 20%;
-    display: flex;
-    align-items: center;
-  }
-
-  .productTitleTag {
-    text-align: center;
-  }
-
-  .productTimeTag {
-    text-align: center;
-  }
-
-  .productBpmTag {
-    text-align: center;
-  }
-
-
-
-
-  .listProduct {
-    display: flex;
-    align-items: center;
-    padding-right: 15%;
-  }
-
-  .productImage {
-    border-radius: 8px;
-    object-fit: cover;
-    width: 180px;
-  }
-
-  .productTitle {
-    text-align: center;
-    width: 90%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .productTime {
-    text-align: center;
-  }
-
-  .productBpm {
-    text-align: center;
-    margin-left: 0;
-  }
-
-  .share-button {
-    margin-top: 0px;
-    width: 190px;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .share {
-    cursor: pointer;
-
-    margin-top: 10px;
-  }
-
-
-
-  .cartButton {
-    width: 140px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    background-color: #1b8d57;
-    padding-left: 15px;
-    padding-right: 15px;
-    color: white;
-    border: solid 2px #1b8d57;
-    border-radius: 5px;
-    margin-bottom: 2px;
-    justify-content: space-between;
-    margin-left: 2%;
-
-  }
-
-  .cartButton:hover {
-    background-color: #1a9b5f;
-    border: solid 2px #1a9b5f;
-  }
-
-  .cartButtonDelete {
-    width: 140px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    background-color: #ca2924;
-    padding-left: 15px;
-    padding-right: 15px;
-    color: white;
-    border-radius: 5px;
-    margin-bottom: 2px;
-    justify-content: space-between;
-    margin-left: 2%;
-    border: 0;
-    display: none;
-  }
-
-  .cartButtonDelete:hover {
-    background: #d81515;
-  }
-
-
-  .division {
-    margin: auto;
-    width: 600px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
 }
 
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #00000056;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
 
-@media screen and (min-width: 481px) and (max-width:769px) {} */
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

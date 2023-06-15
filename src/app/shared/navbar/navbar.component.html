@@ -37,6 +37,11 @@
                     {{ "CONTACT" | translate }}
                 </button>
             </li>
+            <li *ngIf="role == 'USER'">
+                <button class="buttonNav contact movil" [routerLink]="['/misBeats']" routerLinkActive="active">
+                    {{ "MISBEATS" | translate }}
+                </button>
+            </li>
             <!-- <li>
                 <button class="buttonNav-search">
 
@@ -140,7 +145,7 @@
     </div>
 
     <div class="closeHidden" [ngClass]="{active: cart}" (click)="showCart()">
-        <div class="cart" [ngClass]="{active: cart}" (click)="notChangeCart()">
+        <div class="cart cartNew" [ngClass]="{active: cart, cartNew:animation}" (click)="notChangeCart()">
 
 
 

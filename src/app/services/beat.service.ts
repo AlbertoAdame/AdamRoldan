@@ -55,7 +55,7 @@ export class BeatService {
   }
 
   //Subiremos un beat
-  uploadBeat(beat: any, picture: File, genre: Genre, mood: Mood): Observable<boolean> {
+  uploadBeat(beat: any, picture: File, genre: Genre, mood: Mood): Observable<any> {
     //Introduciremos todos los datos en un FormData para enviarlos
     const data: FormData = new FormData();
 
@@ -71,7 +71,7 @@ export class BeatService {
       }), catchError(error => {
         console.log(error);
 
-        return of(false)
+        return of(error)
       }));
   }
 

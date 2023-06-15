@@ -7,6 +7,7 @@ import { ComunicationService } from 'src/app/services/comunication.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import Swal from 'sweetalert2';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 @Component({
   selector: 'app-pagination',
@@ -26,14 +27,16 @@ export class PaginationComponent implements OnInit {
   numberOfElements: number = 5;//numero de beats por pagina
   actualPage: number = 0;
 
-
+  spinner: boolean = true;
 
   constructor(private beatService: BeatService, private comunicationService: ComunicationService, private translate: TranslateService,
-    private shoppingCartService: ShoppingCartService) {
+    private shoppingCartService: ShoppingCartService, private spinnerService: SpinnerService) {
     this.translate.addLangs(['es', 'en']);
   }
 
   ngOnInit(): void {
+
+    this.spinner = true
 
     this.currentCartItems = this.shoppingCartService.beats;
 
@@ -49,6 +52,7 @@ export class PaginationComponent implements OnInit {
     this.beatService.searchBeats(this.actualPage, this.numberOfElements)
       .subscribe({
         next: (resp) => {
+          this.spinner = false
 
           this.results = resp.content
           this.totalElements = resp.totalElements
@@ -60,12 +64,14 @@ export class PaginationComponent implements OnInit {
 
   //Para mostrar mas o menos valores
   pageChangeEvent(event: number) {
+    this.spinner = true
     this.actualPage = event;
     this.getBeats();
   }
 
   //Para mostrar mas o menos valores
   changePageSize() {
+    this.spinner = true
     this.getBeats();
   }
 
@@ -119,6 +125,14 @@ export class PaginationComponent implements OnInit {
       else
         element.bought = true;
     });
+  }
+
+  /**
+ * Para activar o desactivar el spinner
+ * @param value 
+ */
+  activeSpinner(value: boolean) {
+    this.spinnerService.spinnerSubject.next(value);
   }
 
 }

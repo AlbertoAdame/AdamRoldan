@@ -55,7 +55,7 @@ export class AuthService {
   }
 
   //Recuperamos el usuario y comprobamos que la contraseña sea correcta
-  login(email: string, password: string): Observable<boolean> {
+  login(email: string, password: string): Observable<any> {
     return this.http.post<TokenInterface>(this.url, { email, password }, this.httpOptions)
       .pipe(switchMap(token => {
         this.loggedIn.next(true);
@@ -69,7 +69,7 @@ export class AuthService {
         this.cookies.delete('token');
         this.cookies.delete('sub');
         this.cookies.delete('role');
-        return of(false)
+        return of(error)
       }))
 
   }

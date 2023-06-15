@@ -40,6 +40,10 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'misBeats',
+    loadChildren: () => import('./mis-beats/mis-beats.module').then(m => m.MisBeatsModule)
+  },
+  {
     path: '**',
     redirectTo: 'home',
   }

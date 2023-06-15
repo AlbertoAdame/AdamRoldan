@@ -13,6 +13,9 @@ import { ComunicationService } from '../../services/comunication.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 import { DataTableDirective } from 'angular-datatables';
+import { SpinnerService } from 'src/app/services/spinner.service';
+import { PurchasesService } from '../../services/purchases.service';
+import { Purchase } from 'src/app/interfaces/purchase.interface';
 
 
 @Component({
@@ -29,6 +32,7 @@ export class SongsComponent implements OnInit, OnDestroy {
   role: string = '';
 
   results: Content[] = [];
+  purchases: Purchase[] = [];
   currentCartItems: Content[] = [];
   genres: Genre[] = []
 
@@ -37,14 +41,19 @@ export class SongsComponent implements OnInit, OnDestroy {
   dtTrigger: Subject<any> = new Subject<any>();
 
   vetanaWidth: boolean = false;
+  username: string = '';
 
 
   constructor(private beatService: BeatService, private authService: AuthService, private cookies: CookieService, private genreService: GenreService,
-    private comunicationService: ComunicationService, private translate: TranslateService, private shoppingCartService: ShoppingCartService) {
+    private comunicationService: ComunicationService, private translate: TranslateService, private shoppingCartService: ShoppingCartService,
+    private spinnerService: SpinnerService, private purchasesService: PurchasesService) {
     this.translate.addLangs(['es', 'en']);
   }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.activeSpinner(true);
+    }, 0.01);
 
     if (window.innerWidth < 1375) {
       this.vetanaWidth = true
@@ -61,16 +70,42 @@ export class SongsComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (resp) => {
 
+          this.activeSpinner(false);
+
           this.results = resp.content
-          this.dtTrigger.next(this.results)
 
           this.changeButtonCart();
+
+          this.username = this.cookies.get('sub')
+          if (this.username != '') {
+            this.purchasesService.getPurchasesByName(this.username)
+              .subscribe({
+                next: (resp) => {
+
+                  this.purchases = resp
+
+                  this.results = this.results.filter((beat) => {
+                    // Retorna true si el idBeat no está presente en "compras"
+                    return !this.purchases.some((compra) => compra.idBeat.idBeat === beat.idBeat);
+                  });
+
+                  this.dtTrigger.next(this.results)
+
+                },
+                error: (error) => {
+                  console.log(error);
+                }
+              })
+          }
         },
         error: (error) => {
+          this.activeSpinner(false);
           console.log(error);
 
         }
       })
+
+
 
     //Opciones necesarias para el datatable
     this.dtOptions = {
@@ -85,8 +120,8 @@ export class SongsComponent implements OnInit, OnDestroy {
     this.authService.isAuthenticated();
     this.role = this.cookies.get('role')
 
-    const self = this;
-
+    // const self = this;
+    // 
     //Esto lo tendremos que hacer ya que cuando hemos hecho la dataTable responsive los botones han dejado de funcionar
     // $(document).ready(function () {
     //   $('#my-table tbody').on('click', '.cartButton', function () {
@@ -112,7 +147,7 @@ export class SongsComponent implements OnInit, OnDestroy {
 
   @HostListener('window:resize', ['$event'])
   onWindowResize(event: Event) {
-    if (window.innerWidth < 1375) {
+    if (window.innerWidth < 1590) {
       this.vetanaWidth = true
 
     } else {
@@ -142,9 +177,11 @@ export class SongsComponent implements OnInit, OnDestroy {
   }
 
   refreshBeats() {
+    this.activeSpinner(true);
     this.beatService.searchBeats(0, 200)
       .subscribe({
         next: (resp) => {
+          this.activeSpinner(false);
           this.results = resp.content
 
           this.dataTableElement.dtInstance.then((dtInstance: DataTables.Api) => {
@@ -157,6 +194,7 @@ export class SongsComponent implements OnInit, OnDestroy {
 
         },
         error: (error) => {
+          this.activeSpinner(false);
           console.log(error);
 
         }
@@ -166,6 +204,7 @@ export class SongsComponent implements OnInit, OnDestroy {
 
   //Al pulsar el botón de borrar beats hará esto
   onDelete(id: number) {
+
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -175,15 +214,18 @@ export class SongsComponent implements OnInit, OnDestroy {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
+      this.activeSpinner(true);
       if (result.isConfirmed) {
         this.beatService.deleteBeat(id)
           .subscribe(
             {
               next: (resp) => {
+                this.activeSpinner(false);
                 this.refreshBeats();
                 console.log(resp)
               },
               error: (error) => {
+                this.activeSpinner(false);
                 console.log(error)
               }
             }
@@ -244,14 +286,17 @@ export class SongsComponent implements OnInit, OnDestroy {
 
   //Cuando el método superior acabe satisfactoriamente llamaremos al servicio y añadiremos un género
   addGenre(idBeat: number, genre: string) {
+    this.activeSpinner(true);
     this.genreService.addBeatGenre(idBeat, genre)
       .subscribe({
         next: (resp) => {
+          this.activeSpinner(false);
           if (resp) {
             this.refreshBeats();
           }
 
           else {
+            this.activeSpinner(false);
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
@@ -261,6 +306,7 @@ export class SongsComponent implements OnInit, OnDestroy {
           }
         },
         error: (error) => {
+          this.activeSpinner(false);
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
@@ -271,6 +317,7 @@ export class SongsComponent implements OnInit, OnDestroy {
   }
   //Cuando pulsemos el boton de borrar género de un beat en concreto lo borrará
   onDeleteGenre(idBeat: number, genre: string) {
+    this.activeSpinner(true);
     this.genreService.getGenresNoAdded(idBeat).subscribe({
       next: (resp: any) => {
         this.genres = resp;
@@ -281,9 +328,11 @@ export class SongsComponent implements OnInit, OnDestroy {
             .subscribe(
               {
                 next: (resp) => {
+                  this.activeSpinner(false);
                   this.refreshBeats();
                 },
                 error: (error) => {
+                  this.activeSpinner(false);
                   console.log(error)
                 }
               }
@@ -341,5 +390,12 @@ export class SongsComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+ * Para activar o desactivar el spinner
+ * @param value 
+ */
+  activeSpinner(value: boolean) {
+    this.spinnerService.spinnerSubject.next(value);
+  }
 
 }

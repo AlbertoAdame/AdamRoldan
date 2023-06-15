@@ -21,9 +21,16 @@
     font-weight: 400;
 }
 
+.space {
+    margin-bottom: 100px;
+    margin-top: 75px;
+}
+
 .introducir {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
+    margin-right: 30px;
+    margin-bottom: 5px;
 }
 
 button {
@@ -38,9 +45,9 @@ button {
 }
 
 
-.fondoCarritoIzquierda {
+.fondoProducto {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 20% 70% 10%;
     align-items: center;
     background-color: rgb(255, 255, 255);
     margin: 20px;
@@ -52,6 +59,10 @@ button {
     margin-right: 0;
     width: 97%;
 
+}
+
+.pointer {
+    cursor: pointer;
 }
 
 .CarritoIzquierda {

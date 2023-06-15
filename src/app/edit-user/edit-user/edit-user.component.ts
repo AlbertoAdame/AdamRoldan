@@ -30,7 +30,7 @@ export class EditUserComponent {
   })
 
   constructor(private fb: FormBuilder, private authService: AuthService, private userService: UserService, private cookies: CookieService,
-    private translate: TranslateService, private language: LanguageService, private spinnerService: SpinnerService) {
+    private translate: TranslateService, private language: LanguageService, private spinnerService: SpinnerService, private router: Router) {
     this.translate.addLangs(['es', 'en']);
   }
 
@@ -86,6 +86,7 @@ export class EditUserComponent {
       .subscribe({
         next: (resp) => {
           this.activeSpinner(false);
+          this.router.navigateByUrl('home')
           Swal.fire({
             icon: 'success',
             title: 'Perfect',
