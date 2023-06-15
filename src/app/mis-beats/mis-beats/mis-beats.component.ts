@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PurchasesService } from '../../services/purchases.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Purchase } from 'src/app/interfaces/purchase.interface';
+import { SpinnerService } from '../../services/spinner.service';
 
 @Component({
   selector: 'app-mis-beats',
@@ -13,11 +14,14 @@ export class MisBeatsComponent implements OnInit {
   username: string = '';
   results: Purchase[] = []
   purchases: any = {}
-  constructor(private purchasesService: PurchasesService, private cookies: CookieService) {
+  constructor(private purchasesService: PurchasesService, private cookies: CookieService, private spinnerService: SpinnerService) {
 
   }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.activeSpinner(true);
+    }, 0.01);
     this.username = this.cookies.get('sub')
     this.purchasesService.getPurchasesByName(this.username)
       .subscribe({
@@ -25,6 +29,7 @@ export class MisBeatsComponent implements OnInit {
 
           this.results = resp
           this.ordenar()
+          this.activeSpinner(false);
         },
         error: (error) => {
           console.log(error);
@@ -53,12 +58,21 @@ export class MisBeatsComponent implements OnInit {
         }
       }
     });
+
+    console.log(this.purchases);
+
   }
 
   getPurchaseKeys(): string[] {
     return Object.keys(this.purchases);
   }
 
-
+  /**
+ * Para activar o desactivar el spinner
+ * @param value 
+ */
+  activeSpinner(value: boolean) {
+    this.spinnerService.spinnerSubject.next(value);
+  }
 
 }

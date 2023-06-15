@@ -40,6 +40,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    canActivate: [RolGuardGuard],
     path: 'misBeats',
     loadChildren: () => import('./mis-beats/mis-beats.module').then(m => m.MisBeatsModule)
   },
