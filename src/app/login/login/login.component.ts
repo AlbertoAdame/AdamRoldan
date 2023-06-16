@@ -107,8 +107,17 @@ export class LoginComponent implements OnInit {
 
   //Aquí haremos el login
   login() {
+
+    let incorrect = '';
+    let wrong = '';
+    this.translate.get('Mail or password incorrect')
+      .subscribe(arg => incorrect = arg);
+    this.translate.get('Something was wrong')
+      .subscribe(arg => wrong = arg);
+
     this.activeSpinner(true);
     if (this.logInForm.invalid) {
+      this.activeSpinner(false);
       this.logInForm.control.markAllAsTouched();
       return;
     }
@@ -123,21 +132,20 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['/']);
             }
             else if (resp.error.status == 'UNAUTHORIZED') {
-
+              this.activeSpinner(false);
               this.username = '';
               this.password = '';
               Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
-                text: 'Mail or password incorrect',
+                text: incorrect,
                 confirmButtonColor: '#9e1815',
               })
             }
             else {
+              this.activeSpinner(false);
               Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong!',
+                text: wrong,
                 confirmButtonColor: '#9e1815',
               })
             }
@@ -150,10 +158,10 @@ export class LoginComponent implements OnInit {
         })
     }
     else {
+      this.activeSpinner(false);
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong!',
+        text: wrong,
         confirmButtonColor: '#9e1815',
       })
 
@@ -164,6 +172,18 @@ export class LoginComponent implements OnInit {
 
   //Aquí haremos el register
   newAccount(): void {
+
+    let success = '';
+    let exist = '';
+    let wrong = '';
+    this.translate.get('Your account has been created')
+      .subscribe(arg => success = arg);
+    this.translate.get('This user already exists')
+      .subscribe(arg => exist = arg);
+    this.translate.get('Something was wrong')
+      .subscribe(arg => wrong = arg);
+
+
     this.activeSpinner(true);
     if (this.registerForm.invalid) {
       this.registerForm.control.markAllAsTouched();
@@ -178,8 +198,7 @@ export class LoginComponent implements OnInit {
             if (resp) {
               Swal.fire({
                 icon: 'success',
-                title: 'Congratulations!',
-                text: 'Your account was created',
+                text: success,
                 confirmButtonColor: '#1b8d57'
               })
               //esto lo haremos para que se recargue y te muestre la ventana del login
@@ -194,31 +213,26 @@ export class LoginComponent implements OnInit {
             if (error.error.status == 'CONFLICT') {
               Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
-                text: 'Este usuario ya existe',
+                text: exist,
                 confirmButtonColor: '#9e1815',
               })
             }
             else {
               Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong!',
+                text: wrong,
                 confirmButtonColor: '#9e1815',
               })
             }
             console.log(error)
           }
         });
-
     }
     else {
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong!',
+        text: wrong,
         confirmButtonColor: '#9e1815',
-
       })
     }
   }
@@ -355,7 +369,6 @@ export class LoginComponent implements OnInit {
   resolved(captchaResponse: string) {
     this.captcha = captchaResponse;
   }
-
 
   @HostListener('window:resize', ['$event'])
   onWindowResize(event: Event) {

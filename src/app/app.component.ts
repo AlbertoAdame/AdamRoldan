@@ -2,6 +2,8 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComunicationService } from './services/comunication.service';
 import { TranslateService } from '@ngx-translate/core';
 import { SpinnerService } from './services/spinner.service';
+import { AuthService } from './services/auth.service';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -20,8 +22,10 @@ export class AppComponent {
   currentLanguage: boolean = true;
 
   spinner: boolean = false;
+  role: string = '';
 
-  constructor(private comunicationService: ComunicationService, private translate: TranslateService, private spinnerService: SpinnerService) {
+  constructor(private comunicationService: ComunicationService, private translate: TranslateService, private spinnerService: SpinnerService
+    , private authService: AuthService, private cookies: CookieService) {
     this.translate.addLangs(['es', 'en']);
     let lang = localStorage.getItem('lang')
 
@@ -32,6 +36,15 @@ export class AppComponent {
     else {
       this.translate.setDefaultLang(lang);
     }
+
+    this.authService.isLoggedIn.subscribe({
+      next: (resp) => {
+        setTimeout(() => {
+          this.role = this.cookies.get('role');
+        }, 0.01);
+      }
+
+    })
 
   }
 

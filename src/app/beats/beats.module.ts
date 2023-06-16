@@ -15,6 +15,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../app.module';
 import { HttpClient } from '@angular/common/http';
 import { ChipModule } from 'primeng/chip';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 
 
@@ -42,7 +43,8 @@ import { ChipModule } from 'primeng/chip';
         deps: [HttpClient]
       }
     }),
-    ChipModule
+    ChipModule,
+    AngularFireStorageModule
   ],
   providers: [
     BeatService

@@ -26,13 +26,13 @@
                     BEATS
                 </button>
             </li>
-            <li>
+            <li *ngIf="role != 'ADMIN'">
 
                 <button class="buttonNav movil" [routerLink]="['/faq']" routerLinkActive="active">
                     FAQ
                 </button>
             </li>
-            <li>
+            <li *ngIf="role != 'ADMIN'">
                 <button class="buttonNav contact movil" [routerLink]="['/contact']" routerLinkActive="active">
                     {{ "CONTACT" | translate }}
                 </button>
@@ -61,7 +61,7 @@
                 </button>
             </li> -->
 
-            <li class="liBorder" (click)="showCart()">
+            <li class="liBorder" (click)="showCart()" *ngIf="role != 'ADMIN'">
                 <button class="buttonCart">
                     <div [matBadge]="currentCartItems.length" matBadgeColor="primary" matBadgePosition="after"
                         matBadgeSize="small" *ngIf="currentCartItems.length>0">

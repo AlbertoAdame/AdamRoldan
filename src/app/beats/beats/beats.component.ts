@@ -31,7 +31,7 @@ export class BeatsComponent implements OnInit {
 
   }
 
-  //Dejaremos esto aqui para el proyecto final
+  //Dejaremos esto aqui para el futuro
 
   // console() {
   //   this.beatService.searchBeatsPageable(0, 200, "date", this.query)

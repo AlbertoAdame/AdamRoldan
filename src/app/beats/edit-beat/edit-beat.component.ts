@@ -11,6 +11,7 @@ import { BeatInterface } from '../../interfaces/beat-response.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SpinnerService } from 'src/app/services/spinner.service';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-edit-beat',
@@ -27,11 +28,19 @@ export class EditBeatComponent implements OnInit {
   isLoggedIn!: boolean;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private beatService: BeatService, private moodService: MoodService,
-    private translate: TranslateService, private route: ActivatedRoute, private router: Router, private spinnerService: SpinnerService) {
+    private translate: TranslateService, private route: ActivatedRoute, private router: Router, private spinnerService: SpinnerService,
+    private language: LanguageService) {
     this.translate.addLangs(['es', 'en']);
   }
 
   ngOnInit() {
+
+    if (this.language.currentLanguage == undefined)
+      this.translate.use('en');
+    else {
+      this.translate.use(this.language.currentLanguage);
+    }
+
     //Este método nos indica si el token es valido
     this.authService.isLoggedIn.subscribe({
       next: (resp) => {
@@ -53,11 +62,10 @@ export class EditBeatComponent implements OnInit {
               bpm: resp.bpm,
               mood: resp.mood.mood
             })
-
           }
-
         }
       })
+
     //Llamaremos al servicio para obtener todos los moods
     this.moodService.getMoods()
       .subscribe({
@@ -65,7 +73,6 @@ export class EditBeatComponent implements OnInit {
           this.moods = resp;
         }
       })
-
   }
 
   myForm: FormGroup = this.fb.group({
@@ -83,6 +90,15 @@ export class EditBeatComponent implements OnInit {
 
 
   save() {
+    let success = '';
+    let exist = '';
+    let wrong = '';
+    this.translate.get('Beat was edited')
+      .subscribe(arg => success = arg);
+    this.translate.get('This title already exist')
+      .subscribe(arg => exist = arg);
+    this.translate.get('Something was wrong')
+      .subscribe(arg => wrong = arg);
 
     if (this.myForm.invalid) {
       this.myForm.markAllAsTouched()
@@ -99,14 +115,14 @@ export class EditBeatComponent implements OnInit {
           if (resp) {
             Swal.fire({
               icon: 'success',
-              title: 'Beat was edited'
+              title: success
             }),
               this.router.navigateByUrl('beats');
           }
           else {
             Swal.fire({
               icon: 'error',
-              text: 'Este título ya existe',
+              text: exist,
 
             })
           }
@@ -115,13 +131,11 @@ export class EditBeatComponent implements OnInit {
           this.activeSpinner(false);
           Swal.fire({
             icon: 'error',
-            title: 'Oops...',
-            text: 'Something was wrong!',
+            text: wrong,
 
           })
         }
       });
-
   }
 
 

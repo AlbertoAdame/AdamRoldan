@@ -13,11 +13,11 @@
 
                 <div>
                     <b class="titulitos"> {{item.title}} </b> <br>
-                    <small> {{item.price}} €</small>
+                    <small> {{item.price}} $</small>
                 </div>
                 <div class="introducir">
                     <button class="cancelar btn btn-danger" (click)="deleteProduct(item)">
-                        Eliminar
+                        {{ "Delete" | translate }}
                     </button>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                         d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
                 </svg>
                 <p>
-                    No hay productos
+                    {{ "Products not found" | translate }}
                 </p>
             </div>
         </div>
@@ -41,14 +41,14 @@
                 <div class="container">
                     <div class="row">
                         <div class="infoProducto">
-                            <span class="subtotalTitle col">Gross:</span>
-                            <span class="letrasFinal col">{{totalPrice}} €</span> <br>
+                            <span class="subtotalTitle col">{{ "Gross" | translate }}:</span>
+                            <span class="letrasFinal col">{{totalPrice}} $</span> <br>
                         </div>
                     </div>
                     <div class="row">
                         <div class="infoProducto">
-                            <span class="subtotalTitle col">Discount:</span>
-                            <span class="letrasFinal col">-0.00 €</span> <br>
+                            <span class="subtotalTitle col">{{ "Discount" | translate }}:</span>
+                            <span class="letrasFinal col">-0.00 $</span> <br>
                         </div>
                     </div>
 
@@ -67,13 +67,13 @@
                     <div class="row">
                         <div class="infoProducto">
                             <b class="subtotalTitle col">Total:</b>
-                            <b class="letrasFinal col">{{totalPrice}} €</b> <br>
+                            <b class="letrasFinal col">{{totalPrice}} $</b> <br>
                         </div>
                     </div>
 
                     <div id="introducir" class="row">
                         <button class="realizarCompra btn btn-warning" (click)="comprobacionesPurchase()">
-                            Terminar Pedido
+                            {{ "Complete order" | translate }}
                         </button>
                     </div>
                 </div>
@@ -81,15 +81,16 @@
             <div class="row fondoDireccionDerecha">
                 <div class="col">
                     <b>
-                        Dirección de facturación
+                        {{ "Billing address" | translate }}
                     </b>
                     <br>
                     <small>
-                        Su dirección actual es:
+                        {{ "Your current address" | translate }}:
+
                     </small>
                     <input type="text" name="address" class="form-control" id="address" [(ngModel)]="address">
                     <span class="form-text text-danger" *ngIf="address == '' || address == null">
-                        NO puede estar vacío
+                        {{ "Billing address can't be empty" | translate }}
                     </span>
                     <!-- <button class="cambiarDireccion btn btn-success">
                                 Cambiar Dirección

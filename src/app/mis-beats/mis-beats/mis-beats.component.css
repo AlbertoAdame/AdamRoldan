@@ -37,9 +37,13 @@
     flex-direction: column;
 }
 
+.titulitos {
+    display: none;
+}
+
 .introducir {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     margin-right: 30px;
     margin-bottom: 5px;
 }
@@ -55,21 +59,56 @@ button {
     margin-bottom: 12px;
 }
 
+.fondo {
+    box-shadow: 0 2px 2px rgb(0 0 0 / 1%), 0 8px 16px rgb(0 0 0 / 10%);
+    border-radius: 8px;
+    background-color: rgb(255, 255, 255);
+    margin-bottom: 30px;
+}
+
+
+.bloque {
+    display: block;
+}
+
+.infoPurchase {
+    display: flex;
+    padding: 15px;
+    padding-left: 40px;
+    padding-top: 20px;
+}
+
+.dividir {
+    display: flex;
+    justify-content: center;
+    margin-bottom: -15px;
+
+}
+
+.dividirBeats {
+    display: flex;
+    justify-content: center;
+}
+
+
+mat-divider {
+    width: 95%;
+}
+
 
 .fondoProducto {
     display: grid;
-    grid-template-columns: 20% 70% 10%;
+    grid-template-columns: 70% 0% 30%;
     align-items: center;
     background-color: rgb(255, 255, 255);
     margin: 20px;
-    height: 95px;
-    box-shadow: 0 2px 2px rgb(0 0 0 / 1%), 0 8px 16px rgb(0 0 0 / 10%);
-    border-radius: 8px;
+    height: 150px;
     margin-top: 0;
     margin-left: 0;
     margin-right: 0;
-    width: 97%;
-
+    margin-bottom: 0;
+    height: 120px;
+    border-radius: 8px;
 }
 
 .pointer {
@@ -188,51 +227,43 @@ mat-divider {
 
 /* ORDENADOR */
 @media screen and (min-width: 992px) {
-
-    .CarritoIzquierda {
-        width: 65.5%;
-        margin-bottom: 50px;
+    .fondoProducto {
+        display: grid;
+        grid-template-columns: 20% 70% 10%;
+        align-items: center;
+        background-color: rgb(255, 255, 255);
+        margin: 20px;
+        border-radius: 8px;
         margin-top: 0;
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 0;
+
     }
 
-    .fondoDireccionDerecha {
-        margin-bottom: 100%;
+    .titulitos {
+        display: contents;
     }
 
-    .noProducts {
-        font-size: xx-large;
-        font-weight: 900;
-        text-align: center;
-        margin-top: 48px;
-        padding-right: 50px;
-    }
 }
 
 /* TABLET */
 @media screen and (min-width: 481px) and (max-width:991px) {
-
-
-    /* .fondoCarritoIzquierda {
+    .fondoProducto {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: 20% 70% 10%;
         align-items: center;
         background-color: rgb(255, 255, 255);
         margin: 20px;
-        height: 95px;
-        box-shadow: 0 2px 2px rgb(0 0 0 / 1%), 0 8px 16px rgb(0 0 0 / 10%);
         border-radius: 8px;
-        margin-bottom: 0;
+        margin-top: 0;
         margin-left: 0;
-        width: 100%;
-    }*/
+        margin-right: 0;
+        margin-bottom: 0;
 
-    .CarritoIzquierda {
-        width: 100%;
-        padding: 0;
     }
 
-    .fondoCarritoIzquierda {
-        margin-right: 0;
-        width: 100%;
+    .titulitos {
+        display: contents;
     }
 }

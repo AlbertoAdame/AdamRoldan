@@ -41,6 +41,7 @@ export class SongsComponent implements OnInit, OnDestroy {
   dtTrigger: Subject<any> = new Subject<any>();
 
   vetanaWidth: boolean = false;
+  vetanaWidthCross: boolean = false;
   username: string = '';
 
 
@@ -51,16 +52,24 @@ export class SongsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    //Pondremos esto para que no de error
     setTimeout(() => {
       this.activeSpinner(true);
     }, 0.01);
 
+    //Para controlar ciertos elementos con  las responsividad
     if (window.innerWidth < 1375) {
       this.vetanaWidth = true
     }
 
+    //Para controlar ciertos elementos con  las responsividad
+    if (window.innerWidth < 1090) {
+      this.vetanaWidthCross = true
+    }
+
     this.currentCartItems = this.shoppingCartService.beats;
 
+    //Si cambia el precio cambiaremos el carrito
     this.shoppingCartService.totalPrice$.subscribe((totalPrice) => {
       this.changeButtonCart();
     });
@@ -105,8 +114,6 @@ export class SongsComponent implements OnInit, OnDestroy {
         }
       })
 
-
-
     //Opciones necesarias para el datatable
     this.dtOptions = {
       pagingType: 'full_numbers',
@@ -114,8 +121,6 @@ export class SongsComponent implements OnInit, OnDestroy {
       processing: true,
       responsive: true
     };
-
-    // this.beatService.searchBeatsPageable(0, 200, "date", '')
 
     this.authService.isAuthenticated();
     this.role = this.cookies.get('role')
@@ -147,6 +152,14 @@ export class SongsComponent implements OnInit, OnDestroy {
 
   @HostListener('window:resize', ['$event'])
   onWindowResize(event: Event) {
+
+    if (window.innerWidth < 1090) {
+      this.vetanaWidthCross = true
+
+    } else {
+      this.vetanaWidthCross = false
+    }
+
     if (window.innerWidth < 1590) {
       this.vetanaWidth = true
 
@@ -191,7 +204,6 @@ export class SongsComponent implements OnInit, OnDestroy {
             // Reinicializar la DataTable
             this.dtTrigger.next(this.results);
           });
-
         },
         error: (error) => {
           this.activeSpinner(false);
@@ -205,9 +217,16 @@ export class SongsComponent implements OnInit, OnDestroy {
   //Al pulsar el botón de borrar beats hará esto
   onDelete(id: number) {
 
+    let sure = '';
+    let revert = '';
+    this.translate.get('Are you sure?')
+      .subscribe(arg => sure = arg);
+    this.translate.get("You won't be able to revert this!")
+      .subscribe(arg => revert = arg);
+
     Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      title: sure,
+      text: revert,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -231,12 +250,30 @@ export class SongsComponent implements OnInit, OnDestroy {
             }
           );
       }
+      else {
+        this.activeSpinner(false);
+      }
     })
   }
 
 
   //Al pulsar el botón de añadir generos nos mostrará una lista con los géneros, y una vez elegido los añadirá 
   onAddGenre(id: number) {
+
+    let selectNewGenre = '';
+    let selectGenre = '';
+    let selected = '';
+    let max = '';
+
+    this.translate.get('selectNewGenre')
+      .subscribe(arg => selectNewGenre = arg);
+    this.translate.get('Select genre')
+      .subscribe(arg => selectGenre = arg);
+    this.translate.get('You selected')
+      .subscribe(arg => selected = arg);
+    this.translate.get('You cannot add more than 3 genres.')
+      .subscribe(arg => max = arg);
+
     //Reduce es más avanzado, y básicamente lo que hace es darle un formato en concreto a los valores del array que le facilitamos
     const genresObject = this.genres.reduce((obj, item) =>
       Object.assign(obj, { [item.genre]: item.genre }), {});
@@ -246,15 +283,14 @@ export class SongsComponent implements OnInit, OnDestroy {
       next: (resp: any) => {
         this.genres = resp;
         let assignedGenres = 6 - this.genres.length;
-        console.log(assignedGenres);
 
         if (assignedGenres < 3) {
           Swal.fire({
-            title: 'Select Your New Genre',
+            title: selectNewGenre,
             input: 'select',
             inputOptions: this.genres.reduce(
               (obj, item) => Object.assign(obj, { [item.genre]: item.genre }), {}),
-            inputPlaceholder: '-- Select genre --',
+            inputPlaceholder: '-- ' + selectGenre + ' --',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -263,7 +299,7 @@ export class SongsComponent implements OnInit, OnDestroy {
               this.addGenre(id, result.value);
               Swal.fire({
                 icon: 'success',
-                html: 'You selected: ' + result.value
+                html: selected + ': ' + result.value
               });
             }
           });
@@ -271,21 +307,26 @@ export class SongsComponent implements OnInit, OnDestroy {
         else {
           Swal.fire({
             icon: 'error',
-            text: 'No puedes añadir mas de 3 géneros',
+            text: max,
           })
         }
       },
       error: (error: any) => {
         console.log(error);
-
       }
     })
-
-
   }
 
   //Cuando el método superior acabe satisfactoriamente llamaremos al servicio y añadiremos un género
   addGenre(idBeat: number, genre: string) {
+
+    let wrong = '';
+    let exist = '';
+    this.translate.get("Genre wasn't added")
+      .subscribe(arg => wrong = arg);
+    this.translate.get('This genre already exists')
+      .subscribe(arg => exist = arg);
+
     this.activeSpinner(true);
     this.genreService.addBeatGenre(idBeat, genre)
       .subscribe({
@@ -299,8 +340,7 @@ export class SongsComponent implements OnInit, OnDestroy {
             this.activeSpinner(false);
             Swal.fire({
               icon: 'error',
-              title: 'Oops...',
-              text: 'Genre wasnt added',
+              text: wrong,
 
             })
           }
@@ -309,14 +349,17 @@ export class SongsComponent implements OnInit, OnDestroy {
           this.activeSpinner(false);
           Swal.fire({
             icon: 'error',
-            title: 'Oops...',
-            text: 'This genre already exists',
+            text: exist,
           })
         }
       });
   }
   //Cuando pulsemos el boton de borrar género de un beat en concreto lo borrará
   onDeleteGenre(idBeat: number, genre: string) {
+
+    let wrong = '';
+    this.translate.get('You cannot remove all the genres.')
+      .subscribe(arg => wrong = arg);
     this.activeSpinner(true);
     this.genreService.getGenresNoAdded(idBeat).subscribe({
       next: (resp: any) => {
@@ -342,13 +385,12 @@ export class SongsComponent implements OnInit, OnDestroy {
           this.refreshBeats();
           Swal.fire({
             icon: 'error',
-            text: 'No puedes quitar todos los géneros',
+            text: wrong,
           })
         }
       },
       error: (error: any) => {
         console.log(error);
-
       }
     })
   }

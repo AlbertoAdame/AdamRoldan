@@ -8,6 +8,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import Swal from 'sweetalert2';
 import { SpinnerService } from 'src/app/services/spinner.service';
+import { Purchase } from 'src/app/interfaces/purchase.interface';
+import { PurchasesService } from '../../services/purchases.service';
+import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-pagination',
@@ -21,6 +25,8 @@ export class PaginationComponent implements OnInit {
   results: Content[] = []
   currentCartItems: Content[] = [];
 
+  purchases: Purchase[] = [];
+  username: string = '';
 
   totalElements: number = 0;//cantidad total de items
   size: number = 0;
@@ -30,13 +36,22 @@ export class PaginationComponent implements OnInit {
   spinner: boolean = true;
 
   constructor(private beatService: BeatService, private comunicationService: ComunicationService, private translate: TranslateService,
-    private shoppingCartService: ShoppingCartService, private spinnerService: SpinnerService) {
+    private shoppingCartService: ShoppingCartService, private spinnerService: SpinnerService, private purchasesService: PurchasesService,
+    private cookies: CookieService, private authService: AuthService) {
     this.translate.addLangs(['es', 'en']);
   }
 
   ngOnInit(): void {
 
     this.spinner = true
+
+    this.authService.isLoggedIn.subscribe({
+      next: (resp) => {
+        setTimeout(() => {
+          this.role = this.cookies.get('role');
+        }, 0.01);
+      }
+    })
 
     this.currentCartItems = this.shoppingCartService.beats;
 
@@ -57,8 +72,27 @@ export class PaginationComponent implements OnInit {
           this.results = resp.content
           this.totalElements = resp.totalElements
           this.changeButtonCart();
-        }
 
+          this.username = this.cookies.get('sub')
+          if (this.username != '') {
+            this.purchasesService.getPurchasesByName(this.username)
+              .subscribe({
+                next: (resp) => {
+
+                  this.purchases = resp
+
+                  this.results = this.results.filter((beat) => {
+                    // Retorna true si el idBeat no está presente en "compras"
+                    return !this.purchases.some((compra) => compra.idBeat.idBeat === beat.idBeat);
+                  });
+
+                },
+                error: (error) => {
+                  console.log(error);
+                }
+              })
+          }
+        }
       })
   }
 
@@ -84,6 +118,10 @@ export class PaginationComponent implements OnInit {
     return minute + ':' + second;
   }
 
+  /**
+   * Activaremos el reproductor
+   * @param beat 
+   */
   audioPlayer(beat: any) {
 
     this.comunicationService.currentBeatSubject.next(beat);
@@ -95,6 +133,12 @@ export class PaginationComponent implements OnInit {
  * @param beat 
  */
   addToCart(beat: Content) {
+
+    let wrong = '';
+    this.translate.get('An admin is not allowed to make purchases')
+      .subscribe(arg => wrong = arg);
+
+
     if (this.role != 'ADMIN') {
       this.shoppingCartService.addToCart(beat);
       beat.bought = true;
@@ -102,13 +146,16 @@ export class PaginationComponent implements OnInit {
     else if (this.role == 'ADMIN') {
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
-        text: 'Con el rol de admin no puedes realizar compras',
+        text: wrong,
         confirmButtonColor: '#9e1815',
       })
     }
   }
 
+  /**
+   * Borraremos del carrito un beat
+   * @param beat 
+   */
   removeFromCart(beat: Content) {
     this.shoppingCartService.eliminarDelCarrito(beat);
     beat.bought = false;

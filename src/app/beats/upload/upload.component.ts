@@ -7,8 +7,7 @@ import { Genre } from '../../interfaces/genre.interface';
 import { Mood } from '../../interfaces/mood.interface';
 import { MoodService } from '../../services/mood.service';
 import { GenreService } from '../../services/genre.service';
-import { ActivatedRoute } from '@angular/router';
-import { BeatInterface } from '../../interfaces/beat-response.interface';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { TranslateService } from '@ngx-translate/core';
 import { SpinnerService } from '../../services/spinner.service';
 
@@ -48,24 +47,19 @@ export class UploadComponent implements OnInit {
     bpm: ['', [Validators.required]],
     time: [''],
     picture: ['', [Validators.required]],
-    audio: [''],
+    audio: ['', [Validators.required]],
     fileSource: [''],
     genre: ['Drill', [Validators.required]],
     mood: ['Accomplished', [Validators.required]]
   })
 
   constructor(private fb: FormBuilder, private authService: AuthService, private beatService: BeatService, private moodService: MoodService,
-    private genreService: GenreService, private translate: TranslateService, private spinnerService: SpinnerService) {
+    private genreService: GenreService, private translate: TranslateService, private spinnerService: SpinnerService, private storage: AngularFireStorage) {
     this.translate.addLangs(['es', 'en']);
   }
 
   ngOnInit() {
-    //Este método nos indica si el token es valido
-    this.authService.isLoggedIn.subscribe({
-      next: (resp) => {
-        this.isLoggedIn = resp;
-      }
-    })
+
     //Obtener moods
     this.moodService.getMoods()
       .subscribe({
@@ -83,7 +77,6 @@ export class UploadComponent implements OnInit {
       })
   }
 
-
   isValidField(field: string) {
     return this.myForm.controls[field].errors
       && this.myForm.controls[field].touched
@@ -99,8 +92,44 @@ export class UploadComponent implements OnInit {
     }
   }
 
+  //Este método subirá el archivo de audio a fireBase
+  uploadAudio($event: any) {
+    this.activeSpinner(true);
+    const file = $event.target.files[0];
+
+    const audioRef = this.storage.ref(file.name);
+    const metadata = {
+      contentType: file.type
+    };
+
+    audioRef.put(file, metadata)
+      .then((snapshot) => {
+        this.activeSpinner(false);
+        audioRef.getDownloadURL()
+          .subscribe((downloadURL) => {
+            this.myForm.value.audio = downloadURL;
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
 
   save() {
+
+    let success = '';
+    let heavy = '';
+    let wrong = '';
+    let exist = '';
+    this.translate.get('Beat was added')
+      .subscribe(arg => success = arg);
+    this.translate.get('This title already exist')
+      .subscribe(arg => heavy = arg);
+    this.translate.get('Something was wrong')
+      .subscribe(arg => wrong = arg);
+    this.translate.get('A beat with this name already exists')
+      .subscribe(arg => exist = arg);
 
     if (this.myForm.invalid) {
 
@@ -110,8 +139,6 @@ export class UploadComponent implements OnInit {
     this.activeSpinner(true);
 
     this.audio.src = this.myForm.value.audio;
-    console.log(this.myForm.value.audio);
-
 
     this.audio.load()
     //Para detectar la duración del beat
@@ -131,12 +158,11 @@ export class UploadComponent implements OnInit {
         this.beatService.uploadBeat(this.jsonBeat, this.myForm.get('fileSource')?.value, this.jsonGenre, this.jsonMood)
           .subscribe({
             next: (resp) => {
-              console.log(resp);
               if (resp == true) {
                 this.activeSpinner(false);
                 Swal.fire({
                   icon: 'success',
-                  text: 'Beat was added'
+                  text: success
                 }),
                   this.myForm.reset()
               }
@@ -144,8 +170,7 @@ export class UploadComponent implements OnInit {
                 this.activeSpinner(false);
                 Swal.fire({
                   icon: 'error',
-                  title: 'Oops...',
-                  text: 'Your file is too heavy',
+                  text: heavy,
 
                 })
               }
@@ -154,8 +179,7 @@ export class UploadComponent implements OnInit {
               this.activeSpinner(false);
               Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong!',
+                text: wrong,
 
               })
               console.log(error)
@@ -182,7 +206,7 @@ export class UploadComponent implements OnInit {
               this.activeSpinner(false);
               Swal.fire({
                 icon: 'success',
-                text: 'Beat was added'
+                text: success
               }),
                 this.myForm.reset()
             }
@@ -190,8 +214,7 @@ export class UploadComponent implements OnInit {
               this.activeSpinner(false);
               Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
-                text: 'Ya existe un beat con este nombre',
+                text: exist,
 
               })
             }
@@ -200,8 +223,7 @@ export class UploadComponent implements OnInit {
               this.activeSpinner(false);
               Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
-                text: 'Your file is too heavy',
+                text: heavy,
 
               })
             }
@@ -209,8 +231,7 @@ export class UploadComponent implements OnInit {
               this.activeSpinner(false);
               Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong!',
+                text: wrong,
 
               })
             }
@@ -219,8 +240,7 @@ export class UploadComponent implements OnInit {
             this.activeSpinner(false);
             Swal.fire({
               icon: 'error',
-              title: 'Oops...',
-              text: 'Something went wrong!',
+              text: wrong,
 
             })
             console.log(error)

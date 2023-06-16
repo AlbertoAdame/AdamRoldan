@@ -362,13 +362,10 @@ li {
 
 .productTitle {
     width: 77px;
-    /* Ancho máximo para mostrar el texto */
     white-space: nowrap;
-    /* Evita que el texto se divida en múltiples líneas */
     overflow: hidden;
-    /* Oculta el texto que excede el ancho */
-    text-overflow: ellipsis;
     /* Agrega "..." al final del texto truncado */
+    text-overflow: ellipsis;
     margin-left: 15px;
     color: black;
 }

@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SpinnerService } from 'src/app/services/spinner.service';
 
@@ -45,6 +44,13 @@ export class ContactComponent implements OnInit {
 
   save() {
 
+    let success = '';
+    let wrong = '';
+    this.translate.get('Your message has been sent')
+      .subscribe(arg => success = arg);
+    this.translate.get('Something was wrong')
+      .subscribe(arg => wrong = arg);
+
     if (this.myForm.invalid) {
       this.myForm.markAllAsTouched()
       return
@@ -57,8 +63,7 @@ export class ContactComponent implements OnInit {
           this.activeSpinner(false);
           Swal.fire({
             icon: 'success',
-            title: 'Your message was sent',
-            text: 'You will receive an answer soon'
+            text: success
           }),
             this.myForm.reset()
         },
@@ -66,9 +71,7 @@ export class ContactComponent implements OnInit {
           this.activeSpinner(false);
           Swal.fire({
             icon: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong!',
-
+            text: wrong,
           })
           console.log(error)
         }

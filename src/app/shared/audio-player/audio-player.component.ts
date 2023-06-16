@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { SpinnerService } from '../../services/spinner.service';
 import { Content } from 'src/app/interfaces/pageable.interface';
 import { BeatService } from 'src/app/services/beat.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-audio-player',
@@ -23,7 +24,8 @@ export class AudioPlayerComponent implements OnInit {
 
   spinner: boolean = false;
 
-  constructor(private comunicationService: ComunicationService, private spinnerService: SpinnerService, private beatService: BeatService) { }
+  constructor(private comunicationService: ComunicationService, private spinnerService: SpinnerService, private beatService: BeatService,
+    private translate: TranslateService) { }
 
   ngOnInit() {
 
@@ -99,13 +101,18 @@ export class AudioPlayerComponent implements OnInit {
 
 
   start() {
+
+
+    let wrong = '';
+    this.translate.get('Audio not found')
+      .subscribe(arg => wrong = arg);
+
     if (this.currentBeat.audio == null) {
       this.audio.src = this.currentBeat.audio;
       this.audio.load();
       Swal.fire({
         icon: 'error',
-        title: 'Lo sentimos',
-        text: 'Audio no encontrado'
+        text: wrong
       })
     }
     else {
@@ -123,6 +130,7 @@ export class AudioPlayerComponent implements OnInit {
               this.audio.addEventListener('canplaythrough', () => {
                 this.spinner = false,
                   this.audio.play();
+                this.currentState = true;
               });
               this.audio.load();
 

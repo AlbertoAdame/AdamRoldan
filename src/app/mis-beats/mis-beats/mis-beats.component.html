@@ -1,44 +1,74 @@
 <div class="frontPage">
     <h1 class="title">Mis Beats</h1>
 </div>
-<div class="container space" *ngIf="!purchases">
-    <div class="row" *ngFor="let item of getPurchaseKeys()">
-        <div class="fondoProducto" *ngFor="let beat of purchases[item].idBeats">
-            <div class="photoCarritoFinal">
-                <img [src]="beat.img" alt="image" width="50" height="50" class="productImage">
+<div class="container space" *ngIf="getPurchaseKeys().length > 0">
+    <div class="row" *ngFor="let item of getPurchaseKeys()" class="fondo">
+
+        <div class="infoPurchase">
+            <div>
+                <b>
+                    {{ "Date" | translate }}
+                </b> <br>
+                <small>
+                    {{purchases[item].date | dateFormat}}
+                </small>
             </div>
 
-            <div>
-                <b class="titulitos"> {{beat.title}} </b> <br>
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
+            <div style="margin-left: 50px;">
+                <b> {{ "Total price" | translate }}</b><br>
+                <small>
+                    {{purchases[item].totalPrice}} $
+                </small>
+            </div>
+        </div>
 
-                            <small> Duración: {{beat.time}} </small>
-                        </div>
+        <div class="row dividir">
+            <mat-divider style="width: 90% "></mat-divider>
 
-                        <div class="col">
+        </div>
+        <div *ngFor="let beat of purchases[item].idBeats; let i = index">
 
-                            <small> BPM: {{beat.bpm}} </small>
-                        </div>
+            <div class="fondoProducto">
+                <div class="photoCarritoFinal">
+                    <img [src]="beat.img" alt="image" width="50" height="50" class="productImage">
+                </div>
 
-                        <div class="col">
+                <div>
+                    <b class="titulitos"> {{beat.title}} </b> <br>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-4 col-lg-4 col-md-4 d-none d-md-block">
 
-                            <small> Mood: {{beat.mood.mood || beat.mood}} </small>
+                                <small> {{"Duration" | translate}} : {{beat.time}} </small>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-4 col-md-4 d-none d-md-block">
+
+                                <small> BPM: {{beat.bpm}} </small>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-4 col-md-4 d-none d-md-block">
+
+                                <small> {{"Mood" | translate}} : {{beat.mood.mood || beat.mood}} </small>
+                            </div>
+
                         </div>
 
                     </div>
-
+                </div>
+                <div class="introducir" (click)="download(beat.audio)">
+                    <i class="fa-solid fa-download fa-xl pointer"></i>
                 </div>
             </div>
-            <div class="introducir">
-                <i class="fa-solid fa-download fa-xl pointer"></i>
+            <div class="dividirBeats" *ngIf="i < purchases[item].idBeats.length - 1">
+                <mat-divider style="width: 60%; margin: 0 !important;"></mat-divider>
             </div>
         </div>
+
     </div>
 </div>
 
-<div *ngIf="purchases" class="noBeats">
+<div *ngIf="getPurchaseKeys().length == 0" class="noBeats">
     <div>
 
         <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor"
@@ -51,8 +81,7 @@
     </div>
 
     <div>
-
-        No tienes ningun beat
+        {{"You don't have any beats" | translate}}
     </div>
 
 </div>

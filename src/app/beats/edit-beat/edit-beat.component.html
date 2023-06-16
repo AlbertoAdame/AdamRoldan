@@ -12,7 +12,7 @@
             <div class="col-md-12 box">
                 <div class="form-group">
                     <label class="label" for="title">{{ "Title" | translate }}</label>
-                    <input type="text" class="form-control" formControlName="title" placeholder="Title">
+                    <input type="text" class="form-control" formControlName="title" [placeholder]="'Title' | translate">
 
                     <span class="form-text text-danger" *ngIf="isValidField('title')">
                         {{ "Title is required" | translate }}
@@ -21,8 +21,9 @@
             </div>
             <div class="col-md-4 box">
                 <div class="form-group">
-                    <label class="label" for="price">Price</label>
-                    <input type="number" class="form-control" formControlName="price" placeholder="Price">
+                    <label class="label" for="price">{{ "Price" | translate }}</label>
+                    <input type="number" class="form-control" formControlName="price"
+                        [placeholder]="'Price' | translate">
 
                     <span class="form-text text-danger" *ngIf="isValidField('price')">
                         {{ "Price is required" | translate }}
@@ -32,7 +33,7 @@
             <div class="col-md-4 box">
                 <div class="form-group">
                     <label class="label" for="time"> {{ "Time" | translate }}</label>
-                    <input type="number" class="form-control" formControlName="time" placeholder="Time">
+                    <input type="number" class="form-control" formControlName="time" [placeholder]="'Time' | translate">
 
                     <span class="form-text text-danger" *ngIf="isValidField('time')">
                         {{ "Time is required" | translate }}
@@ -66,7 +67,7 @@
 
             <div class="col-md-12 buttons">
                 <div class="form-group groupButtons">
-                    <input type="submit" value="Save" class="btn btn-success button">
+                    <input type="submit" [value]="'Save' | translate" class="btn btn-success button">
                     <div class="submitting"></div>
 
                     <button type="button" class="btn btn-danger" [routerLink]="['/beats']">{{ "Cancel" |

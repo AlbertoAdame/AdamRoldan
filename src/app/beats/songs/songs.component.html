@@ -195,14 +195,12 @@
                         <div>
                             <p-chip [removable]="true" class="genreButtonAdmin"
                                 (onRemove)="onDeleteGenre(beat.idBeat, itemGenre.genre.genre || itemGenre.genre)"
-                                *ngIf="role=='ADMIN'">
+                                *ngIf="role=='ADMIN' && !vetanaWidthCross">
                                 <span class="chip">
                                     {{itemGenre.genre.genre|| itemGenre.genre}}
                                 </span> </p-chip>
 
-                            <p-chip class="genreButton"
-                                (onRemove)="onDeleteGenre(beat.idBeat, itemGenre.genre.genre || itemGenre.genre)"
-                                *ngIf="role!='ADMIN'">
+                            <p-chip class="genreButton" [removable]="false" *ngIf="role!='ADMIN' || vetanaWidthCross">
                                 <span class="chip">
                                     {{itemGenre.genre.genre|| itemGenre.genre}}
                                 </span> </p-chip>

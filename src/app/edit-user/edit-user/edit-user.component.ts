@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { UserResponseInterface } from '../../interfaces/user-response.interface';
 import { CookieService } from 'ngx-cookie-service';
@@ -26,7 +26,6 @@ export class EditUserComponent {
     email: ['', [Validators.required, Validators.email]],
     address: ['', [Validators.required]],
     password: ['']
-
   })
 
   constructor(private fb: FormBuilder, private authService: AuthService, private userService: UserService, private cookies: CookieService,
@@ -62,9 +61,7 @@ export class EditUserComponent {
               password: '',
               address: resp.address
             })
-
           }
-
         }
       })
   }
@@ -75,6 +72,14 @@ export class EditUserComponent {
   }
 
   save() {
+
+    let success = '';
+    let wrong = '';
+    this.translate.get('Your account has been updated')
+      .subscribe(arg => success = arg);
+
+    this.translate.get('Something was wrong')
+      .subscribe(arg => wrong = arg);
 
     if (this.myForm.invalid) {
       this.myForm.markAllAsTouched()
@@ -89,17 +94,14 @@ export class EditUserComponent {
           this.router.navigateByUrl('home')
           Swal.fire({
             icon: 'success',
-            title: 'Perfect',
-            text: 'Your account was updated'
+            text: success
           })
         },
         error: (error) => {
           this.activeSpinner(false);
           Swal.fire({
             icon: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong!',
-
+            text: wrong,
           })
           console.log(error)
         }
