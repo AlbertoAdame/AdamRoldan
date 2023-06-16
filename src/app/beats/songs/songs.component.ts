@@ -106,6 +106,10 @@ export class SongsComponent implements OnInit, OnDestroy {
                 }
               })
           }
+
+          else {
+            this.dtTrigger.next(this.results)
+          }
         },
         error: (error) => {
           this.activeSpinner(false);
