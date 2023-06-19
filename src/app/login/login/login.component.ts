@@ -186,6 +186,7 @@ export class LoginComponent implements OnInit {
 
     this.activeSpinner(true);
     if (this.registerForm.invalid) {
+      this.activeSpinner(false);
       this.registerForm.control.markAllAsTouched();
       return;
     }
